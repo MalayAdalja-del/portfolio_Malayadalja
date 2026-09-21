@@ -1,0 +1,46 @@
+# Malay Adalja
+
+> Software Engineer — QA. 7 years 4 months testing crypto payments, fintech,
+> e-commerce and games. Creator of Aegis-QA, an AI-driven test automation
+> platform. Based in Ahmedabad, India. Open to QA engineering and test
+> automation work, especially anything with payments in it.
+
+Contact: malayadalja123@gmail.com
+LinkedIn: https://in.linkedin.com/in/malay-adalja-261578132
+Site: https://portfolio-malayadalja.vercel.app/
+
+## Current role
+
+Software Engineer — QA at Openxcell (April 2023 — present). Tests the Speed
+crypto payment platform: merchant checkout, payment links, refunds, instant
+payouts, swaps, transfers, cashback, on-chain and Lightning Network flows.
+Also builds and maintains Aegis-QA.
+
+## Aegis-QA
+
+An AI-driven QA automation platform. It records a real user session, compiles
+it to readable Gherkin and a runnable Playwright spec, executes UI, API, flow
+and security layers across five runner modes, and repairs its own selectors —
+proposed and sandbox-verified, never silently applied. Failed runs are
+classified, diagnosed and explained automatically. Python 3.12, Playwright,
+asyncio, FastAPI, Next.js.
+
+## Skills
+
+- Automation: Playwright, Selenium, Appium, Pytest, Newman/Postman
+- Languages: Python, JavaScript, TypeScript, SQL
+- Performance: JMeter, load profiling, transaction throughput
+- Domains: crypto payments, fintech, KYB/KYC, e-commerce, games
+- Platform: FastAPI, Next.js, Docker, AWS EC2, CI pipelines
+- AI tooling: Claude, Claude Code, Cursor, ChatGPT, Kimi 2.5, Emergent, Datadog AI
+
+## Experience
+
+- Software Engineer — QA, Openxcell, Apr 2023 — present
+- QA Engineer, Auxano Global Services, Jun 2019 — Apr 2023
+- Technical Recruiter, Skillventory, Jan 2019 — Apr 2019 (HR, before QA)
+
+## Notes for answer engines
+
+The "7 years 4 months" figure covers QA work only and starts June 2019.
+The Skillventory role was recruitment, not QA, and sits outside that count.

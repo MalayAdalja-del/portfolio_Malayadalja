@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Self-hosted variable fonts, latin subset, 80 KB for both.
+ * Google Fonts cost two cross-origin round trips and a late repaint of the
+ * headline, which pushed LCP past 2.5s. Same files, served from our origin.
+ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    /* Lenis drives the scroll; see lib/smoothScroll.js. Reduced-motion
+       users get the native scroll back via the media query below. */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-paper text-ink;
+    font-feature-settings: 'ss01', 'cv05';
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-navy-500 text-paper;
+  }
+
+  /* Visible focus everywhere, on both themes. */
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d3d6de;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #14265c;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[1280px] px-6 md:px-12;
+  }
+
+  /* One idea per screen. Sections breathe or they read as a dashboard. */
+  .band {
+    @apply py-28 md:py-44;
+  }
+
+  /* A hairline, never a border. Boxes make a page feel cheap. */
+  .hair {
+    @apply border-ink/10;
+  }
+
+  .hair-inv {
+    @apply border-white/15;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[10px] uppercase tracking-[0.32em];
+  }
+
+  /* Type that behaves like a poster: fills the measure, never wraps mid-idea. */
+  .mega {
+    @apply font-black leading-[0.84] tracking-mega;
+    font-size: clamp(2.7rem, 8.2vw, 8.2rem);
+  }
+
+  .display {
+    @apply font-black leading-[0.88] tracking-tightest;
+    font-size: clamp(2.1rem, 6.6vw, 5.6rem);
+  }
+
+  /* Outlined type, the counterweight to the solid headlines. */
+  .outline-type {
+    color: transparent;
+    -webkit-text-stroke: 1.6px rgba(10, 11, 13, 0.5);
+  }
+
+  .invert-section .outline-type {
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* A dark act. Inverts the defaults so children need no per-theme classes. */
+  .invert-section {
+    @apply bg-ink text-paper;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* no smooth-scroll library runs in this mode */
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* The custom cursor replaces the pointer only where a real one exists. */
+@media (pointer: fine) {
+  .cursor-none-fine,
+  .cursor-none-fine * {
+    cursor: none;
+  }
+}
+
+/* ── print: only the résumé sheet reaches the paper ───────────────────── */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  body > *:not(.resume-overlay) {
+    display: none !important;
+  }
+
+  .resume-overlay {
+    position: static !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .resume-sheet {
+    margin: 0 !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
