@@ -33,7 +33,7 @@ export function Toolkit() {
 export function Contact() {
   const rows = [
     { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
-    { label: 'LinkedIn', value: 'malay-adalja', href: profile.linkedin, ext: true },
+    { label: 'LinkedIn', value: 'malayy-j-adalja', href: profile.linkedin, ext: true },
     profile.github && { label: 'GitHub', value: 'View profile', href: profile.github, ext: true },
     profile.resume && { label: 'Résumé', value: 'Download PDF', href: profile.resume },
   ].filter(Boolean)

@@ -102,7 +102,7 @@ export default function Resume({ onClose }) {
                 rel="noopener noreferrer"
                 className="underline-offset-2 hover:underline"
               >
-                linkedin.com/in/malay-adalja
+                linkedin.com/in/malayy-j-adalja
               </a>
             </li>
             <li className="text-navy-500">{profile.availability}</li>

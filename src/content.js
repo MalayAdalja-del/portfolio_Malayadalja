@@ -19,7 +19,7 @@ export const profile = {
     'Seven years on crypto payments — BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.',
 
   email: 'malayadalja123@gmail.com',
-  linkedin: 'https://in.linkedin.com/in/malay-adalja-261578132',
+  linkedin: 'https://www.linkedin.com/in/malayy-j-adalja-261578132/',
   github: '',
   resume: '', // e.g. '/Malay-Adalja-QA.pdf' dropped into /public
 }
