@@ -93,6 +93,39 @@ export function ldFor(meta) {
         articleSection: s.tag,
         inLanguage: 'en',
       },
+      // Aegis is the one case study that is also a thing, so it gets
+      // described as software as well as an article. This is the shape an
+      // answer engine reads when someone asks what tools exist for a job,
+      // and featureList is where the capability language actually lives.
+      ...(s.id === 'aegis'
+        ? [
+            {
+              '@type': 'SoftwareApplication',
+              name: 'Aegis-QA',
+              applicationCategory: 'DeveloperApplication',
+              applicationSubCategory: 'Test automation platform',
+              operatingSystem: 'Web, Linux, Docker',
+              url: `${SITE}/work/aegis`,
+              author: { '@type': 'Person', name: profile.name, url: `${SITE}/` },
+              isAccessibleForFree: false,
+              featureList: [
+                'Record a browser session and compile it to Gherkin and a runnable Playwright spec',
+                'Run UI, API, flow and security test layers from one place',
+                'Five runner modes: single, suite, flow, full and all',
+                'Self-healing Playwright locators, proposed and sandbox-verified, never auto-applied',
+                'Automatic failure classification, diagnosis and fix planning',
+                'Database and ledger reconciliation alongside UI assertions',
+                'API contract testing with Postman and Newman collections',
+                'Android mobile test recording over Appium',
+                'Distributed trace lookup for a failed request',
+                'Test case management tied to the automation that covers it',
+                'A knowledge graph of the application built from observed runs',
+              ],
+              keywords:
+                'QA automation platform, test automation tool, AI QA tooling, self-healing test locators, Playwright test generation, session recorder to Playwright, Gherkin compiler, API and UI test orchestration, database reconciliation testing, failure triage automation, payments QA tooling, SDET platform',
+            },
+          ]
+        : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [

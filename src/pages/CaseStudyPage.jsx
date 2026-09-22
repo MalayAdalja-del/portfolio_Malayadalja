@@ -11,7 +11,7 @@ import {
 } from '../content'
 import { goHome, navigate } from '../lib/router'
 import { Reveal, useStatic } from '../lib/motion'
-import AegisDiagrams from '../components/AegisDiagrams'
+import AegisDemo from '../components/AegisDemo'
 
 /**
  * A real subpage per case study, with its own URL (`/work/speed`).
@@ -166,8 +166,19 @@ export default function CaseStudyPage({ id }) {
 
         {isAegis && (
           <>
-            <Block label="What it looks like">
-              <AegisDiagrams />
+            <Block label="Why it exists">
+              <p className="max-w-3xl font-black leading-[1.18] tracking-tight [font-size:clamp(1.25rem,2.6vw,1.9rem)]">
+                {profile.curiosity}
+              </p>
+              <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/75">
+                That is the short version of how a QA engineer ends up maintaining a platform. The
+                QA judgement is mine. AI is how one person shipped something that would normally
+                need a team, and learning enough of it to do that is the part I would do again.
+              </p>
+            </Block>
+
+            <Block label="Try it">
+              <AegisDemo />
             </Block>
 
             <Block label="What it replaced">

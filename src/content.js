@@ -18,6 +18,12 @@ export const profile = {
   intro:
     'Seven years on crypto payments. BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.',
 
+  // QA is the job. AI is the thing he went and learned. Both are true and
+  // the second one is why Aegis exists at all, so it gets said out loud
+  // rather than left to be inferred from a tools list.
+  curiosity:
+    'QA is my profession. AI is my curiosity. Aegis-QA is what happened when the two met: I did not wait for a vendor to sell me a tool, I learned enough AI to build my own.',
+
   email: 'malayadalja123@gmail.com',
   linkedin: 'https://www.linkedin.com/in/malayy-j-adalja-261578132/',
   github: 'https://github.com/MalayAdalja-del',
@@ -858,6 +864,10 @@ export const faq = [
   {
     q: 'Is he available for work, and where?',
     a: 'Open to work, remote or hybrid, from Ahmedabad, Gujarat, India. He is interested in QA engineering and test-automation roles, especially anything with payments in it. Reachable at malayadalja123@gmail.com.',
+  },
+  {
+    q: 'Is he a QA engineer or an AI engineer?',
+    a: 'QA, by profession and by choice. AI is the thing he went and learned because the tooling he needed did not exist, and Aegis-QA is the result: a QA platform built with AI rather than bought from a vendor. Claude, Claude Code, Cursor and ChatGPT are daily working tools for him, used for test design, failure triage, scripting and reading unfamiliar code. The QA judgement is his; AI is how one person shipped a platform that would normally take a team.',
   },
   {
     q: 'Why should a QA engineer be trusted with test architecture?',

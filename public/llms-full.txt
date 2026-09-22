@@ -309,6 +309,9 @@ Merchant checkout, payment links, refunds, crypto payouts and instant payouts, t
 ### Is he available for work, and where?
 Open to work, remote or hybrid, from Ahmedabad, Gujarat, India. He is interested in QA engineering and test-automation roles, especially anything with payments in it. Reachable at malayadalja123@gmail.com.
 
+### Is he a QA engineer or an AI engineer?
+QA, by profession and by choice. AI is the thing he went and learned because the tooling he needed did not exist, and Aegis-QA is the result: a QA platform built with AI rather than bought from a vendor. Claude, Claude Code, Cursor and ChatGPT are daily working tools for him, used for test design, failure triage, scripting and reading unfamiliar code. The QA judgement is his; AI is how one person shipped a platform that would normally take a team.
+
 ### Why should a QA engineer be trusted with test architecture?
 Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand. So the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.
 
