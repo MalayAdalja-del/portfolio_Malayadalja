@@ -230,7 +230,13 @@ export function Nav({ onResume }) {
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
             transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden bg-ink text-paper md:hidden"
+            /* `relative` is load-bearing. The bar's backdrop above is
+               position:absolute inset-0, and once the menu is open that
+               inset covers the whole expanded header. A positioned element
+               paints over a static one whatever the DOM order, so without
+               this the panel rendered as a black rectangle with all six
+               links underneath it, present and white and invisible. */
+            className="relative overflow-hidden bg-ink text-paper md:hidden"
           >
             {/* An opaque panel, and deliberately outside the blended bar
                 above it. The menu used to inherit mix-blend-difference and
