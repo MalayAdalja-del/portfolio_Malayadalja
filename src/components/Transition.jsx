@@ -35,8 +35,12 @@ export default function Transition({ lead, emph, sub, dark = false }) {
         style={reduce ? undefined : { y, opacity }}
         className="shell relative max-w-[1100px]"
       >
+        {/* Lead solid, punchline navy — the same two-voice headline as the
+            hero. It was a 55%-opacity grey lead, which on white read as
+            silver rather than as a de-emphasis, and put the weakest colour
+            on the longest half of the sentence. */}
         <p className="display">
-          <span className={dark ? 'text-white/55' : 'text-ink/55'}>{lead}</span> <span>{emph}</span>
+          <span>{lead}</span> <span className="accent-line">{emph}</span>
         </p>
         <p
           className={`mt-8 max-w-xl text-[15px] leading-relaxed md:text-[18px] ${
