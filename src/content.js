@@ -706,10 +706,13 @@ export const roadmap = [
   },
   {
     year: 'Now',
-    kind: 'Open',
-    title: 'Looking for the next one',
-    org: 'Remote or hybrid',
-    note: 'Find the thing that breaks, then make it impossible to ship again. I want a team that treats that as engineering.',
+    // The hero already says "open to work". Repeating it at the end of the
+    // journey closes on a status instead of on an invitation, which is the
+    // weaker of the two things this stop can do.
+    kind: 'Next',
+    title: 'Let’s talk about it',
+    org: 'A conversation, not a pitch',
+    note: 'If you are building something where quality is load-bearing — payments, ledgers, anything that must not fail quietly — I would like to hear about it.',
     qa: ['Test architecture', 'Quality strategy'],
     tech: ['Whatever the problem needs'],
     cta: true,
