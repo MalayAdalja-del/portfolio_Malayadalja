@@ -32,6 +32,8 @@ export function metaFor(route) {
         'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage, coverage and a knowledge graph. Rebuilt with invented data.',
       path: '/aegis-demo',
       demo: true,
+      keywords:
+        'QA automation platform, test automation tool, AI QA tooling, self-healing test locators, Playwright test generation, record session to Playwright, Gherkin test compiler, UI API DB test orchestration, database reconciliation testing, automated failure triage, payments QA platform, SDET tooling, test case management, test coverage matrix',
     }
   }
   if (route?.name === 'work') {
@@ -43,6 +45,10 @@ export function metaFor(route) {
       description: study.summary.slice(0, 180),
       path: `/work/${study.id}`,
       study,
+      keywords:
+        study.id === 'aegis'
+          ? 'Aegis-QA, QA automation platform, test automation tool, self-healing Playwright locators, session recorder to Playwright, Gherkin compiler, failure triage automation, database reconciliation testing, payments QA tooling, AI built QA platform'
+          : `${study.tag} QA, ${study.stack.join(', ')}, test automation, Malay Adalja`,
     }
   }
   return HOME
@@ -165,6 +171,7 @@ export function useHead(route) {
     setMeta('meta[property="og:url"]', 'content', url)
     setMeta('meta[name="twitter:title"]', 'content', meta.title)
     setMeta('meta[name="twitter:description"]', 'content', meta.description)
+    if (meta.keywords) setMeta('meta[name="keywords"]', 'content', meta.keywords)
 
     const ld = ldFor(meta)
     const id = 'route-ld'

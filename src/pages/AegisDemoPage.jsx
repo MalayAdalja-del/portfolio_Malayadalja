@@ -3,6 +3,7 @@ import { profile } from '../content'
 import { goHome } from '../lib/router'
 import { useStatic } from '../lib/motion'
 import AegisDemo from '../components/AegisDemo'
+import DemoCases from '../components/DemoCases'
 
 /**
  * A walkthrough of the Aegis-QA portal, reconstructed.
@@ -49,14 +50,6 @@ const STATS = [
 
 const TREND = [88, 91, 94, 90, 96, 97, 96]
 const DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
-
-const CASES = [
-  ['TC-2041', 'Guest checkout with a card', 'Automated', 'checkout.guest_card'],
-  ['TC-2042', 'Refund a partial amount', 'Automated', 'refund.partial_amount'],
-  ['TC-2043', 'Payout retries reuse no key', 'Automated', 'payout.idempotency_key'],
-  ['TC-2044', 'Webhook replay is ignored', 'Automated', 'webhook.replay_is_ignored'],
-  ['TC-2045', 'Expired invoice reissues', 'Manual', '—'],
-]
 
 const SURFACES = [
   ['Merchant checkout', [1, 1, 1, 1, 0]],
@@ -214,47 +207,6 @@ function Runs() {
   )
 }
 
-function Cases() {
-  return (
-    <div className="min-w-0 overflow-x-auto">
-      <table className="w-full min-w-[430px] border-collapse text-left">
-        <thead>
-          <tr className="border-b border-ink/15">
-            {['ID', 'Title', 'State', 'Covered by'].map((h) => (
-              <th
-                key={h}
-                className="py-2 pr-3 font-mono text-[9.5px] uppercase tracking-[0.09em] text-ink/60"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {CASES.map(([id, title, state, spec]) => (
-            <tr key={id} className="border-b border-ink/10">
-              <td className="py-2.5 pr-3 font-mono text-[11px] text-navy-500">{id}</td>
-              <td className="py-2.5 pr-3 text-[12.5px]">{title}</td>
-              <td className="py-2.5 pr-3">
-                <span
-                  className={`font-mono text-[9.5px] uppercase tracking-[0.08em] ${
-                    state === 'Automated' ? 'text-navy-500' : 'text-ink/60'
-                  }`}
-                >
-                  {state}
-                </span>
-              </td>
-              <td className="max-w-[11rem] truncate py-2.5 font-mono text-[10.5px] text-ink/70">
-                {spec}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
 function Coverage() {
   return (
     <div>
@@ -352,7 +304,7 @@ const VIEWS = {
   overview: Overview,
   runs: Runs,
   recorder: () => <AegisDemo />,
-  cases: Cases,
+  cases: DemoCases,
   coverage: Coverage,
   knowledge: Knowledge,
 }
@@ -387,7 +339,14 @@ export default function AegisDemoPage() {
       </div>
 
       <div className="shell pb-8 pt-10 md:pt-14">
+        <p className="eyebrow mb-4 text-navy-500">QA automation platform · walkthrough</p>
         <h1 className="display max-w-3xl">The Aegis-QA portal</h1>
+        <p className="mt-5 max-w-3xl text-[15px] leading-relaxed text-ink/85 md:text-[17px]">
+          Run orchestration across UI, API, flow and security layers. Session recording that
+          compiles to Gherkin and Playwright. Self-healing locators that wait for a human. Automatic
+          failure triage, database reconciliation, coverage, and a knowledge graph of the
+          application.
+        </p>
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/75 md:text-[17px]">
           The real one drives live payment systems, so every screen in it carries merchant names,
           transaction ids and keys. None of that can be published, blurred or otherwise. This is the
@@ -445,7 +404,7 @@ export default function AegisDemoPage() {
                       <h2 className="mb-4 font-mono text-[11px] uppercase tracking-[0.1em] text-navy-500">
                         {NAV.find((n) => n[0] === id)?.[1] || id}
                       </h2>
-                      <V />
+                      <V still />
                     </section>
                   ))}
                 </div>

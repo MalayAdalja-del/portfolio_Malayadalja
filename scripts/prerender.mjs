@@ -53,6 +53,14 @@ for (const path of ROUTES) {
   page = swap(page, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
   page = swap(page, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
 
+  if (meta.keywords) {
+    page = swap(
+      page,
+      /(<meta\s+name="keywords"[\s\S]*?content=")[\s\S]*?(")/,
+      `$1${esc(meta.keywords)}$2`,
+    )
+  }
+
   // The rendered markup, and the per-route graph next to it.
   const extra = ld
     ? `\n    <script type="application/ld+json" id="route-ld">${JSON.stringify(ld)}</script>`
