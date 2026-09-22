@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { failureWall } from '../content'
-import { Counter, Marker, MaskedWords } from '../lib/motion'
+import { Counter, Marker, MaskedWords, useStatic } from '../lib/motion'
 
 /**
  * What breaks — set as type, not as cards.
@@ -18,7 +18,7 @@ const STEP = 0.11
 
 export default function FailureWall() {
   const ref = useRef(null)
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const [index, setIndex] = useState(0)
 
@@ -70,7 +70,8 @@ export default function FailureWall() {
           <div className="relative min-h-[300px] md:min-h-[380px]">
             <div className="flex items-baseline gap-4 border-b border-white/15 pb-4">
               <span className="font-mono text-[11px] tabular-nums text-navy-300">
-                {String(index + 1).padStart(2, '0')}/{String(failureWall.cases.length).padStart(2, '0')}
+                {String(index + 1).padStart(2, '0')}/
+                {String(failureWall.cases.length).padStart(2, '0')}
               </span>
               <span className="h-px flex-1 bg-white/15">
                 <motion.span
@@ -128,7 +129,10 @@ function Static() {
 
         <ol className="mt-12 border-t border-white/15">
           {failureWall.cases.map((c, i) => (
-            <li key={c.text} className="grid gap-3 border-b border-white/15 py-7 md:grid-cols-[3rem_1fr_1fr] md:gap-8">
+            <li
+              key={c.text}
+              className="grid gap-3 border-b border-white/15 py-7 md:grid-cols-[3rem_1fr_1fr] md:gap-8"
+            >
               <span className="font-mono text-[11px] tabular-nums text-navy-300">
                 {String(i + 1).padStart(2, '0')}
               </span>

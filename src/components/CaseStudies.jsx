@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
 import { caseStudies, otherWork } from '../content'
 import { navigate } from '../lib/router'
-import { Marker, MaskedWords, Reveal } from '../lib/motion'
+import { Marker, MaskedWords, Reveal, useStatic } from '../lib/motion'
 
 /** The panel that rides the cursor while you scan the list. */
 function Preview({ study, index, x, y }) {
@@ -32,7 +32,7 @@ function Preview({ study, index, x, y }) {
 }
 
 export default function CaseStudies() {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const [hovered, setHovered] = useState(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -72,9 +72,15 @@ export default function CaseStudies() {
                   aria-hidden
                   className="absolute inset-0 origin-left scale-x-0 bg-navy-500 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 motion-reduce:hidden"
                 />
+                {/* Aegis is the long one — the whole product, not a summary —
+                    so it opens in its own tab and leaves this page where it
+                    was. The other two navigate in place. */}
                 <a
-                  href={`#/work/${c.id}`}
+                  href={`/work/${c.id}`}
+                  target={c.id === 'aegis' ? '_blank' : undefined}
+                  rel={c.id === 'aegis' ? 'noopener' : undefined}
                   onClick={(e) => {
+                    if (c.id === 'aegis') return
                     e.preventDefault()
                     navigate(`/work/${c.id}`)
                   }}

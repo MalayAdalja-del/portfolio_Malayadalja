@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-} from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { nav, profile } from '../content'
+import { useStatic } from '../lib/motion'
 
 /* ── preloader ────────────────────────────────────────────────────────── */
 
@@ -17,7 +11,7 @@ import { nav, profile } from '../content'
  * paint timing — the self-test would catch it if it did.
  */
 export function Preloader() {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const [count, setCount] = useState(0)
   const [gone, setGone] = useState(Boolean(reduce))
 
@@ -66,7 +60,7 @@ export function Preloader() {
  * on the white acts and the black ones, with no theme plumbing.
  */
 export function Cursor() {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const [on, setOn] = useState(false)
   const [mode, setMode] = useState('idle') // idle | link | view
   const x = useMotionValue(-100)

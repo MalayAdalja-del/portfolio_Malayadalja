@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { skillSpine } from '../content'
-import { Marker, MaskedWords, Reveal } from '../lib/motion'
+import { Marker, MaskedWords, Reveal, useStatic } from '../lib/motion'
 import { SKILL_ICON } from './icons'
 
 /**
@@ -10,6 +10,7 @@ import { SKILL_ICON } from './icons'
  * left standing on its own.
  */
 export default function WhatIDo() {
+  const reduce = useStatic()
   const [open, setOpen] = useState('manual')
 
   return (
@@ -21,7 +22,9 @@ export default function WhatIDo() {
 
       <div className="border-t border-ink/10">
         {skillSpine.map((skill, i) => {
-          const isOpen = open === skill.key
+          // Statically, a closed row means its tools and its evidence are not
+          // in the document at all. Open them all instead.
+          const isOpen = reduce || open === skill.key
           return (
             <Reveal key={skill.key} delay={Math.min(i, 4) * 0.05}>
               <div className="border-b border-ink/10">

@@ -1,13 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import {
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion'
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import { profile, roadmap, roadmapIntro } from '../content'
-import { Marker, MaskedWords } from '../lib/motion'
+import { Marker, MaskedWords, useStatic } from '../lib/motion'
 
 /**
  * The career as a road you drive.
@@ -68,7 +62,7 @@ function Car({ className = '' }) {
 export default function Roadmap() {
   const road = useRef(null)
   const cards = useRef([])
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
 
   const [amp, setAmp] = useState(0)
   const [base, setBase] = useState(6)
@@ -228,9 +222,7 @@ export default function Roadmap() {
                     viewport={{ once: true, margin: '-12% 0px' }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className={
-                      base < 20
-                        ? 'pl-10'
-                        : `w-[min(40%,420px)] ${right ? 'ml-auto pl-2' : 'pr-2'}`
+                      base < 20 ? 'pl-10' : `w-[min(40%,420px)] ${right ? 'ml-auto pl-2' : 'pr-2'}`
                     }
                   >
                     <div className="flex flex-wrap items-baseline gap-x-3">

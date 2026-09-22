@@ -4,7 +4,6 @@ import { Cursor, Nav, Preloader, ScrollProgress } from './components/Chrome'
 import ChapterRail from './components/ChapterRail'
 import Marquee from './components/Marquee'
 import Transition from './components/Transition'
-import SelfTest from './components/SelfTest'
 import Resume from './components/Resume'
 import Hero from './components/Hero'
 import WhatIDo from './components/WhatIDo'
@@ -12,12 +11,15 @@ import FailureWall from './components/FailureWall'
 import CaseStudies from './components/CaseStudies'
 import Roadmap from './components/Roadmap'
 import QaProof from './components/QaProof'
+import Faq from './components/Faq'
 import PaymentRails from './components/PaymentRails'
 import Depth from './components/Depth'
 import { Contact, Footer, Toolkit } from './components/Sections'
 import CaseStudyPage from './pages/CaseStudyPage'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { useRoute } from './lib/router'
+import { useHead } from './lib/head'
+import { useStatic } from './lib/motion'
 import { initSmoothScroll, scrollToTop } from './lib/smoothScroll'
 import { marqueeA, marqueeB, transitions } from './content'
 
@@ -28,11 +30,27 @@ import { marqueeA, marqueeB, transitions } from './content'
  *   where it ran → the journey → talk to me
  *
  * Each <Transition> is the page-turn that makes the next chapter feel earned.
- * Case studies get real URLs (`#/work/speed`) rather than an accordion —
+ * Case studies get real URLs (`/work/speed`) rather than an accordion —
  * depth nobody can link to never gets shared.
  */
-export default function App() {
-  const route = useRoute()
+/**
+ * `initialRoute` is for the build-time prerenderer, which has no `window` to
+ * read a route from.
+ *
+ * `prerender` is true on the server *and* in the browser whenever the
+ * browser is hydrating prerendered HTML — main.jsx passes the same value
+ * back. It has to match or the first client render differs from the
+ * document and React throws the whole thing away. It drops the loading
+ * curtain, which a page whose content is already painted does not need.
+ *
+ * The cursor, the scroll bar and the analytics beacon are held back by
+ * `staticPass` instead: absent on the first render, so it matches the HTML,
+ * mounted immediately after.
+ */
+export default function App({ initialRoute, prerender = false }) {
+  const route = useRoute(initialRoute)
+  const staticPass = useStatic()
+  useHead(route)
   const [resume, setResume] = useState(false)
   const onWork = route.name === 'work'
 
@@ -46,9 +64,13 @@ export default function App() {
 
   return (
     <>
-      <Preloader />
-      <ScrollProgress />
-      <Cursor />
+      {!prerender && <Preloader />}
+      {!staticPass && (
+        <>
+          <ScrollProgress />
+          <Cursor />
+        </>
+      )}
       <Nav onResume={() => setResume(true)} />
       {!onWork && <ChapterRail />}
 
@@ -78,6 +100,7 @@ export default function App() {
             {/* the argument for QA, made by actually breaking this page */}
             <QaProof />
             <Toolkit />
+            <Faq />
 
             <Transition {...transitions.toContact} dark />
             <Contact />
@@ -88,13 +111,11 @@ export default function App() {
       {/* every route gets the footer landmark, subpages included */}
       <Footer />
 
-      <SelfTest />
-
       <AnimatePresence>{resume && <Resume onClose={() => setResume(false)} />}</AnimatePresence>
 
       {/* Vercel Speed Insights — the React entry point, not the Next.js one.
           No-ops locally; only reports from the Vercel deployment. */}
-      <SpeedInsights />
+      {!staticPass && <SpeedInsights />}
     </>
   )
 }

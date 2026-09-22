@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   caseStudies,
   experience,
@@ -9,6 +9,7 @@ import {
   skillSpine,
   skills,
 } from '../content'
+import { useStatic } from '../lib/motion'
 
 /**
  * The résumé, rendered from the same content.js the site uses.
@@ -19,7 +20,7 @@ import {
  * `public/` and pointed at by `profile.resume`; the download button prefers it.
  */
 export default function Resume({ onClose }) {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
 
   useEffect(() => {
     const onKey = (e) => {

@@ -458,37 +458,6 @@ export const caseStudies = [
 
 /* ── Aegis detail (shown in the case-study drawer) ────────────────────── */
 
-export const aegisModules = [
-  {
-    name: 'Run manager',
-    line: 'Trigger a run, watch it live, and keep the history — UI, API, flow and security layers, five runner modes.',
-  },
-  {
-    name: 'API testing',
-    line: 'Collections and contract checks run next to the UI suite instead of in a separate tool.',
-  },
-  {
-    name: 'Playwright scripts',
-    line: 'The generated specs live with the runs that execute them, versioned and editable.',
-  },
-  {
-    name: 'SQL queries',
-    line: 'Saved queries to verify the database state a run just produced, without leaving the tool.',
-  },
-  {
-    name: 'Datadog lookups',
-    line: 'Pull the trace for a failed request straight from the run that failed it.',
-  },
-  {
-    name: 'Test case management',
-    line: 'Cases tied to the automation that covers them, so coverage gaps are visible rather than assumed.',
-  },
-  {
-    name: 'Session recorder',
-    line: 'Record a real session on the real app and get a reviewable script back — intent captured, not raw selectors.',
-  },
-]
-
 export const aegisPipeline = [
   { name: 'Record', line: 'A real session on the real app becomes a structured recording.' },
   {
@@ -544,10 +513,26 @@ export const moneyFlow = {
   title: 'Where the money actually goes',
   line: 'Four hops between a customer paying and a merchant being paid. Each one is a place to lose it.',
   stages: [
-    { name: 'Payer', sub: 'wallet or card', verify: 'Amount and asset match the invoice before anything is signed' },
-    { name: 'Rail', sub: 'chain or Lightning', verify: 'Broadcast confirmed, and confirmations counted for that asset' },
-    { name: 'Ledger', sub: 'our record', verify: 'One row per payment, written exactly once, reconciled on read' },
-    { name: 'Payout', sub: 'merchant out', verify: 'Destination verified, approval recorded, retry never double-sends' },
+    {
+      name: 'Payer',
+      sub: 'wallet or card',
+      verify: 'Amount and asset match the invoice before anything is signed',
+    },
+    {
+      name: 'Rail',
+      sub: 'chain or Lightning',
+      verify: 'Broadcast confirmed, and confirmations counted for that asset',
+    },
+    {
+      name: 'Ledger',
+      sub: 'our record',
+      verify: 'One row per payment, written exactly once, reconciled on read',
+    },
+    {
+      name: 'Payout',
+      sub: 'merchant out',
+      verify: 'Destination verified, approval recorded, retry never double-sends',
+    },
   ],
 }
 
@@ -618,7 +603,8 @@ export const latencySteps = [
     ms: 1500,
     label: 'Slow',
     state: 'Spinner, user waits',
-    failure: 'The pay button stays live while the request is in flight, so an impatient customer submits twice.',
+    failure:
+      'The pay button stays live while the request is in flight, so an impatient customer submits twice.',
     assert: 'Button disables on submit; a second click cannot create a second charge',
     severity: 'p1',
   },
@@ -626,7 +612,8 @@ export const latencySteps = [
     ms: 4000,
     label: 'Degraded',
     state: 'Invoice nearing expiry',
-    failure: 'The quote was locked 4 seconds ago. Pay now and the rate has already moved past tolerance.',
+    failure:
+      'The quote was locked 4 seconds ago. Pay now and the rate has already moved past tolerance.',
     assert: 'Expiry is visible and enforced; a stale quote is refused, not honoured',
     severity: 'p1',
   },
@@ -634,7 +621,8 @@ export const latencySteps = [
     ms: 10000,
     label: 'Timeout',
     state: 'Request abandoned',
-    failure: 'The client gives up. The order shows failed — but the payment provider took the money anyway.',
+    failure:
+      'The client gives up. The order shows failed — but the payment provider took the money anyway.',
     assert: 'Order stays pending, never failed; the webhook is the source of truth',
     severity: 'p0',
   },
@@ -694,7 +682,14 @@ export const roadmap = [
     title: 'Software Engineer — QA',
     org: 'Openxcell · Speed · Apr 2023 — present',
     note: 'Crypto raised the stakes. Stopped testing screens, started testing state machines — and checking the ledger, not the toast.',
-    qa: ['Crypto payments', 'Smart contracts', 'KYB / KYC', 'API contracts', 'DB reconciliation', 'Load testing'],
+    qa: [
+      'Crypto payments',
+      'Smart contracts',
+      'KYB / KYC',
+      'API contracts',
+      'DB reconciliation',
+      'Load testing',
+    ],
     tech: ['Python', 'Playwright', 'Pytest', 'Appium', 'SQL', 'Newman', 'JMeter'],
   },
   {
@@ -816,4 +811,116 @@ export const nav = [
   { label: 'Experience', href: '#experience' },
   { label: 'Proof', href: '#proof' },
   { label: 'Contact', href: '#contact' },
+]
+
+/* ── answers, for people and for answer engines ───────────────────────────
+ *
+ * These are the questions a recruiter asks in a first message, and the
+ * questions ChatGPT, Claude, Gemini and Perplexity have to be able to answer
+ * before any of them will put my name in a reply. They are rendered as
+ * visible page content and mirrored into FAQPage structured data — schema
+ * that describes text a visitor cannot see is a Google violation, and a
+ * lie besides.
+ *
+ * Same rule as the rest of this file: nothing goes in that isn't true.
+ */
+export const faq = [
+  {
+    q: 'Who is Malay Adalja?',
+    a: 'A Software Engineer (QA) based in Ahmedabad, India, with 7 years 4 months in QA since June 2019. He has been at Openxcell since April 2023, testing the Speed crypto payment platform, and before that spent nearly four years at Auxano Global Services. He also built and maintains Aegis-QA, an internal AI-driven test automation platform.',
+  },
+  {
+    q: 'What kind of QA engineer is he?',
+    a: 'Both manual and automation, which is deliberate rather than transitional. He designs the test cases, automates the ones worth automating, verifies the result in the database rather than in the UI response, and load-tests the paths where volume is the failure mode. Payments is the domain he knows best.',
+  },
+  {
+    q: 'What can he test that most QA engineers cannot?',
+    a: 'Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network — each with its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.',
+  },
+  {
+    q: 'Which tools and languages does he use?',
+    a: 'Playwright and Pytest for web, Appium for Android, Postman and Newman for API and contract testing, JMeter for load, SQL for database verification, and Datadog for tracing a failed request. Python, JavaScript, TypeScript and SQL. Docker, AWS EC2 and CI pipelines for the plumbing. Claude, Claude Code, Cursor and ChatGPT as daily working tools, not novelties.',
+  },
+  {
+    q: 'What is Aegis-QA?',
+    a: 'An internal QA platform he built and maintains. It records a real session on the real application, compiles it to readable Gherkin and a runnable Playwright spec, runs UI, API, flow and security layers across five runner modes, and proposes selector repairs that are verified in a sandbox and never applied without a human approving them. Failed runs are classified and diagnosed automatically. Python 3.12, Playwright, asyncio, FastAPI and Next.js.',
+  },
+  {
+    q: 'Which payment flows has he actually tested?',
+    a: 'Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails — across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.',
+  },
+  {
+    q: 'Is he available for work, and where?',
+    a: 'Open to work, remote or hybrid, from Ahmedabad, Gujarat, India. He is interested in QA engineering and test-automation roles, especially anything with payments in it. Reachable at malayadalja123@gmail.com.',
+  },
+  {
+    q: 'Why should a QA engineer be trusted with test architecture?',
+    a: 'Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand — so the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.',
+  },
+]
+
+/* ── Aegis-QA, in full ────────────────────────────────────────────────────
+ *
+ * The product detail for /work/aegis, which opens in its own tab. Same rule
+ * as everything else in this file: these are subsystems that exist and run,
+ * described at the level you would describe them in an interview. No
+ * endpoints, no credentials, no customer data, no invented numbers.
+ */
+export const aegisRunnerModes = [
+  { mode: 'single', line: 'One test, on its own — the loop you use while writing it.' },
+  { mode: 'suite', line: 'One layer or a grouped set, for a targeted regression.' },
+  { mode: 'flow', line: 'Lifecycle and flow tests, where the output of one step feeds the next.' },
+  { mode: 'full', line: 'Every primary layer — the pre-release pass.' },
+  { mode: 'all', line: 'Every module, everything. The nightly.' },
+]
+
+export const aegisSubsystems = [
+  {
+    name: 'Session recorder',
+    line: 'Records a real session on the real application and keeps the intent — which element, which role, which label — rather than the raw selector that happened to match. The recording is the source of truth; everything downstream is generated from it and can be regenerated.',
+  },
+  {
+    name: 'Compiler',
+    line: 'Turns a recording into readable Gherkin and a runnable Playwright spec. Nav clicks, entity IDs and CRUD verbs are recovered from the session, so a generated test reads like one a person wrote.',
+  },
+  {
+    name: 'Execution engine',
+    line: 'Runs UI, API, flow and security layers across the five runner modes, headed or headless, locally or on the deployed box, with the run history and its artefacts kept together.',
+  },
+  {
+    name: 'Self-healing locators',
+    line: 'When a locator rots, the run proposes a replacement and verifies it in a sandbox before anyone sees it. A sandbox pass is advisory — it never resolves the failure and never writes itself into the knowledge base on its own. A human approves, or it stays a suggestion.',
+  },
+  {
+    name: 'Failure intelligence',
+    line: 'Every failed run is classified, diagnosed, given a fix plan, and where the fix is safe and on an allowlist, executed and verified. Deterministic checks run first and AI runs last, so the cheap and certain answer is never skipped in favour of a guess.',
+  },
+  {
+    name: 'Knowledge graph',
+    line: 'A live model of the application built from what has actually been observed running, not from a diagram. It answers which tests cover a change, what a change puts at risk, and which surfaces nothing has ever touched.',
+  },
+  {
+    name: 'API and database verification',
+    line: 'Collections and contract checks run beside the UI suite, and saved SQL queries confirm the state a run just produced. This is where the UI-says-success-but-the-ledger-disagrees class of bug gets caught.',
+  },
+  {
+    name: 'Mobile pipeline',
+    line: 'The same record-and-compile path for Android over Appium, including the cases where the tappable node and its label are different elements in the view tree.',
+  },
+  {
+    name: 'Trace lookup',
+    line: 'Paste a request ID and get the cross-service path it took. Pulled from observability on request, never in the background.',
+  },
+  {
+    name: 'Test case management',
+    line: 'Cases tied to the automation that covers them, so a coverage gap is something you can see rather than something you assume.',
+  },
+]
+
+export const aegisPrinciples = [
+  'A generated fix is a proposal until a person approves it. Nothing self-applies.',
+  'Deterministic checks run before AI, always. AI is the last resort, not the first.',
+  'The recording is immutable. Everything else is derived and can be rebuilt from it.',
+  'A sandbox pass proves a fix compiles and runs. It does not prove the bug is gone.',
+  'Secrets never enter a recording, a report or a repository.',
 ]

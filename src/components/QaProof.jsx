@@ -2,15 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Marker, MaskedWords } from '../lib/motion'
 import Bisect from './Bisect'
+import SelfTest from './SelfTest'
+import { SUITE_SIZE } from '../lib/selftest'
 
 /**
  * The argument for QA, made by breaking this page on purpose.
  *
  * Every defect below is a *real* defect injected into the real DOM — not a
- * picture of one. The panel in the corner is the same suite that runs on every
- * load, so flipping the switch genuinely turns 15/15 green into red, and
- * fixing a defect genuinely turns it back. Nothing here is special-cased:
- * the suite has no idea this section exists.
+ * picture of one. The suite below is the real suite, so flipping the switch
+ * genuinely turns it red and fixing a defect genuinely turns it back. Nothing
+ * here is special-cased: the suite has no idea this section exists.
  *
  * That is the whole pitch. "QA is necessary" is an opinion; a live failing
  * assertion is not.
@@ -102,9 +103,9 @@ export default function QaProof() {
         </h2>
 
         <p className="mt-7 max-w-2xl text-[15px] leading-relaxed text-white/80 md:text-[18px]">
-          Every defect below is real and gets injected into this actual page. The test panel in the
-          corner is the same suite that runs on every load — it has no idea this section exists.
-          Flip the switch and watch it go red.
+          Every defect below is real and gets injected into this actual page. The suite underneath
+          runs against the rendered DOM and has no idea this section exists. Flip the switch and
+          watch it go red.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -125,9 +126,11 @@ export default function QaProof() {
           >
             {count
               ? `${count} defect${count > 1 ? 's' : ''} live on this page`
-              : 'page is clean — 15 assertions holding'}
+              : `page is clean — ${SUITE_SIZE} assertions holding`}
           </p>
         </div>
+
+        <SelfTest />
 
         {/* the defect ledger */}
         <ol className="mt-14 border-t border-white/15">

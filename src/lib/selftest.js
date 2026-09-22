@@ -288,7 +288,10 @@ const checks = [
 
         judged += 1
         if (contrastRatio(front, behind) < 1.04) {
-          flat.push(el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
+          flat.push(
+            el.tagName.toLowerCase() +
+              (el.className ? '.' + String(el.className).split(' ')[0] : ''),
+          )
         }
       }
 

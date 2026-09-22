@@ -1,11 +1,17 @@
-import { useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import { aegisModules, aegisPipeline, caseStudies, profile } from '../content'
-import { navigate } from '../lib/router'
-import { Reveal } from '../lib/motion'
+import { motion } from 'framer-motion'
+import {
+  aegisPipeline,
+  aegisPrinciples,
+  aegisRunnerModes,
+  aegisSubsystems,
+  caseStudies,
+  profile,
+} from '../content'
+import { goHome, navigate } from '../lib/router'
+import { Reveal, useStatic } from '../lib/motion'
 
 /**
- * A real subpage per case study, with its own URL (`#/work/speed`).
+ * A real subpage per case study, with its own URL (`/work/speed`).
  *
  * Apple gives every product a page rather than an accordion, because depth
  * that cannot be linked to does not get shared. This one is the same content
@@ -25,17 +31,10 @@ function Block({ label, children }) {
 }
 
 export default function CaseStudyPage({ id }) {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const index = caseStudies.findIndex((c) => c.id === id)
   const study = caseStudies[index]
   const next = caseStudies[(index + 1) % caseStudies.length]
-
-  useEffect(() => {
-    if (study) document.title = `${study.title} — ${profile.name}`
-    return () => {
-      document.title = `${profile.name} — QA Automation Engineer (SDET) | Playwright, Python`
-    }
-  }, [study])
 
   if (!study) {
     return (
@@ -43,7 +42,7 @@ export default function CaseStudyPage({ id }) {
         <h1 className="display">Not found.</h1>
         <button
           type="button"
-          onClick={() => navigate('')}
+          onClick={() => navigate('/')}
           className="mt-8 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper"
         >
           Back to the site
@@ -60,7 +59,7 @@ export default function CaseStudyPage({ id }) {
       <header className="shell pb-16 pt-14 md:pb-24 md:pt-20">
         <button
           type="button"
-          onClick={() => navigate('/#work')}
+          onClick={() => goHome('#work')}
           className="mb-12 font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60 transition-colors hover:text-ink"
         >
           ← All work
@@ -113,7 +112,9 @@ export default function CaseStudyPage({ id }) {
           </div>
           {study.link && (
             <div>
-              <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">Live</dt>
+              <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">
+                Live
+              </dt>
               <dd className="mt-1.5">
                 <a
                   href={study.link}
@@ -151,17 +152,53 @@ export default function CaseStudyPage({ id }) {
 
         {isAegis && (
           <>
-            <Block label="What it manages">
+            <Block label="What is in it">
               <div className="grid gap-x-12 gap-y-0 sm:grid-cols-2">
-                {aegisModules.map((m) => (
+                {aegisSubsystems.map((m) => (
                   <Reveal key={m.name}>
-                    <div className="border-t border-ink/10 py-5">
+                    <div className="border-t border-ink/10 py-6">
                       <p className="text-[16px] font-bold tracking-tight">{m.name}</p>
-                      <p className="mt-1.5 text-[14px] leading-relaxed text-ink/75">{m.line}</p>
+                      <p className="mt-2 text-[14px] leading-relaxed text-ink/75">{m.line}</p>
                     </div>
                   </Reveal>
                 ))}
               </div>
+            </Block>
+
+            <Block label="Runner modes">
+              <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/75">
+                Five, and they are a frozen contract — every module has to keep working in all five,
+                because the cost of a runner mode quietly breaking is a suite that looks green while
+                running almost nothing.
+              </p>
+              <dl className="border-t border-ink/10">
+                {aegisRunnerModes.map((m) => (
+                  <Reveal key={m.mode}>
+                    <div className="flex flex-wrap gap-x-8 gap-y-1.5 border-b border-ink/10 py-4">
+                      <dt className="w-24 shrink-0 font-mono text-[12px] text-navy-500">
+                        {m.mode}
+                      </dt>
+                      <dd className="min-w-0 flex-1 text-[14.5px] leading-relaxed text-ink/75">
+                        {m.line}
+                      </dd>
+                    </div>
+                  </Reveal>
+                ))}
+              </dl>
+            </Block>
+
+            <Block label="Rules it will not break">
+              <ul className="space-y-5">
+                {aegisPrinciples.map((line) => (
+                  <Reveal as="li" key={line}>
+                    <div className="flex gap-5 border-l-2 border-navy-500 pl-5">
+                      <p className="text-[15px] leading-relaxed text-ink/85 md:text-[17px]">
+                        {line}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </ul>
             </Block>
 
             <Block label="How a test gets made">
@@ -233,7 +270,7 @@ export default function CaseStudyPage({ id }) {
             </a>
             <button
               type="button"
-              onClick={() => navigate('')}
+              onClick={() => navigate('/')}
               className="rounded-full border border-white/25 px-7 py-3.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-white hover:text-ink"
             >
               Back to the site

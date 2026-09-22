@@ -1,0 +1,318 @@
+# Malay Adalja — Software Engineer — QA
+
+I find what breaks payment systems before customers do — then automate it so it stays found.
+
+Seven years on crypto payments — BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.
+
+Location: Ahmedabad, India
+Availability: Open to work · remote or hybrid
+Experience: 7 yrs 4 mo, QA only, from June 2019
+Contact: malayadalja123@gmail.com
+LinkedIn: https://www.linkedin.com/in/malayy-j-adalja-261578132/
+Site: https://portfolio-malayadalja.vercel.app/
+
+---
+
+## Skills
+
+### Automation
+- Playwright
+- Selenium
+- Appium
+- Pytest
+- Newman / Postman
+
+### Languages
+- Python
+- JavaScript
+- TypeScript
+- SQL
+
+### AI tooling
+- Claude
+- Claude Code (CLI)
+- ChatGPT
+- Cursor
+- GitHub Copilot
+- Kimi 2.5
+- Emergent
+- Datadog AI
+
+### Performance
+- JMeter
+- Load profiling
+- Transaction throughput
+
+### Domains
+- Crypto payments
+- Fintech
+- KYB / KYC
+- E-commerce
+- Games
+
+### Platform
+- FastAPI
+- Next.js
+- Docker
+- AWS EC2
+- CI pipelines
+
+---
+
+## Payment rails tested
+
+### Bitcoin · on-chain
+undefined
+
+### Lightning Network
+undefined
+
+### Ethereum · native
+undefined
+
+### Tether · ERC-20
+undefined
+
+### Tether Gold
+undefined
+
+### Smart contract
+undefined
+
+### Crypto payout
+undefined
+
+---
+
+## Coverage surfaces
+
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+- undefined: 
+
+---
+
+## Case studies
+
+### Speed — crypto payment platform
+URL: https://portfolio-malayadalja.vercel.app/work/speed
+Role: Software Engineer — QA
+Period: 2023 — present
+Category: Payments
+Product: https://www.tryspeed.com/
+
+Merchant checkout, payment links, refunds and crypto payouts across BTC, ETH, USDT, XAUT and the Lightning Network — plus ERC-20 smart contract testing, e-commerce plugin integrations and localization.
+
+**The problem**
+Money movement has no safe failure mode. A refund that fires twice, a payout to an unverified address or a rate that drifts on a fallback path are all real losses, and none of them show up on the happy path.
+
+**What I did**
+- Built regression coverage across the payment modules — Metadata, Customer, Swap, Payout, Instant Payout, Transfer.
+- Covered BTC and Lightning, ETH, USDT (ERC-20) and XAUT, each with its own confirmation and decimal rules.
+- Tested ERC-20 smart contract calls — ABI encoding, revert paths, emitted events and access control.
+- Automated the crypto payout and instant-send workflows end to end, including address verification.
+- Verified every transaction against the database, not just the UI response.
+- Load-tested withdrawal and high-volume transaction flows with JMeter.
+- Checked wallet address verification, audit trails and the KYB/KYC onboarding path.
+- Validated WooCommerce and e-commerce plugin integrations, plus checkout localization across devices.
+
+**What changed**
+- Payment flows that used to need a manual pass before every release are covered by an automated suite.
+- Database reconciliation catches the class of bug where the UI reports success and the ledger disagrees.
+- Regression runs against on-chain and Lightning rails without a person driving them.
+
+**Stack**
+Playwright, Postman / Newman, SQL, JMeter, Appium
+
+---
+
+### Aegis-QA — the tooling I built
+URL: https://portfolio-malayadalja.vercel.app/work/aegis
+Role: Creator & maintainer
+Period: 2024 — present
+Category: Internal tool
+
+An internal platform I built to manage the QA work itself: triggering runs, API testing, Playwright scripts, SQL queries, Datadog lookups and test-case management with automation-script recording — in one place.
+
+**The problem**
+The work was spread across a dozen tools. Postman here, a Playwright repo there, SQL in a client, Datadog in a browser tab, test cases in a spreadsheet. Every investigation meant stitching them back together by hand.
+
+**What I did**
+- One place to trigger and watch runs across UI, API, flow and security layers.
+- A recorder that turns a real session into a reviewable script instead of hand-written selectors.
+- API tests, SQL queries and Datadog lookups available next to the run that needs them.
+- Test-case management tied to the automation that covers it.
+- Self-healing locators — proposed and sandbox-verified, never applied without a human saying yes.
+
+**What changed**
+- Investigating a failed run happens in one tool instead of five.
+- Recorded sessions become maintained scripts, so coverage grows without hand-writing every selector.
+- It is internal tooling, not a product — built because the off-the-shelf options did not fit how the team works.
+
+**Stack**
+Python 3.12, Playwright, asyncio, FastAPI, Next.js, Docker
+
+---
+
+### KYB / KYC onboarding
+URL: https://portfolio-malayadalja.vercel.app/work/kyb
+Role: QA Engineer
+Period: 2023 — present
+Category: Compliance
+
+Merchant verification through a third-party identity provider — LLC and Corporation flows, document upload, beneficiary checks and liveness.
+
+**The problem**
+Onboarding sits between your product and a vendor you do not control, across several document types and company structures. The failure modes are slow, stateful and easy to miss.
+
+**What I did**
+- Covered both LLC and Corporation paths, including multi-beneficiary cases.
+- Tested document upload, liveness and the vendor iframe handoff.
+- Cross-checked verification status in the database against what the provider reported.
+- Built negative cases around the country allowlist and rejected document types.
+
+**What changed**
+- The onboarding path has a repeatable suite instead of being re-tested by hand each release.
+- Status mismatches between our records and the provider surface as failures rather than support tickets.
+
+**Stack**
+Playwright, SQL, Postman
+
+---
+
+## Aegis-QA in detail
+
+Page: https://portfolio-malayadalja.vercel.app/work/aegis
+
+### Subsystems
+
+**Session recorder** — Records a real session on the real application and keeps the intent — which element, which role, which label — rather than the raw selector that happened to match. The recording is the source of truth; everything downstream is generated from it and can be regenerated.
+
+**Compiler** — Turns a recording into readable Gherkin and a runnable Playwright spec. Nav clicks, entity IDs and CRUD verbs are recovered from the session, so a generated test reads like one a person wrote.
+
+**Execution engine** — Runs UI, API, flow and security layers across the five runner modes, headed or headless, locally or on the deployed box, with the run history and its artefacts kept together.
+
+**Self-healing locators** — When a locator rots, the run proposes a replacement and verifies it in a sandbox before anyone sees it. A sandbox pass is advisory — it never resolves the failure and never writes itself into the knowledge base on its own. A human approves, or it stays a suggestion.
+
+**Failure intelligence** — Every failed run is classified, diagnosed, given a fix plan, and where the fix is safe and on an allowlist, executed and verified. Deterministic checks run first and AI runs last, so the cheap and certain answer is never skipped in favour of a guess.
+
+**Knowledge graph** — A live model of the application built from what has actually been observed running, not from a diagram. It answers which tests cover a change, what a change puts at risk, and which surfaces nothing has ever touched.
+
+**API and database verification** — Collections and contract checks run beside the UI suite, and saved SQL queries confirm the state a run just produced. This is where the UI-says-success-but-the-ledger-disagrees class of bug gets caught.
+
+**Mobile pipeline** — The same record-and-compile path for Android over Appium, including the cases where the tappable node and its label are different elements in the view tree.
+
+**Trace lookup** — Paste a request ID and get the cross-service path it took. Pulled from observability on request, never in the background.
+
+**Test case management** — Cases tied to the automation that covers them, so a coverage gap is something you can see rather than something you assume.
+
+### How a test gets made
+
+1. Record — A real session on the real app becomes a structured recording.
+2. Compile — The recording compiles to readable Gherkin and a runnable Playwright spec.
+3. Run — UI, API, flow and security layers execute together across five runner modes.
+4. Heal — When a locator rots, the run proposes a fix and verifies it in a sandbox.
+5. Learn — Only verified fixes are kept. Everything else stays advisory until a human approves it.
+
+### Runner modes
+
+- single: One test, on its own — the loop you use while writing it.
+- suite: One layer or a grouped set, for a targeted regression.
+- flow: Lifecycle and flow tests, where the output of one step feeds the next.
+- full: Every primary layer — the pre-release pass.
+- all: Every module, everything. The nightly.
+
+### Rules it will not break
+
+- A generated fix is a proposal until a person approves it. Nothing self-applies.
+- Deterministic checks run before AI, always. AI is the last resort, not the first.
+- The recording is immutable. Everything else is derived and can be rebuilt from it.
+- A sandbox pass proves a fix compiles and runs. It does not prove the bug is gone.
+- Secrets never enter a recording, a report or a repository.
+
+---
+
+## Other work
+
+- TM2 (Teach Me To Online): E-learning platform — course upload, purchase flow, secure payment, student dashboards and access control.
+- NLC (Natural Living Care): E-commerce with a multi-level bonus system — cart, checkout, bonus tier calculation and user activity tracking.
+- OZ Road Code: Ride assessment platform on web and mobile — video recording, map tracking and real-time speed logs.
+- Dekabes Domino: Multiplayer game — real-time stability, AI difficulty and fairness, private tables and invites.
+- Moana Pasifika: Community app — purchases, gifting, secure transactions and a shared feed across mobile and web.
+- E-commerce builds: Multiple storefronts — end-to-end UI/UX validation, cart, checkout, payment success and email notifications.
+
+---
+
+## Career route
+
+### 2019 — Technical Recruiter
+Skillventory · Jan — Apr 2019
+
+
+### 2019 — QA Engineer
+Auxano Global Services · Jun 2019 — Apr 2023
+
+
+### 2021 — Games, e-commerce, e-learning
+TM2 · NLC · OZ Road Code · Dekabes · Moana Pasifika
+
+
+### 2023 — Software Engineer — QA
+Openxcell · Speed · Apr 2023 — present
+
+
+### 2024 — Aegis-QA
+Internal tooling · Creator & maintainer
+
+
+### Now — Looking for the next one
+Remote or hybrid
+
+
+---
+
+## Employment history
+
+- Software Engineer — QA, undefined, Apr 2023 — Present
+- QA Engineer, undefined, Jun 2019 — Apr 2023
+- Technical Recruiter, undefined, Jan 2019 — Apr 2019
+
+---
+
+## Questions and answers
+
+### Who is Malay Adalja?
+A Software Engineer (QA) based in Ahmedabad, India, with 7 years 4 months in QA since June 2019. He has been at Openxcell since April 2023, testing the Speed crypto payment platform, and before that spent nearly four years at Auxano Global Services. He also built and maintains Aegis-QA, an internal AI-driven test automation platform.
+
+### What kind of QA engineer is he?
+Both manual and automation, which is deliberate rather than transitional. He designs the test cases, automates the ones worth automating, verifies the result in the database rather than in the UI response, and load-tests the paths where volume is the failure mode. Payments is the domain he knows best.
+
+### What can he test that most QA engineers cannot?
+Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network — each with its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.
+
+### Which tools and languages does he use?
+Playwright and Pytest for web, Appium for Android, Postman and Newman for API and contract testing, JMeter for load, SQL for database verification, and Datadog for tracing a failed request. Python, JavaScript, TypeScript and SQL. Docker, AWS EC2 and CI pipelines for the plumbing. Claude, Claude Code, Cursor and ChatGPT as daily working tools, not novelties.
+
+### What is Aegis-QA?
+An internal QA platform he built and maintains. It records a real session on the real application, compiles it to readable Gherkin and a runnable Playwright spec, runs UI, API, flow and security layers across five runner modes, and proposes selector repairs that are verified in a sandbox and never applied without a human approving them. Failed runs are classified and diagnosed automatically. Python 3.12, Playwright, asyncio, FastAPI and Next.js.
+
+### Which payment flows has he actually tested?
+Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails — across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.
+
+### Is he available for work, and where?
+Open to work, remote or hybrid, from Ahmedabad, Gujarat, India. He is interested in QA engineering and test-automation roles, especially anything with payments in it. Reachable at malayadalja123@gmail.com.
+
+### Why should a QA engineer be trusted with test architecture?
+Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand — so the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.
+
+---
+
+Generated from the site's own content on 2026-09-22. If a claim here and a claim
+on the page disagree, the page is authoritative and this file is a bug.

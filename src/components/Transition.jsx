@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useStatic } from '../lib/motion'
 
 /**
  * The page-turn between two chapters.
@@ -11,7 +12,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
  */
 export default function Transition({ lead, emph, sub, dark = false }) {
   const ref = useRef(null)
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
 
   const y = useTransform(scrollYProgress, [0, 1], ['16%', '-16%'])

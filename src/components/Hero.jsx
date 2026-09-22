@@ -1,12 +1,13 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile, quickFacts, storyPromise } from '../content'
+import { useStatic } from '../lib/motion'
 
 const LINES = ['I find what', 'breaks payments']
 
 export default function Hero({ onResume }) {
   const ref = useRef(null)
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])

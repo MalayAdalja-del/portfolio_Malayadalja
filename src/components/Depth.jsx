@@ -1,13 +1,7 @@
 import { useRef, useState } from 'react'
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-} from 'framer-motion'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { coverage, coverageLayers, depthIntro, latencySteps } from '../content'
-import { Marker, MaskedWords, Reveal } from '../lib/motion'
+import { Marker, MaskedWords, Reveal, useStatic } from '../lib/motion'
 
 /**
  * Breadth then depth, in one chapter.
@@ -31,7 +25,7 @@ const SEV = {
 
 function Matrix() {
   const ref = useRef(null)
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 85%', 'end 70%'] })
 
   // One subscription, one number. Calling useTransform per cell would put a
@@ -108,6 +102,7 @@ function Matrix() {
 }
 
 function Dial() {
+  const reduce = useStatic()
   const [i, setI] = useState(0)
   const step = latencySteps[i]
   const sev = SEV[step.severity]
@@ -167,7 +162,7 @@ function Dial() {
         <AnimatePresence mode="wait">
           <motion.div
             key={step.ms}
-            initial={{ opacity: 0, y: 14 }}
+            initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -14 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}

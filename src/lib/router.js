@@ -1,46 +1,68 @@
 import { useEffect, useState } from 'react'
 
 /**
- * A 30-line hash router. No dependency, no server rewrites, and it works
- * identically on Vercel, a static host, or a file:// preview.
+ * A path router, in about fifty lines. No dependency.
  *
- * Contract: a *route* hash starts with `#/`. Anything else (`#work`,
- * `#contact`) is an in-page anchor and is deliberately ignored, so the
- * existing scroll navigation keeps working untouched.
+ * It used to be a *hash* router (`#/work/speed`), which was the wrong choice
+ * and the single biggest SEO defect on the site: a fragment is never a URL to
+ * any crawler, so all three case studies — the richest content here — were
+ * invisible to Google and could not appear in a search result or be cited by
+ * an answer engine. They are real paths now (`/work/speed`), which needs the
+ * rewrite in vercel.json so a deep link served cold still reaches index.html.
+ *
+ * Contract: `#section` anchors are untouched, so the scroll nav keeps working.
  */
-export function parseRoute(hash) {
-  const h = (hash || '').replace(/^#/, '')
-  if (!h.startsWith('/')) return { name: 'home' }
 
-  const parts = h.split('/').filter(Boolean)
+/** Every route the site serves, in the order the sitemap lists them. */
+export const ROUTES = ['/', '/work/speed', '/work/aegis', '/work/kyb']
+
+export function parseRoute(pathname) {
+  const parts = (pathname || '/').split('/').filter(Boolean)
   if (parts[0] === 'work' && parts[1]) return { name: 'work', id: parts[1] }
-  if (parts[0] === 'resume') return { name: 'resume' }
   return { name: 'home' }
 }
 
-export function useRoute() {
-  const [route, setRoute] = useState(() => parseRoute(window.location.hash))
+/**
+ * `initial` lets the prerenderer state the route instead of reading a
+ * `window` that does not exist in Node.
+ */
+export function useRoute(initial) {
+  const [route, setRoute] = useState(
+    () =>
+      initial ??
+      (typeof window === 'undefined' ? { name: 'home' } : parseRoute(window.location.pathname)),
+  )
 
   useEffect(() => {
-    const sync = () => setRoute(parseRoute(window.location.hash))
-    window.addEventListener('hashchange', sync)
-    return () => window.removeEventListener('hashchange', sync)
+    const sync = () => setRoute(parseRoute(window.location.pathname))
+    window.addEventListener('popstate', sync)
+    // pushState fires no event of its own, so navigate() raises this one.
+    window.addEventListener('routechange', sync)
+    return () => {
+      window.removeEventListener('popstate', sync)
+      window.removeEventListener('routechange', sync)
+    }
   }, [])
 
   return route
 }
 
+function go(url) {
+  window.history.pushState(null, '', url)
+  window.dispatchEvent(new Event('routechange'))
+}
+
 /** Go to a route and start at the top, the way a real page navigation does. */
 export function navigate(to) {
-  window.location.hash = to
+  go(to.startsWith('/') ? to : `/${to}`)
   window.scrollTo({ top: 0, behavior: 'auto' })
 }
 
 /** Back to the home page, landing on the section you came from. */
 export function goHome(anchor = '') {
-  window.location.hash = anchor
-  if (!anchor) {
-    // Clearing the hash entirely would reload-jump; blank it without a jump.
-    history.replaceState(null, '', window.location.pathname + window.location.search)
+  go(`/${anchor}`)
+  if (anchor) {
+    const target = document.querySelector(anchor)
+    if (target) target.scrollIntoView({ behavior: 'auto', block: 'start' })
   }
 }

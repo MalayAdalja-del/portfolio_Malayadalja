@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { paymentRails, railsIntro } from '../content'
-import { Marker, MaskedWords } from '../lib/motion'
+import { Marker, MaskedWords, useStatic } from '../lib/motion'
 import { RAIL_ICON } from './icons'
 import MoneyFlow from './MoneyFlow'
 
@@ -16,7 +16,7 @@ const STEP_MS = 850
  * asset, and here is why those five differ".
  */
 export default function PaymentRails() {
-  const reduce = useReducedMotion()
+  const reduce = useStatic()
   const [railId, setRailId] = useState('btc')
   const [step, setStep] = useState(-1)
   const [running, setRunning] = useState(false)
@@ -84,6 +84,17 @@ export default function PaymentRails() {
   }
 
   const settled = step === rail.steps.length - 1
+
+  // Interactively this shows one rail at a time. Statically that would mean
+  // six of the seven rails, and every assertion on them, simply not existing
+  // — and those assertions are the most specific thing on this site. So the
+  // no-motion render lists all of them.
+  //
+  // This branch has to sit below every hook above it. Put it any higher and
+  // the mount pass, which flips `reduce` from true to false, runs a
+  // different number of hooks than the render before it — React error #310,
+  // and a blank page.
+  if (reduce) return <Static />
 
   return (
     <section id="rails" ref={ref} className="invert-section scroll-mt-20">
@@ -226,6 +237,54 @@ export default function PaymentRails() {
               <span className="text-white/60">{rail.symbol} settled</span>
             </motion.div>
           </div>
+        </div>
+
+        <MoneyFlow />
+      </div>
+    </section>
+  )
+}
+
+/**
+ * Every rail, every assertion, no interaction.
+ *
+ * This is what a reduced-motion visitor sees, and what the prerender bakes
+ * into the HTML that crawlers and answer engines read.
+ */
+function Static() {
+  return (
+    <section id="rails" className="invert-section scroll-mt-20">
+      <div className="shell band">
+        <Marker index="Ch.02">{railsIntro.kicker}</Marker>
+        <h2 className="display max-w-4xl">{railsIntro.title}</h2>
+        <p className="mt-7 max-w-2xl text-[15px] leading-relaxed text-white/80 md:text-[17px]">
+          {railsIntro.line}
+        </p>
+
+        <div className="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-2">
+          {paymentRails.map((rail) => (
+            <article key={rail.id}>
+              <header className="flex items-baseline gap-3 border-b border-white/15 pb-3">
+                <h3 className="text-xl font-black tracking-tightest">{rail.name}</h3>
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-navy-300">
+                  {rail.symbol}
+                </span>
+              </header>
+              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-white/60">
+                Known risk — {rail.note}
+              </p>
+              <ol className="mt-5">
+                {rail.steps.map((step) => (
+                  <li key={step.state} className="border-b border-white/10 py-3">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-navy-300">
+                      {step.state}
+                    </p>
+                    <p className="mt-1.5 text-[13.5px] leading-snug text-white">{step.assert}</p>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          ))}
         </div>
 
         <MoneyFlow />

@@ -129,47 +129,12 @@
     <div id="root"></div>
 
     <!--
-      Crawlers and readers without JavaScript still get the substance.
-      Keep this in step with src/content.js.
+      There is no <noscript> fallback any more, and that is the point: every
+      route is prerendered, so the content is in this file whether or not a
+      script runs. The old fallback was a 250-word summary — the only thing
+      ClaudeBot, PerplexityBot or Bing ever saw of a 3,500-word site. Keeping
+      it now would only duplicate the page.
     -->
-    <noscript>
-      <h1>Malay Adalja — Software Engineer, QA</h1>
-      <p>
-        QA automation engineer, 7 years 4 months across crypto payments, fintech, e-commerce and
-        games. Based in Ahmedabad, India.
-      </p>
-      <h2>What I do</h2>
-      <ul>
-        <li>
-          End-to-end test automation with Playwright, Selenium, Appium and Pytest across web and
-          Android.
-        </li>
-        <li>API testing and contract validation with Postman and Newman.</li>
-        <li>Performance and load testing with JMeter for high-volume payment transactions.</li>
-        <li>
-          Crypto payment testing on-chain and over the Lightning Network — merchant checkout,
-          payment links, refunds, instant payouts, swaps and cashback.
-        </li>
-        <li>KYB and KYC onboarding verification, security and wallet address validation.</li>
-      </ul>
-      <h2>Aegis-QA</h2>
-      <p>
-        An AI-driven QA automation platform I built and maintain. It records a real user session,
-        compiles it to Gherkin and a runnable Playwright spec, runs UI, API, flow and security
-        layers across five runner modes, and repairs its own selectors under human review.
-      </p>
-      <h2>Experience</h2>
-      <ul>
-        <li>Software Engineer — QA, Openxcell, April 2023 to present.</li>
-        <li>QA Engineer, Auxano Global Services, June 2019 to April 2023.</li>
-        <li>Technical Recruiter, Skillventory, January 2019 to April 2019.</li>
-      </ul>
-      <h2>Contact</h2>
-      <p>
-        Email <a href="mailto:malayadalja123@gmail.com">malayadalja123@gmail.com</a> or
-        <a href="https://www.linkedin.com/in/malayy-j-adalja-261578132/">connect on LinkedIn</a>.
-      </p>
-    </noscript>
 
     <script type="module" src="/src/main.jsx"></script>
   </body>

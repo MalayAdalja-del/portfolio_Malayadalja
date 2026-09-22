@@ -115,9 +115,9 @@ export default function Bisect() {
             the culprit
           </span>
           <br />
-          <span className="font-semibold">{bisect.commits[found]}</span> — sharing one retry
-          helper made two payouts reuse a single idempotency key. Sixteen commits, four tests.
-          That is the whole reason to bisect instead of reading the diff.
+          <span className="font-semibold">{bisect.commits[found]}</span> — sharing one retry helper
+          made two payouts reuse a single idempotency key. Sixteen commits, four tests. That is the
+          whole reason to bisect instead of reading the diff.
         </p>
       )}
     </div>
