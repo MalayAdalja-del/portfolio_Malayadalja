@@ -927,3 +927,66 @@ export const aegisPrinciples = [
   'A sandbox pass proves a fix compiles and runs. It does not prove the bug is gone.',
   'Secrets never enter a recording, a report or a repository.',
 ]
+
+/**
+ * What Aegis replaced.
+ *
+ * This is the product case, and it is made against the stack this team
+ * actually used before — a framework repo, Postman in another window, a SQL
+ * client, a spreadsheet and a browser tab of logs. Not against named
+ * commercial tools: claiming a win over Testim or mabl would mean asserting
+ * things about their behaviour I have not measured, and an unverifiable
+ * comparison is worth less than a true one.
+ */
+export const aegisCompare = [
+  {
+    need: 'Write a test',
+    before: 'Hand-written selectors, rewritten every time the UI moved.',
+    after: 'Record the real session. The spec is generated, and regenerable from the recording.',
+  },
+  {
+    need: 'Run it',
+    before: 'A framework repo driven from a terminal, results scrolling past in the console.',
+    after: 'One place, with the run history and its artefacts kept together.',
+  },
+  {
+    need: 'Check the API',
+    before: 'Postman in another window, with its own environment files to keep in sync.',
+    after: 'Collections run beside the UI suite, against the same run record.',
+  },
+  {
+    need: 'Confirm the data really changed',
+    before: 'A SQL client, queried by hand, when someone remembered to.',
+    after:
+      'Saved queries against the state the run just produced. This is where the UI-says-success-but-the-ledger-disagrees bug gets caught.',
+  },
+  {
+    need: 'A locator stops matching',
+    before: 'Find it, guess a new one, hope it holds until next week.',
+    after: 'A proposed replacement, verified in a sandbox, waiting for a human to approve it.',
+  },
+  {
+    need: 'A run fails at 2am',
+    before: 'Read the log, then the trace, then the diff, then ask the developer.',
+    after:
+      'Classified and diagnosed on arrival, with the trace for the failed request pulled in beside it.',
+  },
+  {
+    need: 'Know what is covered',
+    before: 'A spreadsheet, out of date the day after it was written.',
+    after:
+      'Cases tied to the automation that covers them, so a gap is visible rather than assumed.',
+  },
+  {
+    need: 'Test the Android app',
+    before: 'A separate project, on a separate framework, that nobody maintained.',
+    after: 'The same record-and-compile path, over Appium.',
+  },
+]
+
+/** The honest limits. A product page without these is a brochure. */
+export const aegisLimits = [
+  'It is internal tooling for one team, not a commercial product. There is no pricing page and no support line.',
+  'It assumes a web or Android application it can drive directly. It is not a unit-test runner.',
+  'A sandbox-verified fix proves the change compiles and runs. It does not prove the bug is gone, which is why a human still approves it.',
+]

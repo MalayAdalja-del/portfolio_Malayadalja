@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import {
+  aegisCompare,
+  aegisLimits,
   aegisPipeline,
   aegisPrinciples,
   aegisRunnerModes,
@@ -152,6 +154,53 @@ export default function CaseStudyPage({ id }) {
 
         {isAegis && (
           <>
+            <Block label="What it replaced">
+              <p className="mb-10 max-w-2xl text-[15px] leading-relaxed text-ink/75 md:text-[17px]">
+                Before this, the job was five windows. The comparison worth making is not against a
+                product with a pricing page — it is against the stack a QA team actually runs when
+                nobody has built them one.
+              </p>
+
+              {/* Two columns on a wide screen, stacked and labelled on a phone.
+                  A table would have needed a scroller at 320px, and a
+                  comparison you have to swipe sideways does not get read. */}
+              <ol className="border-t border-ink/10">
+                {aegisCompare.map((row, i) => (
+                  <Reveal as="li" key={row.need} delay={Math.min(i, 4) * 0.04}>
+                    <div className="border-b border-ink/10 py-7">
+                      <div className="flex items-baseline gap-4">
+                        <span className="font-mono text-[11px] text-ink/60">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <h3 className="text-[17px] font-bold tracking-tight md:text-[20px]">
+                          {row.need}
+                        </h3>
+                      </div>
+
+                      <div className="mt-5 grid gap-5 md:grid-cols-2 md:gap-10">
+                        <div className="border-l-2 border-ink/15 pl-5">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">
+                            Before
+                          </p>
+                          <p className="mt-2 text-[14.5px] leading-relaxed text-ink/60">
+                            {row.before}
+                          </p>
+                        </div>
+                        <div className="border-l-2 border-navy-500 pl-5">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.11em] text-navy-500">
+                            With Aegis
+                          </p>
+                          <p className="mt-2 text-[14.5px] leading-relaxed text-ink/85">
+                            {row.after}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </ol>
+            </Block>
+
             <Block label="What is in it">
               <div className="grid gap-x-12 gap-y-0 sm:grid-cols-2">
                 {aegisSubsystems.map((m) => (
@@ -193,6 +242,26 @@ export default function CaseStudyPage({ id }) {
                   <Reveal as="li" key={line}>
                     <div className="flex gap-5 border-l-2 border-navy-500 pl-5">
                       <p className="text-[15px] leading-relaxed text-ink/85 md:text-[17px]">
+                        {line}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </ul>
+            </Block>
+
+            <Block label="What it is not">
+              <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/75">
+                A product page without this section is a brochure.
+              </p>
+              <ul className="space-y-5">
+                {aegisLimits.map((line) => (
+                  <Reveal as="li" key={line}>
+                    <div className="flex gap-4">
+                      <span aria-hidden className="shrink-0 font-mono text-[13px] text-ink/60">
+                        —
+                      </span>
+                      <p className="text-[15px] leading-relaxed text-ink/75 md:text-[16px]">
                         {line}
                       </p>
                     </div>
