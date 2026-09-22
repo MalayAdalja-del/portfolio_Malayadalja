@@ -11,6 +11,7 @@ import {
 } from '../content'
 import { goHome, navigate } from '../lib/router'
 import { Reveal, useStatic } from '../lib/motion'
+import AegisDiagrams from '../components/AegisDiagrams'
 
 /**
  * A real subpage per case study, with its own URL (`/work/speed`).
@@ -154,6 +155,10 @@ export default function CaseStudyPage({ id }) {
 
         {isAegis && (
           <>
+            <Block label="What it looks like">
+              <AegisDiagrams />
+            </Block>
+
             <Block label="What it replaced">
               <p className="mb-10 max-w-2xl text-[15px] leading-relaxed text-ink/75 md:text-[17px]">
                 Before this, the job was five windows. The comparison worth making is not against a
