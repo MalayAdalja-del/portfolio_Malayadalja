@@ -136,7 +136,7 @@ export default function Roadmap() {
           {roadmapIntro.line}
         </p>
 
-        <div className="mt-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60">
+        <div className="mt-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60">
           <span className="text-navy-500">{String(Math.max(reached, 1)).padStart(2, '0')}</span>
           <span className="block h-px w-20 bg-ink/20">
             <motion.span
@@ -241,7 +241,7 @@ export default function Roadmap() {
                       >
                         {stop.year}
                       </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">
                         {stop.kind}
                       </span>
                     </div>
@@ -256,7 +256,7 @@ export default function Roadmap() {
                       {stop.note}
                     </p>
 
-                    <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.22em] text-navy-500">
+                    <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.12em] text-navy-500">
                       QA work
                     </p>
                     <ul className="mt-2 flex flex-wrap gap-1.5">
@@ -267,7 +267,7 @@ export default function Roadmap() {
                       ))}
                     </ul>
 
-                    <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-ink/60">
+                    <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.12em] text-ink/60">
                       Languages &amp; tools
                     </p>
                     <ul className="mt-2 flex flex-wrap gap-1.5">

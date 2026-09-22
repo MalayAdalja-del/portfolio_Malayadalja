@@ -121,7 +121,7 @@ export default function QaProof() {
           {/* fixed box: a status line that resizes would shift the page */}
           <p
             aria-live="polite"
-            className="flex h-6 w-full max-w-[22rem] items-center font-mono text-[11px] uppercase tracking-[0.2em] text-white/60"
+            className="flex h-6 w-full max-w-[22rem] items-center font-mono text-[11px] uppercase tracking-[0.11em] text-white/60"
           >
             {count
               ? `${count} defect${count > 1 ? 's' : ''} live on this page`
@@ -150,7 +150,7 @@ export default function QaProof() {
                         {d.title}
                       </h3>
                       <span
-                        className={`px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+                        className={`px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] transition-colors duration-300 ${
                           on ? 'bg-navy-300 text-ink' : 'bg-white/10 text-white/60'
                         }`}
                       >
@@ -161,7 +161,7 @@ export default function QaProof() {
                     <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-white/75">
                       {d.real}
                     </p>
-                    <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-white/60">
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.09em] text-white/60">
                       caught by → {d.caught}
                     </p>
                   </div>
@@ -170,7 +170,7 @@ export default function QaProof() {
                     type="button"
                     onClick={() => fix(d.id)}
                     disabled={!on}
-                    className="shrink-0 border border-white/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors hover:bg-white hover:text-ink disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white"
+                    className="shrink-0 border border-white/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:bg-white hover:text-ink disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white"
                   >
                     {on ? 'Fix it' : 'Fixed'}
                   </button>

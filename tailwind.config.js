@@ -25,9 +25,11 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
+      // Display type wants tight tracking, not collapsed tracking. Apple sits
+      // around -0.02em at poster sizes; -0.065em ran the letters together.
       letterSpacing: {
-        tightest: '-0.055em',
-        mega: '-0.065em',
+        tightest: '-0.021em',
+        mega: '-0.028em',
       },
       keyframes: {
         marquee: {

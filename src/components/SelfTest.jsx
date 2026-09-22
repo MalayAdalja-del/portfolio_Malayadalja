@@ -71,14 +71,14 @@ export default function SelfTest() {
             className="mb-2.5 w-full overflow-hidden border border-ink/20 bg-paper shadow-[0_30px_70px_-30px_rgba(10,11,13,0.6)]"
           >
             <div className="flex items-center justify-between border-b border-ink/10 px-4 py-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink/60">
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink/60">
                 self-test · this page
               </p>
               <button
                 type="button"
                 onClick={run}
                 disabled={running}
-                className="border border-ink/25 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper disabled:opacity-40"
+                className="border border-ink/25 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper disabled:opacity-40"
               >
                 run again
               </button>

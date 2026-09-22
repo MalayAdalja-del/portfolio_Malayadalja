@@ -52,7 +52,7 @@ function Matrix() {
         <h3 className="text-xl font-black tracking-tightest sm:text-2xl">
           What I have taken through which layer
         </h3>
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60">
+        <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60">
           {covered} of {total * coverageLayers.length} cells
         </p>
       </div>
@@ -63,7 +63,7 @@ function Matrix() {
         {coverageLayers.map((l) => (
           <span
             key={l}
-            className="pb-1 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-ink/60 sm:text-[10px]"
+            className="pb-1 text-center font-mono text-[9px] uppercase tracking-[0.08em] text-ink/60 sm:text-[10px]"
           >
             {l}
           </span>
@@ -100,7 +100,7 @@ function Matrix() {
         ))}
       </div>
 
-      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
         Blank means not claimed — a coverage grid that is all filled in is a lie
       </p>
     </div>
@@ -118,7 +118,7 @@ function Dial() {
         <h3 className="text-xl font-black tracking-tightest sm:text-2xl">
           The same checkout, five network conditions
         </h3>
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60">
+        <p className="font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60">
           drag the dial
         </p>
       </div>
@@ -130,7 +130,7 @@ function Dial() {
               {step.ms < 1000 ? `${step.ms}ms` : `${step.ms / 1000}s`}
             </span>
             <span
-              className={`px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] ${sev.chip}`}
+              className={`px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] ${sev.chip}`}
             >
               {step.severity === 'ok' ? 'healthy' : step.severity}
             </span>
@@ -149,7 +149,7 @@ function Dial() {
             />
           </label>
 
-          <ol className="mt-4 flex justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-ink/60">
+          <ol className="mt-4 flex justify-between font-mono text-[9px] uppercase tracking-[0.07em] text-ink/60">
             {latencySteps.map((s, n) => (
               <li key={s.ms}>
                 <button
@@ -172,7 +172,7 @@ function Dial() {
             exit={{ opacity: 0, y: -14 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink/60">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink/60">
               {step.state}
             </p>
             <p className="mt-4 text-[17px] font-semibold leading-snug tracking-tight md:text-[21px]">
@@ -183,7 +183,7 @@ function Dial() {
                 ✓
               </span>
               <span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink/60">
+                <span className="font-mono text-[9px] uppercase tracking-[0.11em] text-ink/60">
                   the assertion
                 </span>
                 <br />

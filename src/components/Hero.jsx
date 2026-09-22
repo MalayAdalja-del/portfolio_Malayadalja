@@ -55,7 +55,7 @@ export default function Hero({ onResume }) {
           ))}
           <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
             <motion.span
-              className="outline-type inline-block"
+              className="accent-line inline-block"
               initial={reduce ? false : { y: '110%' }}
               animate={{ y: '0%' }}
               transition={{ duration: 1.05, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
@@ -85,7 +85,7 @@ export default function Hero({ onResume }) {
         <dl className="grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-4">
           {quickFacts.map((f) => (
             <div key={f.label}>
-              <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">
+              <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">
                 {f.label}
               </dt>
               <dd className="mt-1.5 text-lg font-bold tracking-tight md:text-xl">{f.value}</dd>
@@ -94,7 +94,7 @@ export default function Hero({ onResume }) {
           ))}
         </dl>
 
-        <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.2em] text-navy-500">
+        <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.11em] text-navy-500">
           ↓ {storyPromise}
         </p>
 

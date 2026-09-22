@@ -38,6 +38,25 @@
     /* Lenis drives the scroll; see lib/smoothScroll.js. Reduced-motion
        users get the native scroll back via the media query below. */
     -webkit-font-smoothing: antialiased;
+    /* Let the variable font pick its own optical size, and never let the
+       browser fake a weight we did not ship — a synthesised Black is the
+       single most common reason self-hosted type looks "off". */
+    font-optical-sizing: auto;
+    font-synthesis-weight: none;
+    font-synthesis-style: none;
+  }
+
+  /* Headlines get balanced lines, body copy gets no orphan last word. This
+     is the one thing every one of Apple, Google and Samsung does and most
+     portfolios do not: a headline never ends on a stranded word. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   body {
@@ -91,28 +110,43 @@
   }
 
   .eyebrow {
-    @apply font-mono text-[10px] uppercase tracking-[0.32em];
+    @apply font-mono text-[10px] uppercase tracking-[0.14em];
   }
 
   /* Type that behaves like a poster: fills the measure, never wraps mid-idea. */
   .mega {
-    @apply font-black leading-[0.84] tracking-mega;
-    font-size: clamp(2.7rem, 8.2vw, 8.2rem);
+    @apply font-black tracking-mega;
+    font-size: clamp(2.6rem, 7.4vw, 6.6rem);
+    /* 1.02 let a descender touch the ascender on the line below at phone
+       widths. Apple's poster type sits near 1.05; below ~1.04 Inter Black
+       collides with itself. */
+    line-height: 1.06;
+    text-wrap: balance;
   }
 
   .display {
-    @apply font-black leading-[0.88] tracking-tightest;
-    font-size: clamp(2.1rem, 6.6vw, 5.6rem);
+    @apply font-black tracking-tightest;
+    font-size: clamp(1.9rem, 4.4vw, 3.5rem);
+    line-height: 1.1;
+    text-wrap: balance;
   }
 
-  /* Outlined type, the counterweight to the solid headlines. */
-  .outline-type {
-    color: transparent;
-    -webkit-text-stroke: 1.6px rgba(10, 11, 13, 0.5);
+  /* The second voice in a headline.
+
+     This was an outlined (-webkit-text-stroke) line. It had to go: Inter
+     builds e, f and r from overlapping contours — a crossbar laid across a
+     bowl — which a fill hides and a stroke exposes, so every one of those
+     letters came out with a bar running through and past it. Identical at
+     900, 800, 600 and 400, because it is the font's geometry, not the
+     weight. Apple, Google and Samsung all separate the two halves of a
+     headline by colour and never by outline; this does the same, and it
+     clears contrast (navy-500 is 10.4:1 on white) instead of dodging it. */
+  .accent-line {
+    color: theme('colors.navy.500');
   }
 
-  .invert-section .outline-type {
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
+  .invert-section .accent-line {
+    color: theme('colors.navy.300');
   }
 
   /* A dark act. Inverts the defaults so children need no per-theme classes. */

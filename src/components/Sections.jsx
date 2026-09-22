@@ -9,7 +9,7 @@ export function Toolkit() {
         <div className="grid gap-x-14 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((group, i) => (
             <Reveal key={group.group} delay={(i % 3) * 0.06}>
-              <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.24em] text-navy-300">
+              <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.13em] text-navy-300">
                 {group.group}
               </h3>
               <ul>
@@ -64,7 +64,7 @@ export function Contact() {
               {...(row.ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className="group flex items-center justify-between gap-6 py-6"
             >
-              <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/60">
+              <span className="font-mono text-[11px] uppercase tracking-[0.13em] text-white/60">
                 {row.label}
               </span>
               <span className="flex items-center gap-4 text-right text-xl font-semibold tracking-tight transition-transform duration-500 group-hover:-translate-x-1 sm:text-3xl">
@@ -84,7 +84,7 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="invert-section border-t border-white/15">
-      <div className="shell flex flex-col items-start justify-between gap-3 py-10 pb-28 font-mono text-[11px] uppercase tracking-[0.2em] text-white/60 sm:flex-row sm:items-center sm:pb-10">
+      <div className="shell flex flex-col items-start justify-between gap-3 py-10 pb-28 font-mono text-[11px] uppercase tracking-[0.11em] text-white/60 sm:flex-row sm:items-center sm:pb-10">
         <span>
           © {new Date().getFullYear()} {profile.name} · {profile.location}
         </span>

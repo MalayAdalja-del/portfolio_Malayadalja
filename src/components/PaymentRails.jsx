@@ -116,7 +116,7 @@ export default function PaymentRails() {
                   const Icon = RAIL_ICON[r.id]
                   return Icon ? <Icon className="mb-2.5 h-7 w-7" /> : null
                 })()}
-                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">
+                <span className="block font-mono text-[10px] uppercase tracking-[0.1em] opacity-70">
                   {r.symbol}
                 </span>
                 <span className="mt-0.5 block text-[14px] font-bold tracking-tight">{r.name}</span>
@@ -129,10 +129,10 @@ export default function PaymentRails() {
           {/* the machine */}
           <div>
             <div className="mb-5 flex items-baseline justify-between border-b border-white/15 pb-3">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-navy-300">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-navy-300">
                 {rail.name}
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60">
+              <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-white/60">
                 {rail.note}
               </p>
             </div>
@@ -156,7 +156,7 @@ export default function PaymentRails() {
 
                     <motion.p
                       animate={{ opacity: done ? 1 : 0.42 }}
-                      className="font-mono text-[12px] uppercase tracking-[0.16em]"
+                      className="font-mono text-[12px] uppercase tracking-[0.09em]"
                     >
                       {s.state}
                     </motion.p>
@@ -169,7 +169,7 @@ export default function PaymentRails() {
               <button
                 type="button"
                 onClick={() => select(railId)}
-                className="border-2 border-white px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors hover:bg-white hover:text-ink"
+                className="border-2 border-white px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:bg-white hover:text-ink"
               >
                 {running ? 'running…' : 'run again'}
               </button>
@@ -179,7 +179,7 @@ export default function PaymentRails() {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="font-mono text-[11px] uppercase tracking-[0.18em] text-navy-300"
+                    className="font-mono text-[11px] uppercase tracking-[0.1em] text-navy-300"
                   >
                     ✓ {rail.steps.length} assertions held
                   </motion.span>
@@ -194,7 +194,7 @@ export default function PaymentRails() {
               <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
-              <span className="ml-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
+              <span className="ml-3 font-mono text-[10px] uppercase tracking-[0.11em] text-white/60">
                 assertions · {rail.symbol}
               </span>
             </div>

@@ -47,7 +47,7 @@ export function Preloader() {
           transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[90] flex items-end justify-between bg-paper px-6 pb-8 md:px-10 md:pb-10"
         >
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-ink/60">
+          <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink/60">
             {profile.name}
           </span>
           <span className="font-black tabular-nums leading-none tracking-mega text-ink [font-size:clamp(4rem,18vw,14rem)]">
@@ -159,7 +159,7 @@ export function Nav({ onResume }) {
             <a
               key={item.href}
               href={item.href}
-              className="group relative font-mono text-[11px] uppercase tracking-[0.22em]"
+              className="group relative font-mono text-[11px] uppercase tracking-[0.12em]"
             >
               {item.label}
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full" />
@@ -171,7 +171,7 @@ export function Nav({ onResume }) {
           <button
             type="button"
             onClick={onResume}
-            className="border border-current px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-opacity hover:opacity-70"
+            className="border border-current px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.11em] transition-opacity hover:opacity-70"
           >
             Résumé
           </button>
@@ -179,7 +179,7 @@ export function Nav({ onResume }) {
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden font-mono text-[11px] uppercase tracking-[0.22em] underline-offset-4 hover:underline sm:block"
+            className="hidden font-mono text-[11px] uppercase tracking-[0.12em] underline-offset-4 hover:underline sm:block"
           >
             LinkedIn ↗
           </a>

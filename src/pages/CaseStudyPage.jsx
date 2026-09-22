@@ -15,7 +15,7 @@ function Block({ label, children }) {
   return (
     <section className="border-t border-ink/10 py-14 md:py-20">
       <div className="grid gap-8 md:grid-cols-[minmax(0,220px)_1fr] md:gap-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.26em] text-navy-500 md:sticky md:top-28 md:self-start">
+        <h2 className="font-mono text-[10px] uppercase tracking-[0.14em] text-navy-500 md:sticky md:top-28 md:self-start">
           {label}
         </h2>
         <div className="max-w-3xl">{children}</div>
@@ -61,7 +61,7 @@ export default function CaseStudyPage({ id }) {
         <button
           type="button"
           onClick={() => navigate('/#work')}
-          className="mb-12 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/60 transition-colors hover:text-ink"
+          className="mb-12 font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60 transition-colors hover:text-ink"
         >
           ← All work
         </button>
@@ -104,16 +104,16 @@ export default function CaseStudyPage({ id }) {
           className="mt-12 grid max-w-3xl grid-cols-2 gap-8 border-t border-ink/10 pt-7 md:grid-cols-3"
         >
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">Role</dt>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">Role</dt>
             <dd className="mt-1.5 text-[16px] font-semibold">{study.role}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">When</dt>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">When</dt>
             <dd className="mt-1.5 text-[16px] font-semibold">{study.period}</dd>
           </div>
           {study.link && (
             <div>
-              <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">Live</dt>
+              <dt className="font-mono text-[10px] uppercase tracking-[0.11em] text-ink/60">Live</dt>
               <dd className="mt-1.5">
                 <a
                   href={study.link}
@@ -172,7 +172,7 @@ export default function CaseStudyPage({ id }) {
                       <span className="absolute -left-[2.45rem] top-0 flex h-7 w-7 items-center justify-center rounded-full bg-navy-500 font-mono text-[10px] font-bold text-paper">
                         {i + 1}
                       </span>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-navy-500">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-navy-500">
                         {stage.name}
                       </p>
                       <p className="mt-2 text-[16px] leading-relaxed text-ink/85 md:text-[18px]">

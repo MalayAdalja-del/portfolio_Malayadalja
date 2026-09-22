@@ -60,7 +60,7 @@ export default function ChapterRail() {
                     aria-current={on ? 'true' : undefined}
                   >
                     <span
-                      className={`font-mono text-[10px] uppercase tracking-[0.18em] transition-all duration-300 ${
+                      className={`font-mono text-[10px] uppercase tracking-[0.1em] transition-all duration-300 ${
                         on
                           ? 'opacity-100'
                           : 'opacity-0 group-hover:opacity-70 group-focus-visible:opacity-70'

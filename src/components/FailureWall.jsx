@@ -58,7 +58,7 @@ export default function FailureWall() {
                   <dt className="text-2xl font-black tabular-nums tracking-tightest sm:text-3xl">
                     <Counter to={s.value} suffix={s.suffix} />
                   </dt>
-                  <dd className="mt-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-white/60">
+                  <dd className="mt-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.09em] text-white/60">
                     {s.label}
                   </dd>
                 </div>
@@ -89,11 +89,11 @@ export default function FailureWall() {
                 transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                 className="pt-7"
               >
-                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-navy-300">
+                <p className="font-mono text-[11px] uppercase tracking-[0.13em] text-navy-300">
                   {item.kind} <span className="text-white/60">· {item.area}</span>
                 </p>
 
-                <p className="mt-5 font-black leading-[1.02] tracking-tightest [font-size:clamp(1.6rem,3.4vw,2.9rem)]">
+                <p className="mt-5 font-black leading-[1.07] tracking-tightest [font-size:clamp(1.6rem,3.4vw,2.9rem)]">
                   {item.text}
                 </p>
 
@@ -102,7 +102,7 @@ export default function FailureWall() {
                     ✓
                   </span>
                   <span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.11em] text-white/60">
                       caught by
                     </span>
                     <br />
@@ -133,13 +133,13 @@ function Static() {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-navy-300">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-navy-300">
                   {c.kind} <span className="text-white/60">· {c.area}</span>
                 </p>
                 <p className="mt-2 text-xl font-bold leading-snug tracking-tight">{c.text}</p>
               </div>
               <p className="text-[14px] leading-relaxed text-white/80">
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
+                <span className="font-mono text-[10px] uppercase tracking-[0.11em] text-white/60">
                   caught by
                 </span>
                 <br />
@@ -156,7 +156,7 @@ function Static() {
                 {s.value.toLocaleString()}
                 {s.suffix}
               </dt>
-              <dd className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/60">
+              <dd className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.09em] text-white/60">
                 {s.label}
               </dd>
             </div>

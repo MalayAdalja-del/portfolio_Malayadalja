@@ -51,13 +51,13 @@ export default function Bisect() {
         <button
           type="button"
           onClick={reset}
-          className="border border-white/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors hover:bg-white hover:text-ink"
+          className="border border-white/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:bg-white hover:text-ink"
         >
           Reset
         </button>
       </div>
 
-      <p aria-live="polite" className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em]">
+      <p aria-live="polite" className="mt-8 font-mono text-[11px] uppercase tracking-[0.11em]">
         {found === null ? (
           <>
             <span className="text-navy-300">{clicks} tested</span>
@@ -111,7 +111,7 @@ export default function Bisect() {
 
       {found !== null && (
         <p className="mt-7 max-w-2xl border-l-2 border-navy-300 pl-5 text-[15px] leading-relaxed text-white md:text-[17px]">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-navy-300">
+          <span className="font-mono text-[10px] uppercase tracking-[0.11em] text-navy-300">
             the culprit
           </span>
           <br />

@@ -271,6 +271,16 @@ const checks = [
         if (!(el.textContent || '').trim()) continue
         if (inBlendContext(el)) continue
 
+        // A fill that matches the page is fine when a strong border draws the
+        // edge — that is a panel, not an invisible one. The bug this exists
+        // for had a 10%-opacity border, which delineated nothing.
+        const behindForBorder = effectiveBackground(el.parentElement || el)
+        const bc = parseRGB(style.borderTopColor)
+        if (bc && bc.a > 0.02 && parseFloat(style.borderTopWidth) > 0) {
+          const edge = bc.a < 1 ? over(bc, behindForBorder) : bc
+          if (contrastRatio(edge, behindForBorder) >= 3) continue
+        }
+
         const parent = el.parentElement
         if (!parent) continue
         const behind = effectiveBackground(parent)
@@ -366,7 +376,16 @@ const checks = [
   {
     id: 'cls',
     name: 'layout shift under 0.1',
-    run: () => ({ pass: probe.cls < 0.1, detail: probe.cls.toFixed(4) }),
+    run: () => {
+      if (DEV_BUILD) {
+        return {
+          pass: true,
+          skipped: true,
+          detail: `${probe.cls.toFixed(4)} · dev build, reflows as modules arrive`,
+        }
+      }
+      return { pass: probe.cls < 0.1, detail: probe.cls.toFixed(4) }
+    },
   },
 ]
 

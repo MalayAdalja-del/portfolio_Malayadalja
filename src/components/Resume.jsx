@@ -48,14 +48,14 @@ export default function Resume({ onClose }) {
       {/* toolbar — hidden when printing */}
       <div className="no-print sticky top-0 z-10 border-b border-ink/10 bg-bone/95 backdrop-blur">
         <div className="mx-auto flex max-w-[900px] items-center justify-between gap-4 px-6 py-3.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink/60">
+          <span className="font-mono text-[10px] uppercase tracking-[0.13em] text-ink/60">
             Résumé · {profile.name}
           </span>
           <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={() => window.print()}
-              className="border border-ink bg-ink px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-paper transition-opacity hover:opacity-80"
+              className="border border-ink bg-ink px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-paper transition-opacity hover:opacity-80"
             >
               Print / Save PDF
             </button>
@@ -63,7 +63,7 @@ export default function Resume({ onClose }) {
               <a
                 href={profile.resume}
                 download
-                className="border border-ink/25 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors hover:border-ink"
+                className="border border-ink/25 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-ink"
               >
                 Download PDF
               </a>
@@ -72,7 +72,7 @@ export default function Resume({ onClose }) {
               type="button"
               onClick={onClose}
               aria-label="Close résumé"
-              className="border border-ink/25 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+              className="border border-ink/25 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-ink hover:bg-ink hover:text-paper"
             >
               Close ✕
             </button>
@@ -83,7 +83,7 @@ export default function Resume({ onClose }) {
       {/* the sheet */}
       <article className="resume-sheet mx-auto my-8 max-w-[900px] bg-paper px-8 py-10 shadow-[0_30px_80px_-40px_rgba(10,11,13,0.45)] md:px-14 md:py-16">
         <header className="border-b-2 border-ink pb-7">
-          <h1 className="text-[clamp(2.2rem,6vw,3.6rem)] font-black leading-[0.9] tracking-tightest">
+          <h1 className="text-[clamp(2.2rem,6vw,3.6rem)] font-black leading-[1.04] tracking-tightest">
             {profile.name}
           </h1>
           <p className="mt-3 text-lg font-semibold text-navy-500 md:text-xl">{profile.headline}</p>
@@ -113,7 +113,7 @@ export default function Resume({ onClose }) {
         <section className="grid grid-cols-2 gap-5 border-b border-ink/10 py-6 md:grid-cols-4">
           {quickFacts.map((f) => (
             <div key={f.label}>
-              <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink/60">
+              <p className="font-mono text-[9px] uppercase tracking-[0.11em] text-ink/60">
                 {f.label}
               </p>
               <p className="mt-1 text-[15px] font-bold tracking-tight">{f.value}</p>
@@ -156,7 +156,7 @@ export default function Resume({ onClose }) {
                   <p className="text-[16px] font-bold tracking-tight">
                     {job.role} <span className="font-normal text-navy-500">· {job.company}</span>
                   </p>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/60">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.09em] text-ink/60">
                     {job.period}
                     {job.note ? ` · ${job.note}` : ''}
                   </p>
@@ -192,7 +192,7 @@ export default function Resume({ onClose }) {
           <div className="grid gap-x-10 gap-y-3 sm:grid-cols-2">
             {skills.map((g) => (
               <div key={g.group} className="break-inside-avoid">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-navy-500">
+                <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-navy-500">
                   {g.group}
                 </p>
                 <p className="mt-0.5 text-[12.5px] text-ink/80">{g.items.join(' · ')}</p>
@@ -201,7 +201,7 @@ export default function Resume({ onClose }) {
           </div>
         </Block>
 
-        <footer className="mt-8 border-t border-ink/10 pt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/60">
+        <footer className="mt-8 border-t border-ink/10 pt-5 font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
           Generated from the live site · portfolio-malayadalja.vercel.app
         </footer>
       </article>
@@ -212,7 +212,7 @@ export default function Resume({ onClose }) {
 function Block({ title, children }) {
   return (
     <section className="break-inside-avoid border-b border-ink/10 py-6 last-of-type:border-0">
-      <h2 className="mb-4 font-mono text-[10px] uppercase tracking-[0.24em] text-navy-500">
+      <h2 className="mb-4 font-mono text-[10px] uppercase tracking-[0.13em] text-navy-500">
         {title}
       </h2>
       {children}

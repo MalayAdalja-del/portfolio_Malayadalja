@@ -44,7 +44,7 @@ export default function MoneyFlow() {
               </span>
 
               <p className="mt-5 text-lg font-bold tracking-tight">{stage.name}</p>
-              <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
+              <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.11em] text-white/60">
                 {stage.sub}
               </p>
               <p className="mt-4 flex gap-2.5 text-[13.5px] leading-relaxed text-white/80">
