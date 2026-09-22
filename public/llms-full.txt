@@ -136,7 +136,7 @@ Playwright, Postman / Newman, SQL, JMeter, Appium
 ### Aegis-QA — the tooling I built
 URL: https://portfolio-malayadalja.vercel.app/work/aegis
 Role: Creator & maintainer
-Period: 2024 — present
+Period: Nov 2025 — present
 Category: Internal tool
 
 An internal platform I built to manage the QA work itself: triggering runs, API testing, Playwright scripts, SQL queries, Datadog lookups and test-case management with automation-script recording — in one place.
@@ -268,8 +268,8 @@ TM2 · NLC · OZ Road Code · Dekabes · Moana Pasifika
 Openxcell · Speed · Apr 2023 — present
 
 
-### 2024 — Aegis-QA
-Internal tooling · Creator & maintainer
+### 2025 — Aegis-QA
+Internal tooling · Creator & maintainer · from Nov 2025
 
 
 ### Now — Looking for the next one

@@ -413,7 +413,7 @@ export const caseStudies = [
     id: 'aegis',
     title: 'Aegis-QA — the tooling I built',
     role: 'Creator & maintainer',
-    period: '2024 — present',
+    period: 'Nov 2025 — present',
     link: '',
     tag: 'Internal tool',
     summary:
@@ -696,10 +696,10 @@ export const roadmap = [
     tech: ['Python', 'Playwright', 'Pytest', 'Appium', 'SQL', 'Newman', 'JMeter'],
   },
   {
-    year: '2024',
+    year: '2025',
     kind: 'Built',
     title: 'Aegis-QA',
-    org: 'Internal tooling · Creator & maintainer',
+    org: 'Internal tooling · Creator & maintainer · from Nov 2025',
     note: 'The work was scattered across a dozen tools, so I built one place to hold all of it — runs, API tests, SQL, Datadog, recorded scripts.',
     qa: ['Run orchestration', 'Session recording', 'Self-healing locators', 'Failure triage'],
     tech: ['Python 3.12', 'asyncio', 'FastAPI', 'Next.js', 'Docker', 'AI tooling'],
