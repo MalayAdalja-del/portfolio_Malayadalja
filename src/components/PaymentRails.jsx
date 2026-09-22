@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { paymentRails, railsIntro } from '../content'
 import { Marker, MaskedWords } from '../lib/motion'
 import { RAIL_ICON } from './icons'
+import MoneyFlow from './MoneyFlow'
 
 const STEP_MS = 850
 
@@ -226,6 +227,8 @@ export default function PaymentRails() {
             </motion.div>
           </div>
         </div>
+
+        <MoneyFlow />
       </div>
     </section>
   )

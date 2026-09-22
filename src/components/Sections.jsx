@@ -45,7 +45,7 @@ export function Contact() {
         className="pointer-events-none absolute left-1/2 top-full h-[70vw] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-navy-600/35 blur-[150px]"
       />
       <div className="shell relative py-32 md:py-52">
-        <Marker index="Ch.07">Contact</Marker>
+        <Marker index="Ch.08">Contact</Marker>
 
         <h2 className="mega max-w-[14ch]">
           <MaskedWords text="Got something that needs breaking?" />

@@ -101,11 +101,12 @@ export const storyPromise =
 export const chapters = [
   { id: 'failures', n: '01', name: 'What breaks' },
   { id: 'rails', n: '02', name: 'What I check' },
-  { id: 'skills', n: '03', name: 'How I keep up' },
-  { id: 'work', n: '04', name: 'Where I did it' },
-  { id: 'experience', n: '05', name: 'The journey' },
-  { id: 'proof', n: '06', name: 'Why it matters' },
-  { id: 'contact', n: '07', name: 'Talk to me' },
+  { id: 'depth', n: '03', name: 'Coverage & conditions' },
+  { id: 'skills', n: '04', name: 'How I keep up' },
+  { id: 'work', n: '05', name: 'Where I did it' },
+  { id: 'experience', n: '06', name: 'The route' },
+  { id: 'proof', n: '07', name: 'Why it matters' },
+  { id: 'contact', n: '08', name: 'Talk to me' },
 ]
 
 export const transitions = {
@@ -316,26 +317,54 @@ export const failureWall = {
   title: 'The bug nobody wrote a test for.',
   line: 'The failure classes that survive a happy-path suite. These are the ones worth hunting.',
   cases: [
-    { text: 'Refund issued twice on a retried webhook', area: 'payments', kind: 'Idempotency' },
-    { text: 'Invoice expires mid-checkout with no retry path', area: 'crypto', kind: 'Timing' },
+    {
+      text: 'Refund issued twice on a retried webhook',
+      area: 'payments',
+      kind: 'Idempotency',
+      caught: 'Status flips to paid exactly once, however many times the webhook fires',
+    },
+    {
+      text: 'Invoice expires mid-checkout with no retry path',
+      area: 'crypto',
+      kind: 'Timing',
+      caught: 'An expired invoice issues a fresh one instead of failing silently',
+    },
     {
       text: 'Payout accepted for an unverified wallet address',
       area: 'security',
       kind: 'Validation',
+      caught: 'Unverified destination is refused — no override path exists',
     },
-    { text: 'Cashback tier miscounted across a month boundary', area: 'logic', kind: 'Boundary' },
+    {
+      text: 'Cashback tier miscounted across a month boundary',
+      area: 'logic',
+      kind: 'Boundary',
+      caught: 'Tier maths asserted on the last and first second of the period',
+    },
     {
       text: 'Country dropdown offers more than the allowlist permits',
       area: 'compliance',
       kind: 'Config drift',
+      caught: 'The rendered list is diffed against the allowlist, not eyeballed',
     },
-    { text: 'Rate drifts past tolerance on the fallback path', area: 'pricing', kind: 'Fallback' },
+    {
+      text: 'Rate drifts past tolerance on the fallback path',
+      area: 'pricing',
+      kind: 'Fallback',
+      caught: 'The fallback quote is held to the same tolerance as the primary',
+    },
     {
       text: 'DB row and API response disagree after a transfer',
       area: 'data',
       kind: 'Reconciliation',
+      caught: 'Every money-moving flow reconciles the ledger against the response',
     },
-    { text: 'Session desyncs after a host reconnect', area: 'realtime', kind: 'State' },
+    {
+      text: 'Session desyncs after a host reconnect',
+      area: 'realtime',
+      kind: 'State',
+      caught: 'Reconnect is asserted from both sides, not just the host',
+    },
   ],
   stats: [
     { value: 15, suffix: '+', label: 'projects delivered' },
@@ -509,94 +538,185 @@ export const otherWork = [
   },
 ]
 
-/* ── the journey, as a changelog ──────────────────────────────────────── */
-//
-// A career is a versioned thing: you ship, you break compatibility with who
-// you were, you deprecate habits. Keep-a-Changelog is the one format every
-// engineer reads fluently and no portfolio uses. MAJOR bumps are the moments
-// the job itself changed, not the job title.
+/* ── money flow ───────────────────────────────────────────────────────── */
 
-export const journeyIntro = {
-  kicker: 'The journey',
-  title: 'Seven years. Four releases. One unreleased.',
-  line: 'Told the way engineers actually read history. Major versions are where the work fundamentally changed — not where the title did.',
+export const moneyFlow = {
+  title: 'Where the money actually goes',
+  line: 'Four hops between a customer paying and a merchant being paid. Each one is a place to lose it.',
+  stages: [
+    { name: 'Payer', sub: 'wallet or card', verify: 'Amount and asset match the invoice before anything is signed' },
+    { name: 'Rail', sub: 'chain or Lightning', verify: 'Broadcast confirmed, and confirmations counted for that asset' },
+    { name: 'Ledger', sub: 'our record', verify: 'One row per payment, written exactly once, reconciled on read' },
+    { name: 'Payout', sub: 'merchant out', verify: 'Destination verified, approval recorded, retry never double-sends' },
+  ],
 }
 
-export const releases = [
+/* ── bisect demo ──────────────────────────────────────────────────────── */
+// A simulation, not real history. Sixteen commits, one broke payouts.
+// The point is the method: binary search finds it in four steps, not sixteen.
+
+export const bisect = {
+  title: 'Sixteen commits. One broke payouts.',
+  line: 'This is a simulation, but the method is the real one. Click a commit to test it — binary search finds the culprit in four, not sixteen.',
+  breakAt: 11,
+  commits: [
+    'chore: bump test fixtures',
+    'feat: add payout status filter',
+    'refactor: extract fee calculator',
+    'test: cover swap tolerance',
+    'fix: timezone on statement export',
+    'chore: upgrade http client',
+    'feat: batch payout endpoint',
+    'style: align payout table',
+    'refactor: share retry helper',
+    'docs: payout runbook',
+    'perf: cache address lookups',
+    'refactor: reuse idempotency key across retries',
+    'chore: lint config',
+    'feat: payout webhook retries',
+    'test: add payout smoke test',
+    'chore: release prep',
+  ],
+}
+
+/* ── coverage matrix + latency dial ───────────────────────────────────── */
+
+export const depthIntro = {
+  kicker: 'Coverage & conditions',
+  title: 'Breadth, then depth.',
+  line: 'Which surfaces I have taken through which layers — and what each one does when the network stops behaving.',
+}
+
+// Rows are product surfaces, columns are the layers each was taken through.
+// Blank means not claimed, which is the honest way to draw a coverage grid.
+export const coverageLayers = ['UI', 'API', 'DB', 'Perf', 'Security']
+
+export const coverage = [
+  { surface: 'Merchant checkout', done: ['UI', 'API', 'DB', 'Perf'] },
+  { surface: 'Payment links', done: ['UI', 'API', 'DB'] },
+  { surface: 'Refunds', done: ['UI', 'API', 'DB'] },
+  { surface: 'Instant payout', done: ['UI', 'API', 'DB', 'Perf', 'Security'] },
+  { surface: 'Swap', done: ['UI', 'API', 'DB'] },
+  { surface: 'Transfer', done: ['UI', 'API', 'DB'] },
+  { surface: 'Cashback', done: ['UI', 'API', 'DB'] },
+  { surface: 'KYB / KYC onboarding', done: ['UI', 'API', 'DB', 'Security'] },
+  { surface: 'Smart contract calls', done: ['API', 'Security'] },
+  { surface: 'Withdrawals', done: ['UI', 'API', 'Perf'] },
+]
+
+// Drag the latency up and the same checkout fails in different ways.
+export const latencySteps = [
   {
-    version: '1.0.0',
-    codename: 'The switch',
-    date: '2019-01 → 2019-04',
-    org: 'Skillventory · Technical Recruiter',
-    breaking: 'Left recruitment for the work I was recruiting for.',
-    note: 'I started by hiring engineers. Three months of screening them taught me what the job actually was — and that I wanted to do it rather than staff it.',
-    changes: [
-      { t: 'add', text: 'An understanding of what teams actually hire for' },
-      { t: 'add', text: 'The vocabulary to read a technical role from the outside' },
-      { t: 'rm', text: 'A career in recruitment' },
-    ],
+    ms: 200,
+    label: 'Healthy',
+    state: 'Checkout completes',
+    failure: 'Nothing to catch here. This is the only state most suites ever test.',
+    assert: 'Happy path passes — necessary, and nowhere near sufficient',
+    severity: 'ok',
   },
   {
-    version: '2.0.0',
-    codename: 'Learning the craft',
-    date: '2019-06 → 2023-04',
-    org: 'Auxano Global Services · QA Engineer',
-    breaking: '',
-    note: 'Four years and 15+ delivered projects — mobile apps, websites, multiplayer games, WordPress. Where test design stopped being a template and became a skill.',
-    changes: [
-      { t: 'add', text: 'Test design, exploratory testing, regression strategy, UAT' },
-      { t: 'add', text: 'First JMeter performance scripts' },
-      { t: 'add', text: 'A reusable test-case library across projects' },
-      { t: 'chg', text: 'From executing someone else’s cases to writing my own' },
-      { t: 'fix', text: 'Reporting a bug without a reliable reproduction' },
-    ],
+    ms: 1500,
+    label: 'Slow',
+    state: 'Spinner, user waits',
+    failure: 'The pay button stays live while the request is in flight, so an impatient customer submits twice.',
+    assert: 'Button disables on submit; a second click cannot create a second charge',
+    severity: 'p1',
   },
   {
-    version: '3.0.0',
-    codename: 'Into payments',
-    date: '2023-04 → present',
-    org: 'Openxcell · Speed · Software Engineer — QA',
-    breaking: 'A bug stopped being a bad experience and started being somebody’s money.',
-    note: 'Crypto raised the stakes. I stopped testing screens and started testing state machines — and checking the ledger, not the toast.',
-    changes: [
-      { t: 'add', text: 'BTC, Lightning, ETH, USDT and XAUT settlement rules' },
-      { t: 'add', text: 'ERC-20 smart contract testing — ABI, reverts, events, access control' },
-      { t: 'add', text: 'Playwright, Appium, Newman and JMeter suites in CI' },
-      { t: 'add', text: 'SQL reconciliation on every money-moving flow' },
-      { t: 'chg', text: 'From testing the screen to testing the state machine behind it' },
-      { t: 'fix', text: 'Idempotency, reorg handling and decimal precision blind spots' },
-      { t: 'rm', text: 'Trusting a green toast as proof of settlement' },
-    ],
+    ms: 4000,
+    label: 'Degraded',
+    state: 'Invoice nearing expiry',
+    failure: 'The quote was locked 4 seconds ago. Pay now and the rate has already moved past tolerance.',
+    assert: 'Expiry is visible and enforced; a stale quote is refused, not honoured',
+    severity: 'p1',
   },
   {
-    version: '4.0.0',
-    codename: 'Becoming a builder',
-    date: '2024 → present',
-    org: 'Aegis-QA · Creator & maintainer',
-    breaking: 'Stopped only using the tools and started shipping one.',
-    note: 'The work was scattered across a dozen tools. So I used the AI tooling I had been learning — Claude, Claude Code, Cursor, Copilot — and built one place to hold all of it.',
-    changes: [
-      { t: 'add', text: 'Python, asyncio, FastAPI and Next.js' },
-      { t: 'add', text: 'Run manager across UI, API, flow and security layers' },
-      { t: 'add', text: 'Session recorder → reviewable Playwright scripts' },
-      { t: 'add', text: 'SQL queries and Datadog lookups beside the failing run' },
-      { t: 'add', text: 'Self-healing locators — sandbox-verified, human-approved' },
-      { t: 'chg', text: 'From consuming QA tooling to designing it' },
-      { t: 'rm', text: 'Stitching five tools together by hand for every investigation' },
-    ],
+    ms: 10000,
+    label: 'Timeout',
+    state: 'Request abandoned',
+    failure: 'The client gives up. The order shows failed — but the payment provider took the money anyway.',
+    assert: 'Order stays pending, never failed; the webhook is the source of truth',
+    severity: 'p0',
+  },
+  {
+    ms: 30000,
+    label: 'Gateway gone',
+    state: 'No response at all',
+    failure: 'Retries pile up. Each one is a chance to move the same money twice.',
+    assert: 'Every retry carries the same idempotency key; exactly one charge exists',
+    severity: 'p0',
   },
 ]
 
-export const unreleased = {
-  version: 'Unreleased',
-  codename: 'What I am looking for',
-  note: 'Seven years in, the pattern has not changed: find the thing that breaks, then make it impossible to ship again. I want a team where that is treated as engineering, not paperwork.',
-  planned: [
-    'A team that treats quality as a design constraint, not a gate at the end',
-    'Payments, fintech, or anything where being wrong is expensive',
-    'Room to keep building the tooling, not just running it',
-  ],
+/* ── the route ────────────────────────────────────────────────────────── */
+//
+// The journey as a road you travel: a marker drives the path while stops
+// reveal as it reaches them. Every stop states the QA work and the languages
+// used, because that is what a visitor is actually scanning for.
+
+export const roadmapIntro = {
+  kicker: 'The route',
+  title: 'Seven years, one road.',
+  line: 'Scroll to drive it. Each stop is where the work changed and what it was built with.',
 }
+
+export const roadmap = [
+  {
+    year: '2019',
+    kind: 'Start',
+    title: 'Technical Recruiter',
+    org: 'Skillventory · Jan — Apr 2019',
+    note: 'Hired engineers before becoming one. Three months of screening them showed me what the job actually was.',
+    qa: ['Candidate evaluation', 'Technical screening'],
+    tech: ['—'],
+  },
+  {
+    year: '2019',
+    kind: 'Role',
+    title: 'QA Engineer',
+    org: 'Auxano Global Services · Jun 2019 — Apr 2023',
+    note: 'Four years, 15+ delivered projects. Where test design stopped being a template and became a skill.',
+    qa: ['Manual & exploratory', 'Test case design', 'Regression', 'UAT', 'Defect triage'],
+    tech: ['SQL', 'JMeter', 'Postman'],
+  },
+  {
+    year: '2021',
+    kind: 'Projects',
+    title: 'Games, e-commerce, e-learning',
+    org: 'TM2 · NLC · OZ Road Code · Dekabes · Moana Pasifika',
+    note: 'Multiplayer stability, bonus-tier maths, course purchase flows, map and speed telemetry.',
+    qa: ['Real-time testing', 'Payment flows', 'Cross-device UI/UX', 'Performance'],
+    tech: ['JMeter', 'SQL', 'WordPress'],
+  },
+  {
+    year: '2023',
+    kind: 'Role',
+    title: 'Software Engineer — QA',
+    org: 'Openxcell · Speed · Apr 2023 — present',
+    note: 'Crypto raised the stakes. Stopped testing screens, started testing state machines — and checking the ledger, not the toast.',
+    qa: ['Crypto payments', 'Smart contracts', 'KYB / KYC', 'API contracts', 'DB reconciliation', 'Load testing'],
+    tech: ['Python', 'Playwright', 'Pytest', 'Appium', 'SQL', 'Newman', 'JMeter'],
+  },
+  {
+    year: '2024',
+    kind: 'Built',
+    title: 'Aegis-QA',
+    org: 'Internal tooling · Creator & maintainer',
+    note: 'The work was scattered across a dozen tools, so I built one place to hold all of it — runs, API tests, SQL, Datadog, recorded scripts.',
+    qa: ['Run orchestration', 'Session recording', 'Self-healing locators', 'Failure triage'],
+    tech: ['Python 3.12', 'asyncio', 'FastAPI', 'Next.js', 'Docker', 'AI tooling'],
+  },
+  {
+    year: 'Now',
+    kind: 'Open',
+    title: 'Looking for the next one',
+    org: 'Remote or hybrid',
+    note: 'Find the thing that breaks, then make it impossible to ship again. I want a team that treats that as engineering.',
+    qa: ['Test architecture', 'Quality strategy'],
+    tech: ['Whatever the problem needs'],
+    cta: true,
+  },
+]
 
 /* ── experience ───────────────────────────────────────────────────────── */
 

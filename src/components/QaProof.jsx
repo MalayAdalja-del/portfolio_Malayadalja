@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Marker, MaskedWords } from '../lib/motion'
+import Bisect from './Bisect'
 
 /**
  * The argument for QA, made by breaking this page on purpose.
@@ -94,7 +95,7 @@ export default function QaProof() {
   return (
     <section id="proof" className="invert-section band scroll-mt-20">
       <div className="shell">
-        <Marker index="Ch.06">Why this matters</Marker>
+        <Marker index="Ch.07">Why this matters</Marker>
 
         <h2 className="display max-w-4xl">
           <MaskedWords text="Break this page." />
@@ -120,7 +121,7 @@ export default function QaProof() {
           {/* fixed box: a status line that resizes would shift the page */}
           <p
             aria-live="polite"
-            className="flex h-6 w-[22rem] items-center font-mono text-[11px] uppercase tracking-[0.2em] text-white/60"
+            className="flex h-6 w-full max-w-[22rem] items-center font-mono text-[11px] uppercase tracking-[0.2em] text-white/60"
           >
             {count
               ? `${count} defect${count > 1 ? 's' : ''} live on this page`
@@ -254,6 +255,8 @@ export default function QaProof() {
           Six defects, none of them exotic, all of them shipped by someone this week. That is the
           job: not opinions about quality, but the assertion that catches it before a customer does.
         </p>
+
+        <Bisect />
       </div>
     </section>
   )

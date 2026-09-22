@@ -239,6 +239,59 @@ const checks = [
     },
   },
   {
+    id: 'surfaces',
+    name: 'panels separate from their background',
+    run: () => {
+      // The bug this exists for: a bordered card filled with exactly its
+      // parent's background colour. Text contrast passed, but the panel was
+      // invisible and read as a hollow outline floating on the page.
+      // Only elements dressed as a surface (border, shadow or radius) are
+      // judged — a plain wrapper sharing the page colour is fine.
+      const els = Array.from(document.querySelectorAll('body *')).filter(isVisible)
+      const flat = []
+      let judged = 0
+
+      for (const el of els) {
+        const style = getComputedStyle(el)
+        const own = parseRGB(style.backgroundColor)
+        if (!own || own.a < 0.02) continue
+
+        const dressed =
+          parseFloat(style.borderTopWidth) > 0 ||
+          parseFloat(style.borderLeftWidth) > 0 ||
+          style.boxShadow !== 'none' ||
+          parseFloat(style.borderTopLeftRadius) > 0
+        if (!dressed) continue
+
+        // Only real panels. A small bordered circle whose fill matches the
+        // page is a ring — correct design, not an invisible surface. The bug
+        // this catches was a large card *containing text* with no separation.
+        const rect = el.getBoundingClientRect()
+        if (rect.width * rect.height < 8000) continue
+        if (!(el.textContent || '').trim()) continue
+        if (inBlendContext(el)) continue
+
+        const parent = el.parentElement
+        if (!parent) continue
+        const behind = effectiveBackground(parent)
+        const front = own.a < 1 ? over(own, behind) : own
+
+        judged += 1
+        if (contrastRatio(front, behind) < 1.04) {
+          flat.push(el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
+        }
+      }
+
+      return {
+        pass: flat.length === 0,
+        detail:
+          flat.length === 0
+            ? `${judged} panels checked`
+            : `${flat.length} of ${judged} invisible · ${flat.slice(0, 2).join(', ')}`,
+      }
+    },
+  },
+  {
     id: 'overflow',
     name: 'no horizontal overflow',
     run: () => {

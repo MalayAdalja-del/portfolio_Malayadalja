@@ -51,7 +51,7 @@ export default function CaseStudies() {
       onPointerMove={reduce ? undefined : track}
     >
       <div className="shell">
-        <Marker index="Ch.04">Selected work</Marker>
+        <Marker index="Ch.05">Selected work</Marker>
         <h2 className="display mb-5 max-w-3xl">
           <MaskedWords text="Three that show the range." />
         </h2>

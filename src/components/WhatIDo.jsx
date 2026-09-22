@@ -14,7 +14,7 @@ export default function WhatIDo() {
 
   return (
     <section id="skills" className="shell bg-paper band scroll-mt-20">
-      <Marker index="Ch.03">What I do</Marker>
+      <Marker index="Ch.04">What I do</Marker>
       <h2 className="display mb-14 max-w-4xl">
         <MaskedWords text="Six things, done properly." />
       </h2>

@@ -35,6 +35,12 @@ export default {
           to: { transform: 'translate3d(-50%,0,0)' },
         },
         spin3: { to: { transform: 'rotate(360deg)' } },
+        flow: {
+          '0%': { transform: 'translateX(0)', opacity: '0' },
+          '12%': { opacity: '1' },
+          '88%': { opacity: '1' },
+          '100%': { transform: 'translateX(100%)', opacity: '0' },
+        },
         drift: {
           '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)' },
           '50%': { transform: 'translate3d(2%,-3%,0) scale(1.06)' },
@@ -44,6 +50,7 @@ export default {
         marquee: 'marquee 38s linear infinite',
         'marquee-slow': 'marquee 64s linear infinite',
         spin3: 'spin3 0.9s linear infinite',
+        flow: 'flow 3.3s linear infinite',
         drift: 'drift 16s ease-in-out infinite',
       },
     },

@@ -10,9 +10,10 @@ import Hero from './components/Hero'
 import WhatIDo from './components/WhatIDo'
 import FailureWall from './components/FailureWall'
 import CaseStudies from './components/CaseStudies'
-import Journey from './components/Journey'
+import Roadmap from './components/Roadmap'
 import QaProof from './components/QaProof'
 import PaymentRails from './components/PaymentRails'
+import Depth from './components/Depth'
 import { Contact, Footer, Toolkit } from './components/Sections'
 import CaseStudyPage from './pages/CaseStudyPage'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -63,13 +64,15 @@ export default function App() {
 
             <Transition {...transitions.toRails} />
             <PaymentRails />
+            {/* breadth then depth: coverage matrix + latency dial */}
+            <Depth />
 
             <Transition {...transitions.toSkills} />
             <WhatIDo />
 
             <Transition {...transitions.toWork} dark />
             <CaseStudies />
-            <Journey />
+            <Roadmap />
 
             <Marquee items={marqueeB} dark slow />
             {/* the argument for QA, made by actually breaking this page */}
