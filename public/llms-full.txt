@@ -9,6 +9,7 @@ Availability: Open to work · remote or hybrid
 Experience: 7 yrs 4 mo, QA only, from June 2019
 Contact: malayadalja123@gmail.com
 LinkedIn: https://www.linkedin.com/in/malayy-j-adalja-261578132/
+GitHub: https://github.com/MalayAdalja-del
 Site: https://portfolio-malayadalja.vercel.app/
 
 ---
@@ -106,7 +107,6 @@ URL: https://portfolio-malayadalja.vercel.app/work/speed
 Role: Software Engineer — QA
 Period: 2023 — present
 Category: Payments
-Product: https://www.tryspeed.com/
 
 Merchant checkout, payment links, refunds and crypto payouts across BTC, ETH, USDT, XAUT and the Lightning Network — plus ERC-20 smart contract testing, e-commerce plugin integrations and localization.
 

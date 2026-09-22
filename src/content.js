@@ -20,7 +20,7 @@ export const profile = {
 
   email: 'malayadalja123@gmail.com',
   linkedin: 'https://www.linkedin.com/in/malayy-j-adalja-261578132/',
-  github: '',
+  github: 'https://github.com/MalayAdalja-del',
   resume: '', // e.g. '/Malay-Adalja-QA.pdf' dropped into /public
 }
 
@@ -383,7 +383,10 @@ export const caseStudies = [
     title: 'Speed — crypto payment platform',
     role: 'Software Engineer — QA',
     period: '2023 — present',
-    link: 'https://www.tryspeed.com/',
+    // No company link here. The work is described; the employer's site is
+    // not advertised from a personal portfolio, and the two identities stay
+    // apart on purpose.
+    link: '',
     tag: 'Payments',
     summary:
       'Merchant checkout, payment links, refunds and crypto payouts across BTC, ETH, USDT, XAUT and the Lightning Network — plus ERC-20 smart contract testing, e-commerce plugin integrations and localization.',

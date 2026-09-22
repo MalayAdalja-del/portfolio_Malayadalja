@@ -77,6 +77,7 @@ ${urls
 
 const contact = `Contact: ${profile.email}
 LinkedIn: ${profile.linkedin}
+GitHub: ${profile.github}
 Site: ${SITE}/`
 
 write(
