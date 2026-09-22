@@ -13,10 +13,10 @@ export const profile = {
 
   // The positioning line. About him, not about a product.
   positioning:
-    'I find what breaks payment systems before customers do — then automate it so it stays found.',
+    'I find what breaks payment systems before customers do, then automate it so it stays found.',
 
   intro:
-    'Seven years on crypto payments — BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.',
+    'Seven years on crypto payments. BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.',
 
   email: 'malayadalja123@gmail.com',
   linkedin: 'https://www.linkedin.com/in/malayy-j-adalja-261578132/',
@@ -38,7 +38,7 @@ export const skillSpine = [
   {
     key: 'manual',
     name: 'Manual & exploratory',
-    line: 'The part automation cannot do — reading a spec, finding the case nobody wrote down, and reproducing it reliably.',
+    line: 'The part automation cannot do. Reading a spec, finding the case nobody wrote down, and reproducing it reliably.',
     tools: ['Test design', 'Exploratory charters', 'Regression strategy', 'UAT', 'Defect triage'],
     evidence: 'Designed and ran the test suites for 15+ delivered projects.',
   },
@@ -66,14 +66,14 @@ export const skillSpine = [
   {
     key: 'performance',
     name: 'Performance',
-    line: 'Load and throughput on the flows that actually cost money — withdrawals, transactions, checkout under concurrency.',
+    line: 'Load and throughput on the flows that actually cost money: withdrawals, transactions, checkout under concurrency.',
     tools: ['JMeter', 'Load profiling', 'Throughput analysis'],
     evidence: 'JMeter scripts for withdrawal and high-volume transaction flows.',
   },
   {
     key: 'ai',
     name: 'AI tooling',
-    line: 'I work with these daily — test design, failure triage, scripting, and reading a codebase I did not write. Then I used them to build Aegis-QA, the internal tool that holds all of this together.',
+    line: 'I use these every day for test design, failure triage, scripting, and reading a codebase I did not write. Then I used them to build Aegis-QA, the internal tool that holds all of this together.',
     tools: [
       'Claude',
       'Claude Code (CLI)',
@@ -85,7 +85,7 @@ export const skillSpine = [
       'Datadog AI',
     ],
     evidence:
-      'Used them to build Aegis-QA — runs, API tests, SQL, Datadog and recorded scripts in one place.',
+      'Used them to build Aegis-QA. Runs, API tests, SQL, Datadog and recorded scripts in one place.',
   },
 ]
 
@@ -118,12 +118,12 @@ export const transitions = {
   toSkills: {
     lead: 'Seven rails. Five assertions each.',
     emph: 'Every release.',
-    sub: 'That does not scale by hand. So the second half of this job is tooling — and knowing which tool to reach for.',
+    sub: 'That does not scale by hand. So the second half of this job is tooling, and knowing which tool to reach for.',
   },
   toWork: {
     lead: 'That is the method.',
     emph: 'Here is where it ran.',
-    sub: 'Three projects, opened in full — the problem, what I actually did, and what changed because of it.',
+    sub: 'Three projects, opened in full. The problem, what I actually did, and what changed because of it.',
   },
   toContact: {
     lead: 'Still here?',
@@ -157,7 +157,7 @@ export const paymentRails = [
       { state: 'Broadcast', assert: 'Transaction accepted to mempool; fee rate above the floor' },
       {
         state: '1 confirmation',
-        assert: 'Order stays pending — one confirmation is not settlement',
+        assert: 'Order stays pending. One confirmation is not settlement',
       },
       {
         state: '3 confirmations',
@@ -185,7 +185,7 @@ export const paymentRails = [
       },
       {
         state: 'In flight',
-        assert: 'Checkout holds state — no double-submit while the HTLC is pending',
+        assert: 'Checkout holds state, with no double-submit while the HTLC is pending',
       },
       {
         state: 'Preimage received',
@@ -211,7 +211,7 @@ export const paymentRails = [
         state: 'Tx submitted',
         assert: 'Nonce sequencing correct; gas estimate survives a busy block',
       },
-      { state: 'Mined', assert: 'Receipt status is 1 — a mined revert is not a payment' },
+      { state: 'Mined', assert: 'Receipt status is 1. A mined revert is not a payment' },
       {
         state: 'Confirmed',
         assert: 'Reorg below the confirmation depth does not credit the account',
@@ -231,7 +231,7 @@ export const paymentRails = [
       },
       {
         state: 'Transfer event',
-        assert: 'Transfer log parsed from the right contract — not a lookalike token',
+        assert: 'Transfer log parsed from the right contract, not a lookalike token',
       },
       {
         state: 'Decimals applied',
@@ -250,7 +250,7 @@ export const paymentRails = [
       { state: 'Quote locked', assert: 'Gold price feed fresh; a stale feed blocks the quote' },
       {
         state: 'Transfer event',
-        assert: 'Fractional units handled — gold trades in fractions of an ounce',
+        assert: 'Fractional units handled, because gold trades in fractions of an ounce',
       },
       { state: 'Confirmed', assert: 'Rounding never favours the house or the customer silently' },
       {
@@ -292,7 +292,7 @@ export const paymentRails = [
     id: 'payout',
     symbol: 'OUT',
     name: 'Crypto payout',
-    note: 'Money leaving — the scary one',
+    note: 'Money leaving. The scary one',
     steps: [
       {
         state: 'Payout requested',
@@ -300,7 +300,7 @@ export const paymentRails = [
       },
       {
         state: 'Address verified',
-        assert: 'Unverified address is refused — no exceptions, no override path',
+        assert: 'Unverified address is refused. No exceptions, no override path',
       },
       { state: 'Approved', assert: 'Balance and limits checked at approval, not just at request' },
       { state: 'Broadcast', assert: 'A retried request never broadcasts twice for one payout id' },
@@ -333,7 +333,7 @@ export const failureWall = {
       text: 'Payout accepted for an unverified wallet address',
       area: 'security',
       kind: 'Validation',
-      caught: 'Unverified destination is refused — no override path exists',
+      caught: 'Unverified destination is refused. No override path exists',
     },
     {
       text: 'Cashback tier miscounted across a month boundary',
@@ -389,13 +389,13 @@ export const caseStudies = [
     link: '',
     tag: 'Payments',
     summary:
-      'Merchant checkout, payment links, refunds and crypto payouts across BTC, ETH, USDT, XAUT and the Lightning Network — plus ERC-20 smart contract testing, e-commerce plugin integrations and localization.',
+      'Merchant checkout, payment links, refunds and crypto payouts across BTC, ETH, USDT, XAUT and the Lightning Network, plus ERC-20 smart contract testing, e-commerce plugin integrations and localization.',
     problem:
       'Money movement has no safe failure mode. A refund that fires twice, a payout to an unverified address or a rate that drifts on a fallback path are all real losses, and none of them show up on the happy path.',
     approach: [
-      'Built regression coverage across the payment modules — Metadata, Customer, Swap, Payout, Instant Payout, Transfer.',
+      'Built regression coverage across the payment modules: Metadata, Customer, Swap, Payout, Instant Payout, Transfer.',
       'Covered BTC and Lightning, ETH, USDT (ERC-20) and XAUT, each with its own confirmation and decimal rules.',
-      'Tested ERC-20 smart contract calls — ABI encoding, revert paths, emitted events and access control.',
+      'Tested ERC-20 smart contract calls. ABI encoding, revert paths, emitted events and access control.',
       'Automated the crypto payout and instant-send workflows end to end, including address verification.',
       'Verified every transaction against the database, not just the UI response.',
       'Load-tested withdrawal and high-volume transaction flows with JMeter.',
@@ -417,7 +417,7 @@ export const caseStudies = [
     link: '',
     tag: 'Internal tool',
     summary:
-      'An internal platform I built to manage the QA work itself: triggering runs, API testing, Playwright scripts, SQL queries, Datadog lookups and test-case management with automation-script recording — in one place.',
+      'An internal platform I built to manage the QA work itself: triggering runs, API testing, Playwright scripts, SQL queries, Datadog lookups and test-case management with automation-script recording, all in one place.',
     problem:
       'The work was spread across a dozen tools. Postman here, a Playwright repo there, SQL in a client, Datadog in a browser tab, test cases in a spreadsheet. Every investigation meant stitching them back together by hand.',
     approach: [
@@ -425,12 +425,12 @@ export const caseStudies = [
       'A recorder that turns a real session into a reviewable script instead of hand-written selectors.',
       'API tests, SQL queries and Datadog lookups available next to the run that needs them.',
       'Test-case management tied to the automation that covers it.',
-      'Self-healing locators — proposed and sandbox-verified, never applied without a human saying yes.',
+      'Self-healing locators. Proposed and sandbox-verified, never applied without a human saying yes.',
     ],
     outcome: [
       'Investigating a failed run happens in one tool instead of five.',
       'Recorded sessions become maintained scripts, so coverage grows without hand-writing every selector.',
-      'It is internal tooling, not a product — built because the off-the-shelf options did not fit how the team works.',
+      'It is internal tooling rather than a product. I built it because the off-the-shelf options did not fit how the team works.',
     ],
     stack: ['Python 3.12', 'Playwright', 'asyncio', 'FastAPI', 'Next.js', 'Docker'],
   },
@@ -442,7 +442,7 @@ export const caseStudies = [
     link: '',
     tag: 'Compliance',
     summary:
-      'Merchant verification through a third-party identity provider — LLC and Corporation flows, document upload, beneficiary checks and liveness.',
+      'Merchant verification through a third-party identity provider. LLC and Corporation flows, document upload, beneficiary checks and liveness.',
     problem:
       'Onboarding sits between your product and a vendor you do not control, across several document types and company structures. The failure modes are slow, stateful and easy to miss.',
     approach: [
@@ -486,27 +486,27 @@ export const aegisPipeline = [
 export const otherWork = [
   {
     title: 'TM2 (Teach Me To Online)',
-    line: 'E-learning platform — course upload, purchase flow, secure payment, student dashboards and access control.',
+    line: 'E-learning platform. Course upload, purchase flow, secure payment, student dashboards and access control.',
   },
   {
     title: 'NLC (Natural Living Care)',
-    line: 'E-commerce with a multi-level bonus system — cart, checkout, bonus tier calculation and user activity tracking.',
+    line: 'E-commerce with a multi-level bonus system. Cart, checkout, bonus tier calculation and user activity tracking.',
   },
   {
     title: 'OZ Road Code',
-    line: 'Ride assessment platform on web and mobile — video recording, map tracking and real-time speed logs.',
+    line: 'Ride assessment platform on web and mobile. Video recording, map tracking and real-time speed logs.',
   },
   {
     title: 'Dekabes Domino',
-    line: 'Multiplayer game — real-time stability, AI difficulty and fairness, private tables and invites.',
+    line: 'Multiplayer game. Real-time stability, AI difficulty and fairness, private tables and invites.',
   },
   {
     title: 'Moana Pasifika',
-    line: 'Community app — purchases, gifting, secure transactions and a shared feed across mobile and web.',
+    line: 'Community app. Purchases, gifting, secure transactions and a shared feed across mobile and web.',
   },
   {
     title: 'E-commerce builds',
-    line: 'Multiple storefronts — end-to-end UI/UX validation, cart, checkout, payment success and email notifications.',
+    line: 'Multiple storefronts. End-to-end UI/UX validation, cart, checkout, payment success and email notifications.',
   },
 ]
 
@@ -545,7 +545,7 @@ export const moneyFlow = {
 
 export const bisect = {
   title: 'Sixteen commits. One broke payouts.',
-  line: 'This is a simulation, but the method is the real one. Click a commit to test it — binary search finds the culprit in four, not sixteen.',
+  line: 'This is a simulation, but the method is the real one. Click a commit to test it. Binary search finds the culprit in four goes, not sixteen.',
   breakAt: 11,
   commits: [
     'chore: bump test fixtures',
@@ -572,7 +572,7 @@ export const bisect = {
 export const depthIntro = {
   kicker: 'Coverage & conditions',
   title: 'Breadth, then depth.',
-  line: 'Which surfaces I have taken through which layers — and what each one does when the network stops behaving.',
+  line: 'Which surfaces I have taken through which layers, and what each one does when the network stops behaving.',
 }
 
 // Rows are product surfaces, columns are the layers each was taken through.
@@ -599,7 +599,7 @@ export const latencySteps = [
     label: 'Healthy',
     state: 'Checkout completes',
     failure: 'Nothing to catch here. This is the only state most suites ever test.',
-    assert: 'Happy path passes — necessary, and nowhere near sufficient',
+    assert: 'Happy path passes. Necessary, and nowhere near sufficient',
     severity: 'ok',
   },
   {
@@ -625,7 +625,7 @@ export const latencySteps = [
     label: 'Timeout',
     state: 'Request abandoned',
     failure:
-      'The client gives up. The order shows failed — but the payment provider took the money anyway.',
+      'The client gives up. The order shows failed, but the payment provider took the money anyway.',
     assert: 'Order stays pending, never failed; the webhook is the source of truth',
     severity: 'p0',
   },
@@ -684,7 +684,7 @@ export const roadmap = [
     kind: 'Role',
     title: 'Software Engineer — QA',
     org: 'Openxcell · Speed · Apr 2023 — present',
-    note: 'Crypto raised the stakes. Stopped testing screens, started testing state machines — and checking the ledger, not the toast.',
+    note: 'Crypto raised the stakes. Stopped testing screens, started testing state machines. And checking the ledger rather than the toast.',
     qa: [
       'Crypto payments',
       'Smart contracts',
@@ -700,7 +700,7 @@ export const roadmap = [
     kind: 'Built',
     title: 'Aegis-QA',
     org: 'Internal tooling · Creator & maintainer · from Nov 2025',
-    note: 'The work was scattered across a dozen tools, so I built one place to hold all of it — runs, API tests, SQL, Datadog, recorded scripts.',
+    note: 'The work was scattered across a dozen tools, so I built one place to hold all of it. Runs, API tests, SQL, Datadog, recorded scripts.',
     qa: ['Run orchestration', 'Session recording', 'Self-healing locators', 'Failure triage'],
     tech: ['Python 3.12', 'asyncio', 'FastAPI', 'Next.js', 'Docker', 'AI tooling'],
   },
@@ -712,7 +712,7 @@ export const roadmap = [
     kind: 'Next',
     title: 'Let’s talk about it',
     org: 'A conversation, not a pitch',
-    note: 'If you are building something where quality is load-bearing — payments, ledgers, anything that must not fail quietly — I would like to hear about it.',
+    note: 'If you are building something where quality is load-bearing, like payments or ledgers or anything that must not fail quietly, I would like to hear about it.',
     qa: ['Test architecture', 'Quality strategy'],
     tech: ['Whatever the problem needs'],
     cta: true,
@@ -841,7 +841,7 @@ export const faq = [
   },
   {
     q: 'What can he test that most QA engineers cannot?',
-    a: 'Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network — each with its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.',
+    a: 'Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network. Each has its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.',
   },
   {
     q: 'Which tools and languages does he use?',
@@ -853,7 +853,7 @@ export const faq = [
   },
   {
     q: 'Which payment flows has he actually tested?',
-    a: 'Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails — across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.',
+    a: 'Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails, across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.',
   },
   {
     q: 'Is he available for work, and where?',
@@ -861,7 +861,7 @@ export const faq = [
   },
   {
     q: 'Why should a QA engineer be trusted with test architecture?',
-    a: 'Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand — so the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.',
+    a: 'Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand. So the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.',
   },
 ]
 
@@ -873,17 +873,17 @@ export const faq = [
  * endpoints, no credentials, no customer data, no invented numbers.
  */
 export const aegisRunnerModes = [
-  { mode: 'single', line: 'One test, on its own — the loop you use while writing it.' },
+  { mode: 'single', line: 'One test, on its own. The loop you use while writing it.' },
   { mode: 'suite', line: 'One layer or a grouped set, for a targeted regression.' },
   { mode: 'flow', line: 'Lifecycle and flow tests, where the output of one step feeds the next.' },
-  { mode: 'full', line: 'Every primary layer — the pre-release pass.' },
+  { mode: 'full', line: 'Every primary layer. The pre-release pass.' },
   { mode: 'all', line: 'Every module, everything. The nightly.' },
 ]
 
 export const aegisSubsystems = [
   {
     name: 'Session recorder',
-    line: 'Records a real session on the real application and keeps the intent — which element, which role, which label — rather than the raw selector that happened to match. The recording is the source of truth; everything downstream is generated from it and can be regenerated.',
+    line: 'Records a real session on the real application and keeps the intent, meaning which element, which role and which label, rather than the raw selector that happened to match. The recording is the source of truth; everything downstream is generated from it and can be regenerated.',
   },
   {
     name: 'Compiler',
@@ -895,7 +895,7 @@ export const aegisSubsystems = [
   },
   {
     name: 'Self-healing locators',
-    line: 'When a locator rots, the run proposes a replacement and verifies it in a sandbox before anyone sees it. A sandbox pass is advisory — it never resolves the failure and never writes itself into the knowledge base on its own. A human approves, or it stays a suggestion.',
+    line: 'When a locator rots, the run proposes a replacement and verifies it in a sandbox before anyone sees it. A sandbox pass is advisory. It never resolves the failure, and never writes itself into the knowledge base on its own. A human approves, or it stays a suggestion.',
   },
   {
     name: 'Failure intelligence',

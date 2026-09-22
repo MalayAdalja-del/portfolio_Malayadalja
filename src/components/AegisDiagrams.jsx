@@ -58,7 +58,7 @@ function RunManager() {
   return (
     <Frame
       title="Run manager"
-      caption="A run, its layers and its results in one place — with the history kept, not scrolled past."
+      caption="A run, its layers and its results in one place, with the history kept rather than scrolled past."
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
         <p className="font-mono text-[12px] font-bold">RUN #1482</p>
@@ -103,7 +103,7 @@ function RunManager() {
 
 function Triage() {
   const steps = [
-    ['Classified', 'Locator no longer matches — not a product defect', true],
+    ['Classified', 'Locator no longer matches. This is not a product defect', true],
     ['Diagnosed', 'The Continue button moved into a dialog in build 218', true],
     ['Fix proposed', 'get_by_role("button", name="Continue") inside the dialog', true],
     ['Sandbox verified', 'Runs green in isolation. Does not prove the bug is gone', true],
@@ -112,7 +112,7 @@ function Triage() {
   return (
     <Frame
       title="Failure triage"
-      caption="Every failed run is classified and diagnosed on arrival. The fix is a proposal — it waits."
+      caption="Every failed run is classified and diagnosed on arrival. The fix is a proposal, so it waits."
     >
       <p className="font-mono text-[11px]">
         <span className="text-ink">✗ payout.idempotency_key</span>
@@ -147,7 +147,7 @@ function RecorderToSpec() {
   return (
     <Frame
       title="Recorder → spec"
-      caption="The recording keeps the intent — role and label — so the generated spec reads like one a person wrote."
+      caption="The recording keeps the intent, meaning role and label, so the generated spec reads like one a person wrote."
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.09em] text-ink/60">Captured</p>
       <ul className="mt-2 font-mono text-[11px] leading-relaxed text-ink/85">
@@ -177,7 +177,7 @@ export default function AegisDiagrams() {
     <div>
       <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/75 md:text-[17px]">
         Drawn, not captured. The real interface runs against live payment data, and none of that
-        belongs on a public page — so these are illustrations of the same screens, with every value
+        belongs on a public page. So these are illustrations of the same screens, with every value
         invented.
       </p>
 

@@ -125,12 +125,14 @@ export function ScrollProgress() {
 export function Nav({ onResume }) {
   const [open, setOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const last = useRef(0)
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
       setHidden(y > 240 && y > last.current)
+      setScrolled(y > 24)
       last.current = y
     }
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -141,9 +143,32 @@ export function Nav({ onResume }) {
     <motion.header
       animate={{ y: hidden && !open ? '-110%' : '0%' }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-[85] text-white mix-blend-difference"
+      className="fixed inset-x-0 top-0 z-[85]"
     >
-      <div className="shell flex h-[72px] items-center justify-between">
+      {/* The bar has no colour of its own — mix-blend-difference is what
+          keeps it legible over both the white and the black sections. That
+          guarantees contrast but not separation: once the page scrolls, the
+          bar sits directly on top of body copy and reads as two lines of
+          text in the same place. This blurs whatever is behind it, which
+          costs nothing on a dark section, keeps the blend maths intact
+          (blur changes detail, not average colour), and only appears once
+          you have actually scrolled, so the hero is untouched. */}
+      <div
+        aria-hidden
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          open ? 'bg-ink opacity-100' : scrolled ? 'backdrop-blur-md opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      {/* With the menu open the bar is the top of an opaque black panel, so
+          it drops the blend and just uses white — blending against the page
+          still showing above the panel washed the Résumé button and the
+          close icon out to a ghost. */}
+      <div
+        className={`shell relative flex h-[72px] items-center justify-between ${
+          open ? 'text-paper' : 'text-white mix-blend-difference'
+        }`}
+      >
         <a href="#top" className="font-mono text-sm font-medium tracking-tight">
           malay<span className="opacity-60">.adalja</span>
         </a>
@@ -205,20 +230,26 @@ export function Nav({ onResume }) {
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
             transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden md:hidden"
+            className="overflow-hidden bg-ink text-paper md:hidden"
           >
-            <div className="shell flex flex-col pb-6">
+            {/* An opaque panel, and deliberately outside the blended bar
+                above it. The menu used to inherit mix-blend-difference and
+                carry no background of its own, so on a phone the six links
+                rendered straight through the hero — "WHAT I DO" sitting
+                inside "I find what breaks payments". A navigation you can
+                see the page through is not a navigation. */}
+            <nav aria-label="Sections" className="shell flex flex-col pb-8 pt-2">
               {nav.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="border-t border-current/30 py-3.5 font-black uppercase tracking-tightest [font-size:2rem]"
+                  className="border-t border-white/20 py-4 font-black uppercase tracking-tightest [font-size:1.75rem]"
                 >
                   {item.label}
                 </a>
               ))}
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

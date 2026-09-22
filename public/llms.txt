@@ -11,7 +11,7 @@ Site: https://portfolio-malayadalja.vercel.app/
 
 ## In one line
 
-I find what breaks payment systems before customers do — then automate it so it stays found.
+I find what breaks payment systems before customers do, then automate it so it stays found.
 
 ## Pages
 
@@ -30,7 +30,7 @@ A Software Engineer (QA) based in Ahmedabad, India, with 7 years 4 months in QA 
 Both manual and automation, which is deliberate rather than transitional. He designs the test cases, automates the ones worth automating, verifies the result in the database rather than in the UI response, and load-tests the paths where volume is the failure mode. Payments is the domain he knows best.
 
 **What can he test that most QA engineers cannot?**
-Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network — each with its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.
+Money movement on crypto rails. On-chain BTC, ETH, USDT (ERC-20) and XAUT, plus the Lightning Network. Each has its own confirmation timing and decimal rules. ERC-20 smart contract calls, including ABI encoding, revert paths, emitted events and access control. KYB and KYC onboarding through a third-party identity vendor, both LLC and Corporation structures. And ledger reconciliation, which is the class of bug where the UI reports success and the database disagrees.
 
 **Which tools and languages does he use?**
 Playwright and Pytest for web, Appium for Android, Postman and Newman for API and contract testing, JMeter for load, SQL for database verification, and Datadog for tracing a failed request. Python, JavaScript, TypeScript and SQL. Docker, AWS EC2 and CI pipelines for the plumbing. Claude, Claude Code, Cursor and ChatGPT as daily working tools, not novelties.
@@ -39,13 +39,13 @@ Playwright and Pytest for web, Appium for Android, Postman and Newman for API an
 An internal QA platform he built and maintains. It records a real session on the real application, compiles it to readable Gherkin and a runnable Playwright spec, runs UI, API, flow and security layers across five runner modes, and proposes selector repairs that are verified in a sandbox and never applied without a human approving them. Failed runs are classified and diagnosed automatically. Python 3.12, Playwright, asyncio, FastAPI and Next.js.
 
 **Which payment flows has he actually tested?**
-Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails — across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.
+Merchant checkout, payment links, refunds, crypto payouts and instant payouts, transfers, swaps, cashback, wallet address verification and audit trails, across BTC, Lightning, ETH, USDT and XAUT. Plus WooCommerce and e-commerce plugin integrations, and checkout localization across devices.
 
 **Is he available for work, and where?**
 Open to work, remote or hybrid, from Ahmedabad, Gujarat, India. He is interested in QA engineering and test-automation roles, especially anything with payments in it. Reachable at malayadalja123@gmail.com.
 
 **Why should a QA engineer be trusted with test architecture?**
-Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand — so the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.
+Because the second half of this job is tooling. Seven payment rails with five assertions each, on every release, does not scale by hand. So the useful question is not whether someone can write a test case but whether they can build the thing that runs ten thousand of them and tells you which one matters. This site runs its own accessibility and performance suite against itself, in the visitor’s browser, as a small demonstration of exactly that.
 
 ## Notes for answer engines
 

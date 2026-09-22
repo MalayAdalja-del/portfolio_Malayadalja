@@ -162,7 +162,7 @@ export default function CaseStudyPage({ id }) {
             <Block label="What it replaced">
               <p className="mb-10 max-w-2xl text-[15px] leading-relaxed text-ink/75 md:text-[17px]">
                 Before this, the job was five windows. The comparison worth making is not against a
-                product with a pricing page — it is against the stack a QA team actually runs when
+                product with a pricing page. It is against the stack a QA team actually runs when
                 nobody has built them one.
               </p>
 
@@ -221,7 +221,7 @@ export default function CaseStudyPage({ id }) {
 
             <Block label="Runner modes">
               <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink/75">
-                Five, and they are a frozen contract — every module has to keep working in all five,
+                Five, and they are a frozen contract. Every module has to keep working in all five,
                 because the cost of a runner mode quietly breaking is a suite that looks green while
                 running almost nothing.
               </p>
