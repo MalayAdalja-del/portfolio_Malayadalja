@@ -52,7 +52,11 @@ function Matrix() {
       </div>
 
       {/* header row */}
-      <div className="mt-5 grid grid-cols-[minmax(0,1fr)_repeat(5,minmax(1.75rem,1fr))] gap-x-1.5 gap-y-2 sm:grid-cols-[minmax(0,1.4fr)_repeat(5,minmax(3rem,0.5fr))] sm:gap-x-2">
+      {/* On a phone the label column was one of six equal 1fr tracks, which
+          left it about 55px — narrower than the word "onboarding" — so the
+          surface names ran underneath the first cells. It gets 2.4fr here
+          and the cells shrink to suit; they only ever need to be squares. */}
+      <div className="mt-5 grid grid-cols-[minmax(0,2.4fr)_repeat(5,minmax(1.4rem,1fr))] gap-x-1.5 gap-y-2 sm:grid-cols-[minmax(0,1.4fr)_repeat(5,minmax(3rem,0.5fr))] sm:gap-x-2">
         <span />
         {coverageLayers.map((l) => (
           <span
@@ -65,7 +69,7 @@ function Matrix() {
 
         {coverage.map((row, i) => (
           <div key={row.surface} className="contents">
-            <span className="flex items-center py-1 pr-2 text-[12.5px] leading-tight text-ink/85 sm:text-[14px]">
+            <span className="flex min-w-0 items-center break-words py-1 pr-2 text-[12px] leading-tight text-ink/85 sm:text-[14px]">
               {row.surface}
             </span>
             {coverageLayers.map((layer) => {

@@ -57,6 +57,19 @@ export default function PaymentRails() {
   )
 
   // Start the default rail once the section is actually looked at.
+  //
+  // Two things were wrong here and both left the panel permanently empty,
+  // showing "0 / 5 passed" under a blank box.
+  //
+  // `threshold: 0.35` cannot fire for a section taller than about three
+  // viewports — on a 390px phone this section is 2783px against an 844px
+  // screen, so the highest ratio reachable is 0.30 and the observer waits
+  // forever. A margin-based trigger asks the right question instead: is
+  // this section across the middle of the screen?
+  //
+  // And the effect has to depend on `reduce`. The first render is the
+  // static one, which has no ref to observe, so an effect that ran once on
+  // mount attached to nothing and never looked again.
   const ref = useRef(null)
   useEffect(() => {
     const node = ref.current
@@ -68,7 +81,7 @@ export default function PaymentRails() {
           io.disconnect()
         }
       },
-      { threshold: 0.35 },
+      { threshold: 0, rootMargin: '-30% 0px -30% 0px' },
     )
     io.observe(node)
     return () => {
@@ -76,7 +89,7 @@ export default function PaymentRails() {
       clear()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [reduce])
 
   const select = (id) => {
     setRailId(id)
