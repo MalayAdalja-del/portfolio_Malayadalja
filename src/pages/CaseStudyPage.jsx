@@ -43,13 +43,16 @@ export default function CaseStudyPage({ id }) {
     return (
       <main className="shell band">
         <h1 className="display">Not found.</h1>
-        <button
-          type="button"
-          onClick={() => navigate('/')}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault()
+            navigate('/')
+          }}
           className="mt-8 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper"
         >
           Back to the site
-        </button>
+        </a>
       </main>
     )
   }
@@ -60,13 +63,21 @@ export default function CaseStudyPage({ id }) {
     <main className="bg-paper pt-[92px]">
       {/* hero */}
       <header className="shell pb-16 pt-14 md:pb-24 md:pt-20">
-        <button
-          type="button"
-          onClick={() => goHome('#work')}
+        {/* A real href, not a button. These were all buttons, which meant
+            the three case studies had no crawlable path back into the site:
+            an audit of the live page found nine links on /work/aegis and
+            zero of them internal. A crawler that cannot leave a page cannot
+            pass any authority through it either. */}
+        <a
+          href="/#work"
+          onClick={(e) => {
+            e.preventDefault()
+            goHome('#work')
+          }}
           className="mb-12 font-mono text-[11px] uppercase tracking-[0.11em] text-ink/60 transition-colors hover:text-ink"
         >
           ← All work
-        </button>
+        </a>
 
         <motion.p
           initial={reduce ? false : { opacity: 0 }}
@@ -325,15 +336,18 @@ export default function CaseStudyPage({ id }) {
       <section className="invert-section">
         <div className="shell py-20 md:py-28">
           <p className="eyebrow text-white/60">Next case study</p>
-          <button
-            type="button"
-            onClick={() => navigate(`/work/${next.id}`)}
+          <a
+            href={`/work/${next.id}`}
+            onClick={(e) => {
+              e.preventDefault()
+              navigate(`/work/${next.id}`)
+            }}
             className="group mt-5 block w-full text-left"
           >
             <span className="display block transition-opacity duration-300 group-hover:opacity-70">
               {next.title} <span className="text-navy-300">→</span>
             </span>
-          </button>
+          </a>
 
           <div className="mt-14 flex flex-wrap gap-3 border-t border-white/15 pt-10">
             <a
@@ -342,13 +356,16 @@ export default function CaseStudyPage({ id }) {
             >
               {profile.email}
             </a>
-            <button
-              type="button"
-              onClick={() => navigate('/')}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/')
+              }}
               className="rounded-full border border-white/25 px-7 py-3.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-white hover:text-ink"
             >
               Back to the site
-            </button>
+            </a>
           </div>
         </div>
       </section>
