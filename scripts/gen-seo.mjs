@@ -53,6 +53,7 @@ const urls = [
     priority: '0.8',
     changefreq: 'monthly',
   })),
+  { loc: `${SITE}/aegis-demo`, priority: '0.8', changefreq: 'monthly' },
 ]
 
 write(

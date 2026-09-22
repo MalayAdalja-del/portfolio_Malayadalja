@@ -25,6 +25,15 @@ const HOME = {
 
 /** The title, description and canonical path for a parsed route. */
 export function metaFor(route) {
+  if (route?.name === 'demo') {
+    return {
+      title: 'Aegis-QA portal — interactive demo | Malay Adalja',
+      description:
+        'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage, coverage and a knowledge graph. Rebuilt with invented data.',
+      path: '/aegis-demo',
+      demo: true,
+    }
+  }
   if (route?.name === 'work') {
     const study = caseStudies.find((c) => c.id === route.id)
     if (!study) return HOME

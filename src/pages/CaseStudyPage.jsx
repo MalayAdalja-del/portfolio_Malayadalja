@@ -178,6 +178,16 @@ export default function CaseStudyPage({ id }) {
             </Block>
 
             <Block label="Try it">
+              <p className="mb-8">
+                <a
+                  href="/aegis-demo"
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-block bg-ink px-7 py-4 text-sm font-semibold text-paper transition-transform duration-300 hover:scale-[1.03]"
+                >
+                  Open the full portal walkthrough ↗
+                </a>
+              </p>
               <AegisDemo />
             </Block>
 

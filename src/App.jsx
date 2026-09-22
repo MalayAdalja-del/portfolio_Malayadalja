@@ -16,6 +16,7 @@ import PaymentRails from './components/PaymentRails'
 import Depth from './components/Depth'
 import { Contact, Footer, Toolkit } from './components/Sections'
 import CaseStudyPage from './pages/CaseStudyPage'
+import AegisDemoPage from './pages/AegisDemoPage'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { useRoute } from './lib/router'
 import { useHead } from './lib/head'
@@ -53,6 +54,7 @@ export default function App({ initialRoute, prerender = false }) {
   useHead(route)
   const [resume, setResume] = useState(false)
   const onWork = route.name === 'work'
+  const onDemo = route.name === 'demo'
 
   useEffect(() => initSmoothScroll(), [])
 
@@ -65,16 +67,21 @@ export default function App({ initialRoute, prerender = false }) {
   return (
     <>
       {!prerender && <Preloader />}
-      {!staticPass && (
+      {!staticPass && !onDemo && (
         <>
           <ScrollProgress />
           <Cursor />
         </>
       )}
-      <Nav onResume={() => setResume(true)} />
-      {!onWork && <ChapterRail />}
+      {/* The walkthrough is a product, and it brings its own chrome. The
+          site header is fixed and blended, so on that page it ghosted
+          straight through the demo's own sticky banner. */}
+      {!onDemo && <Nav onResume={() => setResume(true)} />}
+      {!onWork && !onDemo && <ChapterRail />}
 
-      {onWork ? (
+      {onDemo ? (
+        <AegisDemoPage />
+      ) : onWork ? (
         <CaseStudyPage id={route.id} />
       ) : (
         <>

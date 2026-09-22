@@ -14,11 +14,12 @@ import { useEffect, useState } from 'react'
  */
 
 /** Every route the site serves, in the order the sitemap lists them. */
-export const ROUTES = ['/', '/work/speed', '/work/aegis', '/work/kyb']
+export const ROUTES = ['/', '/work/speed', '/work/aegis', '/work/kyb', '/aegis-demo']
 
 export function parseRoute(pathname) {
   const parts = (pathname || '/').split('/').filter(Boolean)
   if (parts[0] === 'work' && parts[1]) return { name: 'work', id: parts[1] }
+  if (parts[0] === 'aegis-demo') return { name: 'demo' }
   return { name: 'home' }
 }
 
