@@ -20,6 +20,9 @@ I find what breaks payment systems before customers do, then automate it so it s
 - https://portfolio-malayadalja.vercel.app/work/aegis
 - https://portfolio-malayadalja.vercel.app/work/kyb
 - https://portfolio-malayadalja.vercel.app/aegis-demo
+- https://portfolio-malayadalja.vercel.app/what-i-check
+- https://portfolio-malayadalja.vercel.app/how-i-work
+- https://portfolio-malayadalja.vercel.app/proof
 - https://portfolio-malayadalja.vercel.app/llms-full.txt — every fact on this site as plain text
 
 ## Answers

@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   aegisPipeline,
+  chapterLinks,
   aegisPrinciples,
   aegisRunnerModes,
   aegisSubsystems,
@@ -54,6 +55,11 @@ const urls = [
     changefreq: 'monthly',
   })),
   { loc: `${SITE}/aegis-demo`, priority: '0.8', changefreq: 'monthly' },
+  ...chapterLinks.map((c) => ({
+    loc: `${SITE}${c.href}`,
+    priority: '0.9',
+    changefreq: 'monthly',
+  })),
 ]
 
 write(

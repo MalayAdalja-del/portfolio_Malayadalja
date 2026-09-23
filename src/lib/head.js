@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { caseStudies, faq, profile } from '../content'
+import { caseStudies, chapterLinks, faq, profile } from '../content'
 
 /**
  * Per-route <head>.
@@ -24,12 +24,41 @@ const HOME = {
 }
 
 /** The title, description and canonical path for a parsed route. */
+const CHAPTER_META = {
+  check: {
+    path: '/what-i-check',
+    title: 'What I check — payment rails, assertions and coverage | Malay Adalja',
+    description:
+      'Seven payment rails with their own state machines and five assertions each: BTC, Lightning, ETH, USDT, XAUT, payouts and refunds, plus the coverage grid.',
+    keywords:
+      'payment testing, crypto payment QA, Lightning Network testing, ERC-20 smart contract testing, payout testing, ledger reconciliation, test coverage matrix, API and database assertions, fintech QA',
+  },
+  'work-how': {
+    path: '/how-i-work',
+    title: 'How I work — manual, automation, API, SQL and AI tooling | Malay Adalja',
+    description:
+      'Manual and exploratory testing, automation, API and contract testing, database verification, performance and AI tooling, each with the evidence behind it.',
+    keywords:
+      'manual testing, exploratory testing, test automation, Playwright, Pytest, Appium, API testing, Postman, Newman, SQL database verification, JMeter performance testing, AI tooling for QA, SDET skills',
+  },
+  proof: {
+    path: '/proof',
+    title: 'Break this page — six real defects, caught live | Malay Adalja',
+    description:
+      'Six real accessibility and security defects injected into this page on demand, and the live assertion suite that catches each one in your browser.',
+    keywords:
+      'accessibility testing, WCAG contrast, alt text, accessible name, positive tabindex, rel noopener, heading structure, live test suite, git bisect, defect demonstration',
+  },
+}
+
 export function metaFor(route) {
+  const chapter = CHAPTER_META[route?.name]
+  if (chapter) return chapter
   if (route?.name === 'demo') {
     return {
       title: 'Aegis-QA portal — interactive demo | Malay Adalja',
       description:
-        'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage, coverage and a knowledge graph. Rebuilt with invented data.',
+        'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage and coverage. Invented data throughout.',
       path: '/aegis-demo',
       demo: true,
       keywords:

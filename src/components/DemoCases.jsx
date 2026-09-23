@@ -110,9 +110,9 @@ export default function DemoCases({ still }) {
       <div className="grid gap-10">
         {CASES.map((x) => (
           <article key={x.id}>
-            <h4 className="font-mono text-[10.5px] uppercase tracking-[0.09em] text-navy-500">
+            <h3 className="font-mono text-[10.5px] uppercase tracking-[0.09em] text-navy-500">
               {x.id} · {x.state} · covered by {x.spec}
-            </h4>
+            </h3>
             <p className="mt-1 text-[14px] font-bold">{x.title}</p>
             <Pane c={x} tab="gherkin" />
             <Pane c={x} tab="code" />

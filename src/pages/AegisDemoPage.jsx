@@ -87,9 +87,9 @@ function Overview() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
         <section className="border border-ink/12 p-4 sm:p-5">
-          <h3 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
             Pass rate · last 7 days
-          </h3>
+          </h2>
           <div className="mt-5 flex h-36 items-end gap-2">
             {TREND.map((v, i) => (
               <div key={DAYS[i] + i} className="flex min-w-0 flex-1 flex-col items-center gap-2">
@@ -101,9 +101,9 @@ function Overview() {
         </section>
 
         <section className="border border-ink/12 p-4 sm:p-5">
-          <h3 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
             Waiting for approval
-          </h3>
+          </h2>
           <ul className="mt-4">
             {[
               ['payout.idempotency_key', 'locator moved into a dialog'],
@@ -250,9 +250,9 @@ function Knowledge() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <section className="border border-ink/12 p-4 sm:p-5">
-        <h3 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
+        <h2 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
           What this change touches
-        </h3>
+        </h2>
         <p className="mt-3 font-mono text-[11px] text-ink/85">checkout/PaymentButton.tsx</p>
         <ul className="mt-4">
           {[
@@ -275,9 +275,9 @@ function Knowledge() {
         </ul>
       </section>
       <section className="border border-ink/12 p-4 sm:p-5">
-        <h3 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
+        <h2 className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
           Known failures
-        </h3>
+        </h2>
         <ul className="mt-3">
           {[
             ['Dialog moved the Continue button', 'seen 4× · fixed 4×'],

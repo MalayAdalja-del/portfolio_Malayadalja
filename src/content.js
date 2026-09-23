@@ -104,15 +104,16 @@ export const skillSpine = [
 export const storyPromise =
   'Six chapters, about two minutes. By the end you will know whether to email me.'
 
+// Only the sections still on the home page. Three chapters are pages of
+// their own now, and a rail that points at anchors which no longer exist
+// scrolls nowhere.
 export const chapters = [
   { id: 'failures', n: '01', name: 'What breaks' },
-  { id: 'rails', n: '02', name: 'What I check' },
-  { id: 'depth', n: '03', name: 'Coverage & conditions' },
-  { id: 'skills', n: '04', name: 'How I keep up' },
-  { id: 'work', n: '05', name: 'Where I did it' },
-  { id: 'experience', n: '06', name: 'The route' },
-  { id: 'proof', n: '07', name: 'Why it matters' },
-  { id: 'contact', n: '08', name: 'Talk to me' },
+  { id: 'work', n: '02', name: 'Where I did it' },
+  { id: 'experience', n: '03', name: 'The route' },
+  { id: 'chapters', n: '04', name: 'Go deeper' },
+  { id: 'faq', n: '05', name: 'Straight answers' },
+  { id: 'contact', n: '06', name: 'Talk to me' },
 ]
 
 export const transitions = {
@@ -816,12 +817,13 @@ export const marqueeB = [
   'Open to work',
 ]
 
+// `href` starting with / is a page; starting with # is a section of home.
 export const nav = [
-  { label: 'What I do', href: '#skills' },
+  { label: 'What I check', href: '/what-i-check' },
+  { label: 'How I work', href: '/how-i-work' },
   { label: 'Work', href: '#work' },
-  { label: 'Rails', href: '#rails' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Proof', href: '#proof' },
+  { label: 'The route', href: '#experience' },
+  { label: 'Proof', href: '/proof' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -1002,4 +1004,31 @@ export const aegisLimits = [
   'It is internal tooling for one team, not a commercial product. There is no pricing page and no support line.',
   'It assumes a web or Android application it can drive directly. It is not a unit-test runner.',
   'A sandbox-verified fix proves the change compiles and runs. It does not prove the bug is gone, which is why a human still approves it.',
+]
+
+/**
+ * The three chapters that moved off the home page, and the way back to them.
+ *
+ * Kept here rather than in the component so the sitemap generator and the
+ * page metadata can read the same titles and lines the page shows.
+ */
+export const chapterLinks = [
+  {
+    n: '02',
+    href: '/what-i-check',
+    title: 'What I check',
+    line: 'Seven payment rails with their own state machines, five assertions each, and the coverage grid with the blanks left in.',
+  },
+  {
+    n: '04',
+    href: '/how-i-work',
+    title: 'How I keep up',
+    line: 'Six things done properly, each opening to the tools behind it and one line of evidence.',
+  },
+  {
+    n: '07',
+    href: '/proof',
+    title: 'Break this page',
+    line: 'Six real defects injected into a real page, caught by a real suite. Flip the switch and watch it go red.',
+  },
 ]

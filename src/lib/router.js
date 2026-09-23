@@ -14,12 +14,25 @@ import { useEffect, useState } from 'react'
  */
 
 /** Every route the site serves, in the order the sitemap lists them. */
-export const ROUTES = ['/', '/work/speed', '/work/aegis', '/work/kyb', '/aegis-demo']
+export const ROUTES = [
+  '/',
+  '/what-i-check',
+  '/how-i-work',
+  '/proof',
+  '/work/speed',
+  '/work/aegis',
+  '/work/kyb',
+  '/aegis-demo',
+]
+
+/** Chapter pages split out of the home page, by first path segment. */
+const CHAPTERS = { 'what-i-check': 'check', 'how-i-work': 'work-how', proof: 'proof' }
 
 export function parseRoute(pathname) {
   const parts = (pathname || '/').split('/').filter(Boolean)
   if (parts[0] === 'work' && parts[1]) return { name: 'work', id: parts[1] }
   if (parts[0] === 'aegis-demo') return { name: 'demo' }
+  if (CHAPTERS[parts[0]]) return { name: CHAPTERS[parts[0]] }
   return { name: 'home' }
 }
 

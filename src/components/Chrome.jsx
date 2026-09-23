@@ -136,8 +136,19 @@ export function Nav({ onResume }) {
    *
    * Off the home page the same links have to be real paths.
    */
-  const hrefFor = (h) => (onHome ? h : `/${h}`)
+  // Two kinds of nav target now: a page (/proof) and a section of the home
+  // page (#work). A page link is the same everywhere. A section link only
+  // works as a bare fragment while you are on the home page — anywhere else
+  // the browser appends it to the current path and goes nowhere.
+  const isPage = (h) => h.startsWith('/')
+  const hrefFor = (h) => (isPage(h) || onHome ? h : `/${h}`)
+
   const goTo = (e, h) => {
+    if (isPage(h)) {
+      e.preventDefault()
+      navigate(h)
+      return
+    }
     if (onHome) return
     e.preventDefault()
     navigate('/')
