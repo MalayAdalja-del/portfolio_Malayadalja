@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useMotionValue } from 'framer-motion'
 import { failureWall } from '../content'
 import { Counter, Marker, MaskedWords, useStatic } from '../lib/motion'
 
@@ -13,22 +13,51 @@ import { Counter, Marker, MaskedWords, useStatic } from '../lib/motion'
  * blend into the page, and it reflows instead of overflowing.
  */
 
-const FIRST = 0.08
-const STEP = 0.11
+const FIRST = 0.06
+const STEP = (1 - FIRST) / failureWall.cases.length
 
 export default function FailureWall() {
   const ref = useRef(null)
   const reduce = useStatic()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const [index, setIndex] = useState(0)
+  const scrollYProgress = useMotionValue(0)
 
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    const n = Math.min(
-      failureWall.cases.length - 1,
-      Math.max(0, Math.floor((v - FIRST) / STEP) + 1),
-    )
-    setIndex((prev) => (prev === n ? prev : n))
-  })
+  /**
+   * Progress is measured here rather than taken from framer's useScroll.
+   *
+   * useScroll measures the target once, and the first render of this
+   * component is the static one — an auto-height list, not the 320vh
+   * sticky section. It cached that height and never looked again, so
+   * progress topped out around 0.19 and the counter stuck on 02/08: six
+   * of the eight failure classes were unreachable however far you
+   * scrolled. Reading the rect on every scroll cannot go stale.
+   *
+   * STEP is derived from the number of cases too. It was a hard-coded
+   * 0.11, which silently stops covering the list the moment a ninth case
+   * is added.
+   */
+  useEffect(() => {
+    if (reduce) return undefined
+    const el = ref.current
+    if (!el) return undefined
+
+    const measure = () => {
+      const r = el.getBoundingClientRect()
+      const travel = r.height - window.innerHeight
+      const p = travel <= 0 ? 0 : Math.min(1, Math.max(0, -r.top / travel))
+      scrollYProgress.set(p)
+      const n = Math.min(failureWall.cases.length - 1, Math.max(0, Math.floor((p - FIRST) / STEP)))
+      setIndex((prev) => (prev === n ? prev : n))
+    }
+
+    measure()
+    window.addEventListener('scroll', measure, { passive: true })
+    window.addEventListener('resize', measure)
+    return () => {
+      window.removeEventListener('scroll', measure)
+      window.removeEventListener('resize', measure)
+    }
+  }, [reduce, scrollYProgress])
 
   if (reduce) return <Static />
 

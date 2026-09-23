@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { profile } from '../content'
-import { goHome } from '../lib/router'
+import { navigate } from '../lib/router'
 import { useStatic } from '../lib/motion'
 import AegisDemo from '../components/AegisDemo'
 import DemoCases from '../components/DemoCases'
@@ -323,18 +323,31 @@ export default function AegisDemoPage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/75">
             Demo · every value on this page is invented
           </p>
-          <a
-            href="/work/aegis"
-            onClick={(e) => {
-              e.preventDefault()
-              goHome('')
-              window.history.pushState(null, '', '/work/aegis')
-              window.dispatchEvent(new Event('routechange'))
-            }}
-            className="font-mono text-[10px] uppercase tracking-[0.1em] text-navy-500 underline-offset-4 hover:underline"
-          >
-            ← back to the write-up
-          </a>
+          {/* Two ways out, not one. This page hides the site header, so
+              without a home link a visitor who landed here from a search
+              result had no route into the rest of the site at all. */}
+          <span className="flex items-center gap-5">
+            <a
+              href="/work/aegis"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/work/aegis')
+              }}
+              className="font-mono text-[10px] uppercase tracking-[0.1em] text-navy-500 underline-offset-4 hover:underline"
+            >
+              ← back to the write-up
+            </a>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/')
+              }}
+              className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink/70 underline-offset-4 hover:text-ink hover:underline"
+            >
+              malay.adalja
+            </a>
+          </span>
         </div>
       </div>
 

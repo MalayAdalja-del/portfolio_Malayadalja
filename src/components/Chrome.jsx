@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { nav, profile } from '../content'
+import { navigate, useRoute } from '../lib/router'
 import { useStatic } from '../lib/motion'
 
 /* ── preloader ────────────────────────────────────────────────────────── */
@@ -123,6 +124,31 @@ export function ScrollProgress() {
 }
 
 export function Nav({ onResume }) {
+  const route = useRoute()
+  const onHome = route.name === 'home'
+
+  /**
+   * Every link in this bar was a bare fragment — `#top`, `#work`, `#proof`.
+   * On the home page that is right. On a case study it is useless: the
+   * browser appends the fragment to the current path and stays there, so
+   * clicking the logo on /work/aegis went to /work/aegis#top and the
+   * visitor was stuck on the subpage with no way back to the site.
+   *
+   * Off the home page the same links have to be real paths.
+   */
+  const hrefFor = (h) => (onHome ? h : `/${h}`)
+  const goTo = (e, h) => {
+    if (onHome) return
+    e.preventDefault()
+    navigate('/')
+    if (h && h !== '#top') {
+      requestAnimationFrame(() => {
+        const target = document.querySelector(h)
+        if (target) target.scrollIntoView({ block: 'start' })
+      })
+    }
+  }
+
   const [open, setOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -169,7 +195,11 @@ export function Nav({ onResume }) {
           open ? 'text-paper' : 'text-white mix-blend-difference'
         }`}
       >
-        <a href="#top" className="font-mono text-sm font-medium tracking-tight">
+        <a
+          href={hrefFor('#top')}
+          onClick={(e) => goTo(e, '#top')}
+          className="font-mono text-sm font-medium tracking-tight"
+        >
           malay<span className="opacity-60">.adalja</span>
         </a>
 
@@ -177,7 +207,8 @@ export function Nav({ onResume }) {
           {nav.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={hrefFor(item.href)}
+              onClick={(e) => goTo(e, item.href)}
               className="group relative font-mono text-[11px] uppercase tracking-[0.12em]"
             >
               {item.label}
@@ -248,8 +279,11 @@ export function Nav({ onResume }) {
               {nav.map((item) => (
                 <a
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
+                  href={hrefFor(item.href)}
+                  onClick={(e) => {
+                    setOpen(false)
+                    goTo(e, item.href)
+                  }}
                   className="border-t border-white/20 py-4 font-black uppercase tracking-tightest [font-size:1.75rem]"
                 >
                   {item.label}
