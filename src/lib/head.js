@@ -41,6 +41,22 @@ const CHAPTER_META = {
     keywords:
       'manual testing, exploratory testing, test automation, Playwright, Pytest, Appium, API testing, Postman, Newman, SQL database verification, JMeter performance testing, AI tooling for QA, SDET skills',
   },
+  route: {
+    path: '/route',
+    title: 'The route — recruiter to QA engineer to building the tooling | Malay Adalja',
+    description:
+      'Seven years in one road: technical recruiting, four years of QA at Auxano, crypto payments at Openxcell, and building Aegis-QA. What each stop taught.',
+    keywords:
+      'QA engineer career, SDET career path, QA experience, test automation career, crypto payments QA, Openxcell, Auxano Global Services, Ahmedabad QA engineer',
+  },
+  faq: {
+    path: '/faq',
+    title: 'Straight answers — the questions people ask first | Malay Adalja',
+    description:
+      'Who he is, what kind of QA engineer, what he can test that most cannot, which tools he uses, what Aegis-QA is, and whether he is available for work.',
+    keywords:
+      'hire QA engineer, QA automation engineer questions, SDET availability, crypto payments testing experience, Aegis-QA, remote QA engineer India',
+  },
   proof: {
     path: '/proof',
     title: 'Break this page — six real defects, caught live | Malay Adalja',
@@ -89,7 +105,30 @@ export function metaFor(route) {
  * breadcrumb, which only exist once you are on that page.
  */
 export function ldFor(meta) {
+  // The FAQ has its own page now, so the FAQPage graph moves with it.
+  // Structured data has to sit on the page that shows the text.
+  if (meta.path === '/faq') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'FAQPage',
+          mainEntity: faq.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        },
+      ],
+    }
+  }
   if (!meta.study) {
+    // WebSite and ProfilePage describe the site and the person, so they
+    // belong on the home page and nowhere else. They were falling through
+    // to every chapter page, which then claimed url '/' while being served
+    // at '/route' — two pages asserting they are the same document.
+    if (meta.path !== '/') return null
+
     // The home page. Person lives in index.html because it never changes;
     // these two are derived from content.js so they cannot drift from the
     // page. FAQPage is the one that matters for an answer engine: it is the
@@ -111,14 +150,6 @@ export function ldFor(meta) {
           url: `${SITE}/`,
           dateModified: new Date().toISOString().slice(0, 10),
           mainEntity: { '@type': 'Person', name: profile.name },
-        },
-        {
-          '@type': 'FAQPage',
-          mainEntity: faq.map((f) => ({
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a },
-          })),
         },
       ],
     }

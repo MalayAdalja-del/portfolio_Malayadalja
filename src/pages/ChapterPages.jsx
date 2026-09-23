@@ -4,6 +4,8 @@ import Depth from '../components/Depth'
 import WhatIDo from '../components/WhatIDo'
 import QaProof from '../components/QaProof'
 import { Toolkit } from '../components/Sections'
+import Roadmap from '../components/Roadmap'
+import Faq from '../components/Faq'
 
 /**
  * The three chapters that used to live on the home page.
@@ -65,6 +67,40 @@ export function ProofPage() {
       }}
     >
       <QaProof />
+    </SubPage>
+  )
+}
+
+export function RoutePage() {
+  return (
+    <SubPage
+      eyebrow="Ch.06 · The route"
+      title="Seven years, one road."
+      intro="Recruiter, then QA engineer, then the person building the tooling. Each stop is here with what the work actually was, the QA it involved and the tools it ran on."
+      next={{
+        href: '/work/speed',
+        title: 'Where it ran',
+        line: 'The crypto payment platform this route ends at, opened in full.',
+      }}
+    >
+      <Roadmap />
+    </SubPage>
+  )
+}
+
+export function FaqPage() {
+  return (
+    <SubPage
+      eyebrow="Q&A · Straight answers"
+      title="What people ask first."
+      intro="Short, checkable answers — the same ones I would give in a first message, and the same ones an answer engine can quote."
+      next={{
+        href: '/proof',
+        title: 'Break this page',
+        line: 'Six real defects, injected live, caught by a real suite.',
+      }}
+    >
+      <Faq />
     </SubPage>
   )
 }

@@ -110,10 +110,8 @@ export const storyPromise =
 export const chapters = [
   { id: 'failures', n: '01', name: 'What breaks' },
   { id: 'work', n: '02', name: 'Where I did it' },
-  { id: 'experience', n: '03', name: 'The route' },
-  { id: 'chapters', n: '04', name: 'Go deeper' },
-  { id: 'faq', n: '05', name: 'Straight answers' },
-  { id: 'contact', n: '06', name: 'Talk to me' },
+  { id: 'chapters', n: '03', name: 'Go deeper' },
+  { id: 'contact', n: '04', name: 'Talk to me' },
 ]
 
 export const transitions = {
@@ -822,7 +820,7 @@ export const nav = [
   { label: 'What I check', href: '/what-i-check' },
   { label: 'How I work', href: '/how-i-work' },
   { label: 'Work', href: '#work' },
-  { label: 'The route', href: '#experience' },
+  { label: 'The route', href: '/route' },
   { label: 'Proof', href: '/proof' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -1030,5 +1028,17 @@ export const chapterLinks = [
     href: '/proof',
     title: 'Break this page',
     line: 'Six real defects injected into a real page, caught by a real suite. Flip the switch and watch it go red.',
+  },
+  {
+    n: '06',
+    href: '/route',
+    title: 'The route here',
+    line: 'Recruiter to QA engineer to building the tooling. Seven years, one road, and what each stop taught.',
+  },
+  {
+    n: 'Q&A',
+    href: '/faq',
+    title: 'Straight answers',
+    line: 'The questions people ask first, answered in the words I would use in a first message.',
   },
 ]

@@ -19,6 +19,8 @@ export const ROUTES = [
   '/what-i-check',
   '/how-i-work',
   '/proof',
+  '/route',
+  '/faq',
   '/work/speed',
   '/work/aegis',
   '/work/kyb',
@@ -26,7 +28,13 @@ export const ROUTES = [
 ]
 
 /** Chapter pages split out of the home page, by first path segment. */
-const CHAPTERS = { 'what-i-check': 'check', 'how-i-work': 'work-how', proof: 'proof' }
+const CHAPTERS = {
+  'what-i-check': 'check',
+  'how-i-work': 'work-how',
+  proof: 'proof',
+  route: 'route',
+  faq: 'faq',
+}
 
 export function parseRoute(pathname) {
   const parts = (pathname || '/').split('/').filter(Boolean)

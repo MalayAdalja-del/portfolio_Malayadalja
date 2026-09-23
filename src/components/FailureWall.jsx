@@ -64,7 +64,7 @@ export default function FailureWall() {
   const item = failureWall.cases[index]
 
   return (
-    <section id="failures" ref={ref} className="invert-section relative h-[320vh]">
+    <section id="failures" ref={ref} className="invert-section relative h-[200vh]">
       <div className="sticky top-0 flex h-screen min-h-[620px] items-center overflow-hidden pt-20 md:pt-0">
         <div
           aria-hidden
