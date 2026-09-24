@@ -5,8 +5,6 @@ import { useStatic } from '../lib/motion'
 
 const LINES = ['I find what ', 'breaks payments ']
 
-const LINES = ['I find what', 'breaks payments']
-
 export default function Hero({ onResume }) {
   const ref = useRef(null)
   const reduce = useStatic()
