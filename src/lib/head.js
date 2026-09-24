@@ -231,12 +231,13 @@ export function useHead(route) {
     setMeta('meta[name="description"]', 'content', meta.description)
     setMeta('link[rel="canonical"]', 'href', url)
     setMeta('meta[property="og:title"]', 'content', meta.title)
-    setMeta('meta[property="og:description"]', 'content', meta.description)
+        setMeta('meta[property="og:description"]', 'content', meta.description)
     setMeta('meta[property="og:url"]', 'content', url)
     setMeta('meta[name="twitter:title"]', 'content', meta.title)
     setMeta('meta[name="twitter:description"]', 'content', meta.description)
     setMeta('meta[property="og:type"]', 'content', meta.ogType || 'profile')
     if (meta.keywords) setMeta('meta[name="keywords"]', 'content', meta.keywords)
+
 
     const ld = ldFor(meta)
     const id = 'route-ld'
