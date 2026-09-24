@@ -21,7 +21,7 @@ const HOME = {
   description:
     'Malay Adalja, Software Engineer (QA) with 7+ years testing crypto payments, fintech and e-commerce. Builder of Aegis-QA, an AI-driven test automation platform.',
   path: '/',
-  ogType:'profile',
+ ogType: 'profile',
 }
 
 /** The title, description and canonical path for a parsed route. */
@@ -33,7 +33,7 @@ const CHAPTER_META = {
       'Seven payment rails with their own state machines and five assertions each: BTC, Lightning, ETH, USDT, XAUT, payouts and refunds, plus the coverage grid.',
     keywords:
       'payment testing, crypto payment QA, Lightning Network testing, ERC-20 smart contract testing, payout testing, ledger reconciliation, test coverage matrix, API and database assertions, fintech QA',
-    ogType:'article',
+ogType: 'article',
   },
   'work-how': {
     path: '/how-i-work',
@@ -79,7 +79,7 @@ export function metaFor(route) {
         'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage and coverage. Invented data throughout.',
       path: '/aegis-demo',
       demo: true,
-      ogType:'website',
+ogType: 'website',
       keywords:
         'QA automation platform, test automation tool, AI QA tooling, self-healing test locators, Playwright test generation, record session to Playwright, Gherkin test compiler, UI API DB test orchestration, database reconciliation testing, automated failure triage, payments QA platform, SDET tooling, test case management, test coverage matrix',
     }
