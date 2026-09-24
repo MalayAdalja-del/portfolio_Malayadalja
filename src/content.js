@@ -3,6 +3,7 @@
 // Rule for this file: nothing goes in that isn't true. No invented metrics.
 // A recruiter should be able to answer "what does he do, how long, with what,
 // and can I hire him" inside ten seconds of landing.
+ export const heroKicker = 'Malay Adalja, QA Automation Engineer (SDET)'
 
 export const profile = {
   name: 'Malay Adalja',
@@ -381,11 +382,20 @@ export const failureWall = {
 /* ── case studies ─────────────────────────────────────────────────────── */
 // Outcomes are deliberately qualitative. Add hard numbers when you have them
 // that you can stand behind — see the README checklist.
+//
+// metaDescription / ogType are new fields, added for SEO: each page's own
+// <meta description> and <meta property="og:type"> should read from these
+// instead of falling back to the long `summary` text (which is over 155
+// chars and gets truncated mid-word by whatever renders the meta tag) or
+// the homepage's og:type="profile".
 
 export const caseStudies = [
   {
     id: 'speed',
     title: 'Speed — crypto payment platform',
+    metaDescription:
+      'Merchant checkout, refunds and crypto payouts across BTC, ETH, USDT, XAUT and Lightning, plus ERC-20 contract testing and DB reconciliation.',
+    ogType: 'article',
     role: 'Software Engineer — QA',
     period: '2023 — present',
     // No company link here. The work is described; the employer's site is
@@ -417,6 +427,9 @@ export const caseStudies = [
   {
     id: 'aegis',
     title: 'Aegis-QA — the tooling I built',
+    metaDescription:
+      'Aegis-QA: the internal platform Malay Adalja built to run tests, API checks, Playwright scripts, SQL queries and test-case management in one place.',
+    ogType: 'article',
     role: 'Creator & maintainer',
     period: 'Nov 2025 — present',
     link: '',
@@ -442,6 +455,9 @@ export const caseStudies = [
   {
     id: 'kyb',
     title: 'KYB / KYC onboarding',
+    metaDescription:
+      'Testing merchant verification end to end: LLC and Corporation flows, document upload, beneficiary checks and liveness via a third-party provider.',
+    ogType: 'article',
     role: 'QA Engineer',
     period: '2023 — present',
     link: '',
