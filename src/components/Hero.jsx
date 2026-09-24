@@ -1,7 +1,9 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { profile, quickFacts, storyPromise } from '../content'
+import { profile, quickFacts, storyPromise, heroKicker } from '../content'
 import { useStatic } from '../lib/motion'
+
+const LINES = ['I find what ', 'breaks payments ']
 
 const LINES = ['I find what', 'breaks payments']
 
@@ -41,7 +43,10 @@ export default function Hero({ onResume }) {
       </div>
 
       <motion.div style={reduce ? undefined : { y, opacity }} className="shell relative py-[3vh]">
-        <h1 className="mega">
+                <h1 className="mega">
+          <span className="block text-sm font-medium tracking-normal text-ink/60 mb-4">
+            {heroKicker}
+          </span>
           {LINES.map((line, i) => (
             <span key={line} className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
               <motion.span
@@ -65,6 +70,7 @@ export default function Hero({ onResume }) {
             </motion.span>
           </span>
         </h1>
+
 
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 20 }}
