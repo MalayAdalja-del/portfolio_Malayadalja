@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile, quickFacts, storyPromise, heroKicker } from '../content'
 import { useStatic } from '../lib/motion'
 
-const LINES = ['I find what ', 'breaks payments ']
+const LINES = ['I find what', 'breaks payments']
 
 export default function Hero({ onResume }) {
   const ref = useRef(null)
@@ -30,9 +30,10 @@ export default function Hero({ onResume }) {
           transition={{ duration: 0.7, delay: 0.95 }}
           className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-b border-ink/10 pb-5"
         >
-          <p className="eyebrow text-ink/60">
-            {profile.name} · {profile.headline}
-          </p>
+          {/* The name and role now lead the h1, so repeating them here put
+              the same fact on the page twice, two lines apart, in two
+              different styles. This slot keeps the availability only. */}
+          <p className="eyebrow text-ink/60">{profile.location}</p>
           <p className="eyebrow flex items-center gap-2.5 text-navy-500">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-navy-500" />
             {profile.availability}
@@ -41,7 +42,7 @@ export default function Hero({ onResume }) {
       </div>
 
       <motion.div style={reduce ? undefined : { y, opacity }} className="shell relative py-[3vh]">
-                <h1 className="mega">
+        <h1 className="mega">
           <span className="block text-sm font-medium tracking-normal text-ink/60 mb-4">
             {heroKicker}
           </span>
@@ -68,7 +69,6 @@ export default function Hero({ onResume }) {
             </motion.span>
           </span>
         </h1>
-
 
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 20 }}

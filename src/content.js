@@ -3,7 +3,7 @@
 // Rule for this file: nothing goes in that isn't true. No invented metrics.
 // A recruiter should be able to answer "what does he do, how long, with what,
 // and can I hire him" inside ten seconds of landing.
- export const heroKicker = 'Malay Adalja, QA Automation Engineer (SDET)'
+export const heroKicker = 'Malay Adalja, QA Automation Engineer (SDET)'
 
 export const profile = {
   name: 'Malay Adalja',

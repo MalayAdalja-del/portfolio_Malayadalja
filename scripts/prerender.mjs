@@ -52,8 +52,6 @@ for (const path of ROUTES) {
   page = swap(page, /(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
   page = swap(page, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
   page = swap(page, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
-  page = swap(page, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
-  page = swap(page, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(meta.title)}$2`)
   page = swap(
     page,
     /(<meta\s+property="og:description"[\s\S]*?content=")[\s\S]*?(")/,

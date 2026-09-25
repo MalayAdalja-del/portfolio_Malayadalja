@@ -21,7 +21,7 @@ const HOME = {
   description:
     'Malay Adalja, Software Engineer (QA) with 7+ years testing crypto payments, fintech and e-commerce. Builder of Aegis-QA, an AI-driven test automation platform.',
   path: '/',
- ogType: 'profile',
+  ogType: 'profile',
 }
 
 /** The title, description and canonical path for a parsed route. */
@@ -31,15 +31,16 @@ const CHAPTER_META = {
     title: 'What I check — payment rails, assertions and coverage | Malay Adalja',
     description:
       'Seven payment rails with their own state machines and five assertions each: BTC, Lightning, ETH, USDT, XAUT, payouts and refunds, plus the coverage grid.',
+    ogType: 'article',
     keywords:
       'payment testing, crypto payment QA, Lightning Network testing, ERC-20 smart contract testing, payout testing, ledger reconciliation, test coverage matrix, API and database assertions, fintech QA',
-ogType: 'article',
   },
   'work-how': {
     path: '/how-i-work',
     title: 'How I work — manual, automation, API, SQL and AI tooling | Malay Adalja',
     description:
       'Manual and exploratory testing, automation, API and contract testing, database verification, performance and AI tooling, each with the evidence behind it.',
+    ogType: 'article',
     keywords:
       'manual testing, exploratory testing, test automation, Playwright, Pytest, Appium, API testing, Postman, Newman, SQL database verification, JMeter performance testing, AI tooling for QA, SDET skills',
   },
@@ -48,6 +49,7 @@ ogType: 'article',
     title: 'The route — recruiter to QA engineer to building the tooling | Malay Adalja',
     description:
       'Seven years in one road: technical recruiting, four years of QA at Auxano, crypto payments at Openxcell, and building Aegis-QA. What each stop taught.',
+    ogType: 'article',
     keywords:
       'QA engineer career, SDET career path, QA experience, test automation career, crypto payments QA, Openxcell, Auxano Global Services, Ahmedabad QA engineer',
   },
@@ -56,6 +58,7 @@ ogType: 'article',
     title: 'Straight answers — the questions people ask first | Malay Adalja',
     description:
       'Who he is, what kind of QA engineer, what he can test that most cannot, which tools he uses, what Aegis-QA is, and whether he is available for work.',
+    ogType: 'article',
     keywords:
       'hire QA engineer, QA automation engineer questions, SDET availability, crypto payments testing experience, Aegis-QA, remote QA engineer India',
   },
@@ -64,6 +67,7 @@ ogType: 'article',
     title: 'Break this page — six real defects, caught live | Malay Adalja',
     description:
       'Six real accessibility and security defects injected into this page on demand, and the live assertion suite that catches each one in your browser.',
+    ogType: 'article',
     keywords:
       'accessibility testing, WCAG contrast, alt text, accessible name, positive tabindex, rel noopener, heading structure, live test suite, git bisect, defect demonstration',
   },
@@ -79,7 +83,7 @@ export function metaFor(route) {
         'A walkthrough of the Aegis-QA test automation portal: run orchestration, session recording to Playwright, failure triage and coverage. Invented data throughout.',
       path: '/aegis-demo',
       demo: true,
-ogType: 'website',
+      ogType: 'website',
       keywords:
         'QA automation platform, test automation tool, AI QA tooling, self-healing test locators, Playwright test generation, record session to Playwright, Gherkin test compiler, UI API DB test orchestration, database reconciliation testing, automated failure triage, payments QA platform, SDET tooling, test case management, test coverage matrix',
     }
@@ -89,8 +93,10 @@ ogType: 'website',
     if (!study) return HOME
     return {
       title: `${study.title} — ${profile.name}`,
-      // Search results cut around 155 characters, so lead with the substance.
-      description: study.summary.slice(0, 180),
+      // Search results cut around 155 characters. `metaDescription` is a
+      // hand-written one that fits; slicing the summary at 180 truncated it
+      // mid-word and shipped 20 characters nobody ever saw.
+      description: study.metaDescription || study.summary.slice(0, 155),
       path: `/work/${study.id}`,
       study,
       ogType: study.ogType || 'article',
@@ -231,13 +237,12 @@ export function useHead(route) {
     setMeta('meta[name="description"]', 'content', meta.description)
     setMeta('link[rel="canonical"]', 'href', url)
     setMeta('meta[property="og:title"]', 'content', meta.title)
-        setMeta('meta[property="og:description"]', 'content', meta.description)
+    setMeta('meta[property="og:description"]', 'content', meta.description)
     setMeta('meta[property="og:url"]', 'content', url)
     setMeta('meta[name="twitter:title"]', 'content', meta.title)
     setMeta('meta[name="twitter:description"]', 'content', meta.description)
     setMeta('meta[property="og:type"]', 'content', meta.ogType || 'profile')
     if (meta.keywords) setMeta('meta[name="keywords"]', 'content', meta.keywords)
-
 
     const ld = ldFor(meta)
     const id = 'route-ld'
