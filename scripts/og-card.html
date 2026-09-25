@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      The source for public/og.png, rendered at 1200x630 by scripts/gen-og.mjs.
+
+      It is HTML rather than a design file because the card has to agree with
+      the site, and the only way to guarantee that is to build it from the
+      same fonts, the same three colours and the same words. The card it
+      replaces still carried the headline from the first version of this
+      site, an outlined typeface that was removed, and a suite count that was
+      one assertion out of date — three claims the site no longer made, on
+      the one image every share and every AI answer card displays.
+    -->
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-weight: 300 900;
+        src: url('../public/fonts/inter-latin.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 400 700;
+        src: url('../public/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #0a0b0d;
+        color: #fff;
+        font-family: Inter, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow: hidden;
+        position: relative;
+      }
+      .glow {
+        position: absolute;
+        width: 780px;
+        height: 780px;
+        right: -240px;
+        top: -300px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        opacity: 0.34;
+        filter: blur(150px);
+      }
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+      .pad {
+        position: relative;
+        padding: 68px 72px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.62);
+      }
+      h1 {
+        font-weight: 900;
+        font-size: 82px;
+        line-height: 1.06;
+        letter-spacing: -0.028em;
+      }
+      .accent {
+        color: #7a9bf5;
+      }
+      .name {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.021em;
+      }
+      .sub {
+        margin-top: 8px;
+        font-size: 19px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+        padding-top: 22px;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.62);
+      }
+      .pass {
+        color: #7a9bf5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="grid"></div>
+    <div class="pad">
+      <p class="eyebrow">Software engineer — QA · Ahmedabad, India</p>
+
+      <h1>
+        I find what breaks payments<br />
+        <span class="accent">before customers do.</span>
+      </h1>
+
+      <div>
+        <p class="name">Malay Adalja</p>
+        <p class="sub">7 yrs 4 mo · crypto payments, fintech, e-commerce, games</p>
+      </div>
+
+      <div class="foot">
+        <span class="mono">portfolio-malayadalja.vercel.app</span>
+        <span class="mono"><span class="pass">✓ 16 passed</span> · 0 failed</span>
+      </div>
+    </div>
+  </body>
+</html>
