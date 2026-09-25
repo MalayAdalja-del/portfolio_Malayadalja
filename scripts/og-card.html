@@ -3,15 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <!--
-      The source for public/og.png, rendered at 1200x630 by scripts/gen-og.mjs.
+      Template for every social card. scripts/gen-og.py loads this once,
+      calls window.render() per route, and screenshots at 1200x630.
 
-      It is HTML rather than a design file because the card has to agree with
-      the site, and the only way to guarantee that is to build it from the
-      same fonts, the same three colours and the same words. The card it
-      replaces still carried the headline from the first version of this
-      site, an outlined typeface that was removed, and a suite count that was
-      one assertion out of date — three claims the site no longer made, on
-      the one image every share and every AI answer card displays.
+      Built in HTML on purpose. The card has to agree with the site, and the
+      only way to guarantee that is to build it from the same fonts, the
+      same three colours and the same words. The single card this replaces
+      still carried the headline from the first version of this portfolio, a
+      typeface treatment that was removed, and a suite count one assertion
+      out of date — three claims the site no longer made, on the one image
+      every share and every AI answer card displays.
+
+      The panel variant is a miniature of the run screen, for the two pages
+      that are about the product. Every value in it is invented.
     -->
     <style>
       @font-face {
@@ -41,10 +45,10 @@
       }
       .glow {
         position: absolute;
-        width: 780px;
-        height: 780px;
-        right: -240px;
-        top: -300px;
+        width: 760px;
+        height: 760px;
+        right: -230px;
+        top: -290px;
         border-radius: 50%;
         background: #1e3a8a;
         opacity: 0.34;
@@ -60,11 +64,22 @@
       }
       .pad {
         position: relative;
-        padding: 68px 72px;
+        padding: 64px 72px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      }
+      .row {
+        display: flex;
+        gap: 56px;
+        align-items: center;
+        flex: 1;
+        padding: 30px 0;
+      }
+      .col {
+        min-width: 0;
+        flex: 1;
       }
       .eyebrow {
         font-family: 'JetBrains Mono', monospace;
@@ -75,21 +90,24 @@
       }
       h1 {
         font-weight: 900;
-        font-size: 82px;
         line-height: 1.06;
         letter-spacing: -0.028em;
+        font-size: 76px;
+      }
+      body.panel h1 {
+        font-size: 54px;
       }
       .accent {
         color: #7a9bf5;
       }
       .name {
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 800;
         letter-spacing: -0.021em;
       }
       .sub {
-        margin-top: 8px;
-        font-size: 19px;
+        margin-top: 6px;
+        font-size: 18px;
         color: rgba(255, 255, 255, 0.72);
       }
       .foot {
@@ -97,7 +115,7 @@
         justify-content: space-between;
         align-items: flex-end;
         border-top: 1px solid rgba(255, 255, 255, 0.16);
-        padding-top: 22px;
+        padding-top: 20px;
       }
       .mono {
         font-family: 'JetBrains Mono', monospace;
@@ -107,18 +125,126 @@
       .pass {
         color: #7a9bf5;
       }
+
+      /* the miniature run panel */
+      #panel {
+        display: none;
+        width: 430px;
+        flex: none;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      body.panel #panel {
+        display: block;
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.28);
+      }
+      .bar span.mono {
+        margin-left: 8px;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .body {
+        padding: 16px 18px 18px;
+      }
+      .chips {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      .chip {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        border: 1px solid #1e3a8a;
+        background: #1e3a8a;
+        color: #fff;
+      }
+      .chip.off {
+        background: none;
+        border-color: rgba(255, 255, 255, 0.22);
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .test {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+      }
+      .test b {
+        width: 10px;
+        color: #7a9bf5;
+      }
+      .test.bad b {
+        color: #fff;
+      }
+      .test span {
+        flex: 1;
+        color: rgba(255, 255, 255, 0.86);
+      }
+      .test i {
+        font-style: normal;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .tally {
+        margin-top: 12px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.55);
+      }
     </style>
   </head>
   <body>
     <div class="glow"></div>
     <div class="grid"></div>
-    <div class="pad">
-      <p class="eyebrow">Software engineer — QA · Ahmedabad, India</p>
 
-      <h1>
-        I find what breaks payments<br />
-        <span class="accent">before customers do.</span>
-      </h1>
+    <div class="pad">
+      <p class="eyebrow" id="eyebrow"></p>
+
+      <div class="row">
+        <div class="col">
+          <h1><span id="lead"></span><br /><span class="accent" id="accent"></span></h1>
+        </div>
+
+        <div id="panel">
+          <div class="bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="mono">run #1482 · suite</span>
+          </div>
+          <div class="body">
+            <div class="chips">
+              <span class="chip">UI</span>
+              <span class="chip">API</span>
+              <span class="chip">DB</span>
+              <span class="chip off">Security</span>
+            </div>
+            <div class="test"><b>✓</b><span>checkout.guest_card</span><i>4.1s</i></div>
+            <div class="test"><b>✓</b><span>refund.partial_amount</span><i>2.8s</i></div>
+            <div class="test bad"><b>✗</b><span>payout.idempotency_key</span><i>9.4s</i></div>
+            <div class="test"><b>✓</b><span>ledger.reconcile_on_read</span><i>1.2s</i></div>
+            <p class="tally"><span class="pass">42 passed</span> · 3 failed · 1 healed</p>
+          </div>
+        </div>
+      </div>
 
       <div>
         <p class="name">Malay Adalja</p>
@@ -130,5 +256,20 @@
         <span class="mono"><span class="pass">✓ 16 passed</span> · 0 failed</span>
       </div>
     </div>
+
+    <script>
+      window.render = (eyebrow, lead, accent, variant) => {
+        document.getElementById('eyebrow').textContent = eyebrow
+        document.getElementById('lead').textContent = lead
+        document.getElementById('accent').textContent = accent
+        document.body.className = variant === 'panel' ? 'panel' : ''
+      }
+      window.render(
+        'Software engineer — QA · Ahmedabad, India',
+        'I find what breaks payments',
+        'before customers do.',
+        'type',
+      )
+    </script>
   </body>
 </html>

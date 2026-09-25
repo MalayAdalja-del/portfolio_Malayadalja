@@ -68,6 +68,11 @@ for (const path of ROUTES) {
     `$1${meta.ogType || 'profile'}$2`,
   )
 
+  if (meta.ogImage) {
+    page = swap(page, /(<meta property="og:image" content=")[^"]*(")/, `$1${meta.ogImage}$2`)
+    page = swap(page, /(<meta name="twitter:image" content=")[^"]*(")/, `$1${meta.ogImage}$2`)
+  }
+
   if (meta.keywords) {
     page = swap(
       page,

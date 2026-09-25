@@ -1,0 +1,109 @@
+/*
+ * The shared stage for every piece of artwork.
+ *
+ * One light source behind and above, a grid that fades at the edges, a
+ * vignette, and a 3D stage. Keeping these identical across scenes is what
+ * makes a set of images read as one system rather than five separate
+ * pictures — it is the same trick as using one type scale across a site.
+ *
+ * Colours are the site's three and nothing else: #07080a ground, #1e3a8a
+ * key light, #7a9bf5 rim and accent.
+ */
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300 900;
+  src: url('../../public/fonts/inter-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-weight: 400 700;
+  src: url('../../public/fonts/jetbrains-mono-latin.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 2400px;
+  height: 1350px;
+  background: #07080a;
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  position: relative;
+}
+
+.key {
+  position: absolute;
+  width: 1850px;
+  height: 1850px;
+  left: 50%;
+  top: -700px;
+  transform: translateX(-46%);
+  border-radius: 50%;
+  background: radial-gradient(circle, #1e3a8a 0%, rgba(30, 58, 138, 0.42) 38%, transparent 68%);
+  filter: blur(70px);
+}
+
+.rim {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  right: -240px;
+  bottom: -420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122, 155, 245, 0.34) 0%, transparent 66%);
+  filter: blur(80px);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, #000 40%, transparent 100%);
+}
+
+.floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 320px;
+  background: linear-gradient(to top, rgba(30, 58, 138, 0.16), transparent);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 45%,
+    transparent 40%,
+    rgba(7, 8, 10, 0.92) 100%
+  );
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 2600px;
+  perspective-origin: 54% 40%;
+}
+
+.scene {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform-style: preserve-3d;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(255, 255, 255, 0.58);
+}

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      What Aegis does, as one readable line.
+
+      The first version of this was three tilted windows floating in space.
+      It looked like a product shot and explained nothing: you could not tell
+      from it what the tool is for. A picture that has to be captioned to be
+      understood has failed.
+
+      So it is a pipeline now, left to right, with the real artifact under
+      each stage — the captured action, the line it compiled to, the run it
+      produced, the fix it proposed, the gate it stops at. Read the row and
+      you know what the thing does.
+
+      Every value is invented.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(1.14) rotateX(8deg) rotateY(-7deg);
+      }
+
+      .head {
+        margin-bottom: 54px;
+        transform: translateZ(70px);
+      }
+      .head h2 {
+        font-size: 46px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #fff;
+      }
+      .head h2 span {
+        color: #7a9bf5;
+      }
+      .head p {
+        margin-top: 14px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .flow {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+      }
+      .stage-col {
+        width: 372px;
+        flex: none;
+        position: relative;
+        padding-right: 28px;
+      }
+
+      /* the spine */
+      .cap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 26px;
+      }
+      .num {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        border: 2px solid #7a9bf5;
+        box-shadow: 0 0 40px -4px rgba(122, 155, 245, 0.8);
+        color: #fff;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .stage-col.gate .num {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: none;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .cap h3 {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.021em;
+        color: #fff;
+      }
+      .arrow {
+        position: absolute;
+        left: 62px;
+        top: 22px;
+        right: -4px;
+        height: 2px;
+        background: linear-gradient(to right, rgba(122, 155, 245, 0.75), rgba(122, 155, 245, 0.2));
+      }
+      .stage-col:last-child .arrow {
+        display: none;
+      }
+
+      .what {
+        font-size: 18px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.64);
+        margin-bottom: 20px;
+        min-height: 82px;
+      }
+
+      /* the artifact each stage actually produces */
+      .art {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 7px;
+        background: linear-gradient(160deg, rgba(20, 24, 34, 0.95), rgba(10, 11, 13, 0.98));
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.13) inset,
+          0 40px 70px -34px rgba(0, 0, 0, 0.9);
+        padding: 16px 18px;
+        min-height: 210px;
+      }
+      .tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #7a9bf5;
+        margin-bottom: 12px;
+      }
+      .art p,
+      .art div {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .dim {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .ok {
+        color: #7a9bf5;
+      }
+      .bad {
+        color: #fff;
+        font-weight: 700;
+      }
+      .wrap {
+        white-space: normal;
+        font-family: Inter, sans-serif !important;
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="head">
+          <h2>A real session becomes a test that <span>fixes its own selectors</span>.</h2>
+          <p>Aegis-QA · five stages, and the last one is a person.</p>
+        </div>
+
+        <div class="flow">
+          <div class="stage-col">
+            <span class="arrow"></span>
+            <div class="cap"><span class="num">1</span><h3>Record</h3></div>
+            <p class="what">Click through the real app. Intent is captured, not raw selectors.</p>
+            <div class="art">
+              <p class="tag">captured</p>
+              <p><span class="dim">click</span> button "Add to basket"</p>
+              <p><span class="dim">fill</span> field "Email"</p>
+              <p><span class="dim">click</span> button "Pay now"</p>
+              <p><span class="dim">wait</span> text "Order confirmed"</p>
+            </div>
+          </div>
+
+          <div class="stage-col">
+            <span class="arrow"></span>
+            <div class="cap"><span class="num">2</span><h3>Compile</h3></div>
+            <p class="what">The recording becomes readable Gherkin and a runnable spec.</p>
+            <div class="art">
+              <p class="tag">generated</p>
+              <p><span class="ok">page</span>.get_by_role(</p>
+              <p>&nbsp;&nbsp;"button", name="Pay now"</p>
+              <p>).click()</p>
+              <p><span class="ok">expect</span>(order).to_be(1)</p>
+            </div>
+          </div>
+
+          <div class="stage-col">
+            <span class="arrow"></span>
+            <div class="cap"><span class="num">3</span><h3>Run</h3></div>
+            <p class="what">UI, API and database layers execute together, in one run.</p>
+            <div class="art">
+              <p class="tag">run #1482</p>
+              <p><span class="ok">✓</span> checkout.guest_card</p>
+              <p><span class="ok">✓</span> refund.partial</p>
+              <p><span class="bad">✗</span> payout.idempotency</p>
+              <p><span class="ok">42 passed</span> <span class="dim">· 3 failed</span></p>
+            </div>
+          </div>
+
+          <div class="stage-col">
+            <span class="arrow"></span>
+            <div class="cap"><span class="num">4</span><h3>Diagnose</h3></div>
+            <p class="what">The failure is classified and a fix is proposed, not applied.</p>
+            <div class="art">
+              <p class="tag">cause found</p>
+              <p class="wrap dim">The Continue button moved into a dialog in build 218.</p>
+              <p class="wrap" style="margin-top: 10px">
+                <span class="ok">Proposed:</span> scope the locator to the dialog.
+              </p>
+            </div>
+          </div>
+
+          <div class="stage-col gate">
+            <div class="cap"><span class="num">!</span><h3>Approve</h3></div>
+            <p class="what">A person decides. Nothing is ever applied on its own.</p>
+            <div class="art">
+              <p class="tag">waiting</p>
+              <p class="wrap dim">
+                Sandbox-verified means the fix runs. It does not mean the bug is gone.
+              </p>
+              <p class="wrap" style="margin-top: 10px">
+                <span class="ok">3 fixes</span> <span class="dim">awaiting review</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

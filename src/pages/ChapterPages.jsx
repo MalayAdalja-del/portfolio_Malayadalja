@@ -1,4 +1,5 @@
 import SubPage from '../components/SubPage'
+import Art from '../components/Art'
 import PaymentRails from '../components/PaymentRails'
 import Depth from '../components/Depth'
 import WhatIDo from '../components/WhatIDo'
@@ -30,6 +31,13 @@ export function WhatICheckPage() {
         line: 'That does not scale by hand. The second half of this job is tooling, and knowing which tool to reach for.',
       }}
     >
+      <div className="shell">
+        <Art
+          src="/art/rails-hero.webp"
+          alt="Five states of a Bitcoin payment — invoice created, broadcast, one confirmation, three confirmations, settled — each with the assertion that has to hold there."
+          caption="One rail, five states, an assertion at each. Six more rails behind it, each settling differently."
+        />
+      </div>
       <PaymentRails />
       <Depth />
     </SubPage>

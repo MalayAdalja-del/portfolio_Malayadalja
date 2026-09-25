@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      Payment rails as a state machine, in perspective.
+
+      The picture is the argument: each asset settles through its own
+      sequence of states, and every state carries the assertion that has to
+      hold there. Drawn from the same rail data the page shows.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(1.32) rotateX(12deg) rotateY(-16deg);
+      }
+
+      .rails {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 62px;
+        transform: translateZ(90px);
+      }
+      .rail {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 17px;
+        letter-spacing: 0.1em;
+        padding: 12px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.55);
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .rail.on {
+        border-color: #7a9bf5;
+        background: #1e3a8a;
+        color: #fff;
+        box-shadow: 0 0 46px -6px rgba(30, 58, 138, 0.95);
+      }
+
+      .track {
+        display: flex;
+        align-items: flex-start;
+        white-space: nowrap;
+      }
+      .node {
+        width: 360px;
+        flex: none;
+        position: relative;
+      }
+      .node .dot {
+        display: block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        border: 2px solid #7a9bf5;
+        box-shadow: 0 0 34px -2px rgba(122, 155, 245, 0.85);
+        position: relative;
+        z-index: 2;
+      }
+      .node.last .dot {
+        background: #7a9bf5;
+      }
+      .node .line {
+        display: block;
+        position: absolute;
+        left: 26px;
+        top: 12px;
+        width: 334px;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          rgba(122, 155, 245, 0.85),
+          rgba(122, 155, 245, 0.28)
+        );
+      }
+      .node.last .line {
+        display: none;
+      }
+      .node h3 {
+        margin-top: 26px;
+        font-size: 27px;
+        font-weight: 800;
+        letter-spacing: -0.021em;
+        color: #fff;
+      }
+      .node p {
+        margin-top: 10px;
+        width: 300px;
+        font-size: 17px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.62);
+        white-space: normal;
+      }
+      .node em {
+        display: block;
+        margin-top: 12px;
+        font-style: normal;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #7a9bf5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="rails">
+          <span class="rail on">BTC</span>
+          <span class="rail">LN</span>
+          <span class="rail">ETH</span>
+          <span class="rail">USDT</span>
+          <span class="rail">XAUT</span>
+          <span class="rail">PAYOUT</span>
+          <span class="rail">REFUND</span>
+        </div>
+
+        <div class="track">
+          <div class="node">
+            <span class="dot"></span><span class="line"></span>
+            <h3>Invoice created</h3>
+            <p>Amount and address match the order; the invoice has an expiry.</p>
+            <em>asserted</em>
+          </div>
+          <div class="node">
+            <span class="dot"></span><span class="line"></span>
+            <h3>Broadcast</h3>
+            <p>Accepted to mempool, fee rate above the floor.</p>
+            <em>asserted</em>
+          </div>
+          <div class="node">
+            <span class="dot"></span><span class="line"></span>
+            <h3>1 confirmation</h3>
+            <p>Order stays pending. One confirmation is not settlement.</p>
+            <em>asserted</em>
+          </div>
+          <div class="node">
+            <span class="dot"></span><span class="line"></span>
+            <h3>3 confirmations</h3>
+            <p>Status flips to paid exactly once, even on a replayed webhook.</p>
+            <em>asserted</em>
+          </div>
+          <div class="node last">
+            <span class="dot"></span>
+            <h3>Settled</h3>
+            <p>Ledger row and API response agree on amount, asset and timestamp.</p>
+            <em>asserted</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

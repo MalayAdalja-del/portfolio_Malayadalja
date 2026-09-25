@@ -3,3 +3,6 @@ dist
 .DS_Store
 *.local
 .vercel
+
+# 2400px artwork masters — regenerate with `python scripts/gen-art.py`
+scripts/art/_masters/

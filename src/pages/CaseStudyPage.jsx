@@ -12,6 +12,7 @@ import {
 import { goHome, navigate } from '../lib/router'
 import { Reveal, useStatic } from '../lib/motion'
 import AegisDemo from '../components/AegisDemo'
+import Art from '../components/Art'
 
 /**
  * A real subpage per case study, with its own URL (`/work/speed`).
@@ -166,6 +167,16 @@ export default function CaseStudyPage({ id }) {
 
         {isAegis && (
           <>
+            {isAegis && (
+              <div className="shell">
+                <Art
+                  src="/art/aegis-hero.webp"
+                  alt="The Aegis-QA interface: a suite run with one failing payout test, the failure triage that classified and diagnosed it, and the Playwright spec compiled from a recorded session."
+                  caption="A run, the triage that follows a failure, and a recording compiled to a spec. Rendered from the real components with invented data."
+                />
+              </div>
+            )}
+
             <Block label="Why it exists">
               <p className="max-w-3xl font-black leading-[1.18] tracking-tight [font-size:clamp(1.25rem,2.6vw,1.9rem)]">
                 {profile.curiosity}
