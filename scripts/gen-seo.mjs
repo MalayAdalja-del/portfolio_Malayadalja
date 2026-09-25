@@ -36,7 +36,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const PUBLIC = resolve(HERE, '..', 'public')
-const SITE = 'https://portfolio-malayadalja.vercel.app'
+const SITE = 'https://malayadalja.in'
 const TODAY = new Date().toISOString().slice(0, 10)
 
 const write = (name, body) => {

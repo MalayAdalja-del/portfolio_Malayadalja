@@ -203,7 +203,7 @@ export default function Resume({ onClose }) {
         </Block>
 
         <footer className="mt-8 border-t border-ink/10 pt-5 font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">
-          Generated from the live site · portfolio-malayadalja.vercel.app
+          Generated from the live site · malayadalja.in
         </footer>
       </article>
     </motion.div>

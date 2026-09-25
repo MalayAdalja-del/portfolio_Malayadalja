@@ -166,7 +166,7 @@ PowerShell: `cd D:\portfolio-v2; npm run dev` — 5.1 has no `&&`.
 ## Deploying to Vercel
 
 Framework preset **Vite**, build `npm run build`, output `dist`. To keep the existing
-`portfolio-malayadalja.vercel.app` URL, push into the same repo the current site deploys
+`malayadalja.in` URL, push into the same repo the current site deploys
 from. After the first deploy, submit the sitemap in Google Search Console.
 
 ## Accessibility & motion

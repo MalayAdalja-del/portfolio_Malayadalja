@@ -14,7 +14,7 @@ import { caseStudies, chapterLinks, faq, profile } from '../content'
  * right after a client-side navigation.
  */
 
-export const SITE = 'https://portfolio-malayadalja.vercel.app'
+export const SITE = 'https://malayadalja.in'
 
 const HOME = {
   title: `${profile.name} — QA Automation Engineer (SDET) | Playwright, Python`,
