@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      A defect beside the assertion that catches it.
+
+      The whole argument of the proof chapter in one shape: on the left what
+      breaks, on the right the check that would have caught it. Pairing them
+      is the point — "quality matters" is an opinion, a failing assertion is
+      not.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(1.16) rotateX(10deg) rotateY(-10deg);
+      }
+      .head {
+        margin-bottom: 42px;
+      }
+      .head h2 {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #fff;
+      }
+      .head h2 span {
+        color: #7a9bf5;
+      }
+      .head p {
+        margin-top: 14px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .cols {
+        display: flex;
+        gap: 22px;
+        margin-bottom: 20px;
+      }
+      .cols span {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .cols span:first-child {
+        width: 700px;
+      }
+
+      .pair {
+        display: flex;
+        gap: 22px;
+        align-items: stretch;
+        margin-bottom: 14px;
+      }
+      .side {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        padding: 18px 22px;
+        background: linear-gradient(160deg, rgba(20, 24, 34, 0.92), rgba(10, 11, 13, 0.97));
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .bug {
+        width: 700px;
+        flex: none;
+      }
+      .fix {
+        width: 700px;
+        flex: none;
+        border-color: rgba(122, 155, 245, 0.42);
+        box-shadow: 0 0 34px -12px rgba(30, 58, 138, 0.9);
+      }
+      .mark {
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .bug .mark {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+      }
+      .fix .mark {
+        background: #1e3a8a;
+        border: 1px solid #7a9bf5;
+        color: #fff;
+      }
+      .side b {
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.015em;
+      }
+      .side i {
+        display: block;
+        font-style: normal;
+        margin-top: 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .fix b {
+        color: #7a9bf5;
+      }
+      .arrow {
+        align-self: center;
+        color: rgba(122, 155, 245, 0.7);
+        font-size: 26px;
+        margin: 0 -4px;
+      }
+      .foot {
+        margin-top: 30px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .foot b {
+        color: #7a9bf5;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="head">
+          <h2>Every defect, <span>and the check that catches it</span>.</h2>
+          <p>Quality is an opinion. A failing assertion is not.</p>
+        </div>
+
+        <div class="cols"><span>Shipped by someone this week</span><span>Caught by</span></div>
+
+        <div class="pair">
+          <div class="side bug">
+            <span class="mark">✗</span>
+            <span><b>Copy at 1.9:1 contrast</b><i>passes on a bright monitor, fails outdoors</i></span>
+          </div>
+          <span class="arrow">→</span>
+          <div class="side fix">
+            <span class="mark">✓</span>
+            <span><b>text contrast meets WCAG AA</b><i>computed against the real background</i></span>
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="side bug">
+            <span class="mark">✗</span>
+            <span><b>Image with no alt text</b><i>a screen reader announces "image"</i></span>
+          </div>
+          <span class="arrow">→</span>
+          <div class="side fix">
+            <span class="mark">✓</span>
+            <span><b>every image has alt text</b><i>checked on the rendered DOM</i></span>
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="side bug">
+            <span class="mark">✗</span>
+            <span
+              ><b>target="_blank" without noopener</b><i>the opened page gets window.opener</i></span
+            >
+          </div>
+          <span class="arrow">→</span>
+          <div class="side fix">
+            <span class="mark">✓</span>
+            <span><b>external links are rel="noopener"</b><i>a phishing vector, closed</i></span>
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="side bug">
+            <span class="mark">✗</span>
+            <span><b>An h5 directly under an h2</b><i>the document outline breaks</i></span>
+          </div>
+          <span class="arrow">→</span>
+          <div class="side fix">
+            <span class="mark">✓</span>
+            <span><b>one h1, no skipped levels</b><i>heading ladder walked in order</i></span>
+          </div>
+        </div>
+
+        <p class="foot"><b>16 assertions</b> · running in your browser, on this page</p>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

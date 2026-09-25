@@ -99,7 +99,12 @@ body {
 .scene {
   position: absolute;
   left: 50%;
-  top: 45%;
+  top: 46%;
+  /* A fixed box so every scene centres identically. Without it each one
+     sizes to its own content and drifts to a different corner of the
+     frame, which is what made the first set look like six unrelated
+     pictures rather than one series. */
+  width: 2080px;
   transform-style: preserve-3d;
 }
 

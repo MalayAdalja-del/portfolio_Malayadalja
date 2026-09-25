@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      The coverage grid, as the home page's one image.
+
+      Chosen because it is the most honest thing this site can show and it
+      needs no explaining: surfaces down the side, layers across the top, a
+      filled cell where that surface has been taken through that layer. The
+      blanks are the point. A coverage grid with no blanks in it is a lie,
+      and anyone who has run a QA function knows that on sight.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(1.1) rotateX(11deg) rotateY(-12deg);
+      }
+      .head {
+        margin-bottom: 44px;
+      }
+      .head h2 {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #fff;
+      }
+      .head h2 span {
+        color: #7a9bf5;
+      }
+      .head p {
+        margin-top: 14px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      table {
+        border-collapse: separate;
+        border-spacing: 10px 8px;
+      }
+      th {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 400;
+        padding-bottom: 8px;
+        text-align: center;
+      }
+      th.surface {
+        text-align: left;
+        width: 430px;
+      }
+      td.name {
+        font-size: 21px;
+        color: rgba(255, 255, 255, 0.88);
+        white-space: nowrap;
+        padding-right: 24px;
+      }
+      td.cell {
+        width: 104px;
+        height: 46px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+      }
+      td.on {
+        background: #1e3a8a;
+        border-color: #4668c9;
+        box-shadow: 0 0 26px -6px rgba(30, 58, 138, 0.95);
+      }
+      td.part {
+        background: rgba(30, 58, 138, 0.42);
+        border-color: rgba(70, 104, 201, 0.6);
+      }
+      .foot {
+        margin-top: 34px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 15px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .foot b {
+        color: #7a9bf5;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="head">
+          <h2>What I have taken <span>through which layer</span>.</h2>
+          <p>The blanks are the point. A grid with none is a lie.</p>
+        </div>
+
+        <table>
+          <tr>
+            <th class="surface"></th>
+            <th>UI</th>
+            <th>API</th>
+            <th>DB</th>
+            <th>Perf</th>
+            <th>Security</th>
+          </tr>
+          <tr>
+            <td class="name">Merchant checkout</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+          </tr>
+          <tr>
+            <td class="name">Payment links</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+            <td class="cell"></td>
+          </tr>
+          <tr>
+            <td class="name">Refunds</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+            <td class="cell"></td>
+          </tr>
+          <tr>
+            <td class="name">Instant payout</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+          </tr>
+          <tr>
+            <td class="name">Swap</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+            <td class="cell"></td>
+          </tr>
+          <tr>
+            <td class="name">KYB / KYC onboarding</td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+            <td class="cell on"></td>
+          </tr>
+          <tr>
+            <td class="name">Smart contract calls</td>
+            <td class="cell"></td>
+            <td class="cell on"></td>
+            <td class="cell"></td>
+            <td class="cell"></td>
+            <td class="cell on"></td>
+          </tr>
+          <tr>
+            <td class="name">Withdrawals</td>
+            <td class="cell part"></td>
+            <td class="cell part"></td>
+            <td class="cell"></td>
+            <td class="cell part"></td>
+            <td class="cell"></td>
+          </tr>
+        </table>
+
+        <p class="foot"><b>33 of 50 cells</b> · blank means not claimed</p>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

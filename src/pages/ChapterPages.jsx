@@ -56,6 +56,13 @@ export function HowIWorkPage() {
         line: 'Six real defects, injected into a real page, caught by a real suite. Quality is an opinion until an assertion fails.',
       }}
     >
+      <div className="shell">
+        <Art
+          src="/art/skills-hero.webp"
+          alt="Six disciplines side by side — manual and exploratory testing, automation, API and contracts, SQL and data, AI tooling — each listing its tools and one line of evidence."
+          caption="Each discipline with the tools under it and the thing it produced. A skill with no evidence is a word in a list."
+        />
+      </div>
       <WhatIDo />
       <Toolkit />
     </SubPage>
@@ -74,6 +81,13 @@ export function ProofPage() {
         line: 'Seven payment rails, five assertions each, and the coverage grid with the blanks left in.',
       }}
     >
+      <div className="shell">
+        <Art
+          src="/art/proof-hero.webp"
+          alt="Four real defects on the left — low-contrast copy, a missing alt attribute, target=_blank without noopener, a skipped heading level — each paired with the assertion that catches it on the right."
+          caption="Every defect beside the check that catches it. That pairing is the whole argument."
+        />
+      </div>
       <QaProof />
     </SubPage>
   )
@@ -91,6 +105,13 @@ export function RoutePage() {
         line: 'The crypto payment platform this route ends at, opened in full.',
       }}
     >
+      <div className="shell">
+        <Art
+          src="/art/route-hero.webp"
+          alt="Four career stops rising left to right: technical recruiter in 2019, QA engineer from 2019 to 2023, software engineer for QA from 2023, and building Aegis-QA from November 2025."
+          caption="Four stops, each one the reason the next happened."
+        />
+      </div>
       <Roadmap />
     </SubPage>
   )

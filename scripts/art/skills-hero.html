@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      Six disciplines, each with the tools under it and one line of evidence.
+
+      The evidence line is what makes this worth drawing. A list of skills is
+      a claim; a skill with the thing it produced underneath it is not. The
+      layout puts the claim, the tools and the proof in the same column so
+      you cannot read one without the other.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(1.2) rotateX(10deg) rotateY(-11deg);
+      }
+      .head {
+        margin-bottom: 48px;
+      }
+      .head h2 {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #fff;
+      }
+      .head h2 span {
+        color: #7a9bf5;
+      }
+      .head p {
+        margin-top: 14px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .cards {
+        display: flex;
+        gap: 20px;
+      }
+      .card {
+        width: 340px;
+        flex: none;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 7px;
+        padding: 26px 24px 24px;
+        background: linear-gradient(165deg, rgba(20, 24, 34, 0.95), rgba(10, 11, 13, 0.98));
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.12) inset,
+          0 44px 72px -38px rgba(0, 0, 0, 0.9);
+      }
+      .card.lead {
+        border-color: rgba(122, 155, 245, 0.45);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.14) inset,
+          0 0 58px -16px rgba(30, 58, 138, 0.95),
+          0 44px 72px -38px rgba(0, 0, 0, 0.9);
+      }
+      .n {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        color: #7a9bf5;
+      }
+      .card h3 {
+        margin-top: 12px;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.021em;
+        color: #fff;
+      }
+      .tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 18px;
+        min-height: 74px;
+        align-content: flex-start;
+      }
+      .tools span {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.78);
+      }
+      .ev {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.11);
+        display: flex;
+        gap: 11px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.66);
+        min-height: 92px;
+      }
+      .ev b {
+        color: #7a9bf5;
+        flex: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="head">
+          <h2>Six things, <span>each with its evidence</span>.</h2>
+          <p>A skill is a claim. A skill with the thing it produced is not.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card lead">
+            <p class="n">01</p>
+            <h3>Manual &amp; exploratory</h3>
+            <div class="tools">
+              <span>Test design</span><span>Charters</span><span>Defect triage</span>
+            </div>
+            <p class="ev"><b>✓</b>Found the fallback-path rate drift no automated case was written for.</p>
+          </div>
+
+          <div class="card">
+            <p class="n">02</p>
+            <h3>Automation</h3>
+            <div class="tools">
+              <span>Playwright</span><span>Pytest</span><span>Selenium</span><span>Appium</span>
+            </div>
+            <p class="ev"><b>✓</b>Payout and instant-send flows run unattended, on-chain and over Lightning.</p>
+          </div>
+
+          <div class="card">
+            <p class="n">03</p>
+            <h3>API &amp; contracts</h3>
+            <div class="tools"><span>Postman</span><span>Newman</span><span>REST</span></div>
+            <p class="ev"><b>✓</b>Contract checks run beside the UI suite, against the same run record.</p>
+          </div>
+
+          <div class="card">
+            <p class="n">04</p>
+            <h3>SQL &amp; data</h3>
+            <div class="tools"><span>SQL</span><span>Ledger reconciliation</span></div>
+            <p class="ev"><b>✓</b>Caught the class of bug where the UI reports success and the ledger disagrees.</p>
+          </div>
+
+          <div class="card">
+            <p class="n">05</p>
+            <h3>AI tooling</h3>
+            <div class="tools">
+              <span>Claude</span><span>Claude Code</span><span>Cursor</span><span>ChatGPT</span>
+            </div>
+            <p class="ev"><b>✓</b>Used them to build Aegis-QA — one person shipping what normally needs a team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

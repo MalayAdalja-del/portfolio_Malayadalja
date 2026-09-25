@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="scene.css" />
+    <!--
+      Seven years as four stops on a rising line.
+
+      The rise is the argument: recruiting, then testing screens, then
+      testing state machines, then building the thing that runs the tests.
+      Each stop carries the one sentence that explains why the next one
+      happened. Dates on the axis so it reads as a career, not a list.
+    -->
+    <style>
+      .scene {
+        transform: translate(-50%, -50%) scale(0.98) rotateX(11deg) rotateY(-12deg);
+      }
+      .head {
+        margin-bottom: 68px;
+      }
+      .head h2 {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #fff;
+      }
+      .head h2 span {
+        color: #7a9bf5;
+      }
+      .head p {
+        margin-top: 14px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .track {
+        display: flex;
+        align-items: flex-end;
+      }
+      .stop {
+        width: 460px;
+        flex: none;
+        position: relative;
+      }
+      .stop .col {
+        width: 400px;
+      }
+      /* each stop sits higher than the last */
+      .stop:nth-child(1) {
+        padding-bottom: 0;
+      }
+      .stop:nth-child(2) {
+        padding-bottom: 92px;
+      }
+      .stop:nth-child(3) {
+        padding-bottom: 184px;
+      }
+      .stop:nth-child(4) {
+        padding-bottom: 276px;
+      }
+
+      .year {
+        font-size: 44px;
+        font-weight: 900;
+        letter-spacing: -0.028em;
+        color: #7a9bf5;
+        line-height: 1;
+      }
+      .kind {
+        display: inline-block;
+        margin-left: 12px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        vertical-align: super;
+      }
+      .stop h3 {
+        margin-top: 12px;
+        font-size: 27px;
+        font-weight: 800;
+        letter-spacing: -0.021em;
+        color: #fff;
+      }
+      .org {
+        margin-top: 7px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .stop p.note {
+        margin-top: 16px;
+        width: 380px;
+        font-size: 17px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .dot {
+        display: block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        border: 2px solid #7a9bf5;
+        box-shadow: 0 0 34px -2px rgba(122, 155, 245, 0.85);
+        margin-top: 30px;
+        position: relative;
+        z-index: 2;
+      }
+      .stop:last-child .dot {
+        background: #7a9bf5;
+      }
+      .rail {
+        display: none;
+        position: absolute;
+        left: 24px;
+        bottom: 11px;
+        width: 442px;
+        height: 2px;
+        transform-origin: left center;
+        background: linear-gradient(to right, rgba(122, 155, 245, 0.8), rgba(122, 155, 245, 0.25));
+      }
+      .stop:nth-child(1) .rail,
+      .stop:nth-child(2) .rail,
+      .stop:nth-child(3) .rail {
+        transform: rotate(-11.3deg);
+        width: 450px;
+      }
+      .stop:last-child .rail {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="key"></div>
+    <div class="rim"></div>
+    <div class="grid"></div>
+    <div class="floor"></div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="head">
+          <h2>Seven years, <span>one road</span>.</h2>
+          <p>Each stop is why the next one happened.</p>
+        </div>
+
+        <div class="track">
+          <div class="stop">
+            <div class="col">
+              <p class="year">2019<span class="kind">start</span></p>
+              <h3>Technical Recruiter</h3>
+              <p class="org">Skillventory · Jan — Apr 2019</p>
+              <p class="note">Hired engineers before becoming one. Three months of screening them showed me what the job actually was.</p>
+            </div>
+            <span class="dot"></span><span class="rail"></span>
+          </div>
+
+          <div class="stop">
+            <div class="col">
+              <p class="year">2019<span class="kind">role</span></p>
+              <h3>QA Engineer</h3>
+              <p class="org">Auxano Global Services · 2019 — 2023</p>
+              <p class="note">Four years, 15+ delivered projects. Where test design stopped being a template and became a skill.</p>
+            </div>
+            <span class="dot"></span><span class="rail"></span>
+          </div>
+
+          <div class="stop">
+            <div class="col">
+              <p class="year">2023<span class="kind">role</span></p>
+              <h3>Software Engineer — QA</h3>
+              <p class="org">Openxcell · Apr 2023 — present</p>
+              <p class="note">Crypto raised the stakes. Stopped testing screens, started testing state machines and checking the ledger.</p>
+            </div>
+            <span class="dot"></span><span class="rail"></span>
+          </div>
+
+          <div class="stop">
+            <div class="col">
+              <p class="year">2025<span class="kind">built</span></p>
+              <h3>Aegis-QA</h3>
+              <p class="org">Internal tooling · from Nov 2025</p>
+              <p class="note">The work was scattered across a dozen tools, so I built one place to hold all of it.</p>
+            </div>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </body>
+</html>

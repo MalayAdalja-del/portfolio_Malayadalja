@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import FailureWall from './components/FailureWall'
 import CaseStudies from './components/CaseStudies'
 import Chapters from './components/Chapters'
+import Art from './components/Art'
 import { Contact, Footer } from './components/Sections'
 import CaseStudyPage from './pages/CaseStudyPage'
 import AegisDemoPage from './pages/AegisDemoPage'
@@ -96,6 +97,14 @@ export default function App({ initialRoute, prerender = false }) {
 
             <Marquee items={marqueeA} dark />
             <FailureWall />
+
+            <div className="shell">
+              <Art
+                src="/art/home-hero.webp"
+                alt="A coverage grid: eight payment surfaces down the side, five test layers across the top, filled cells where that surface has been taken through that layer, and blanks where it has not."
+                caption="Thirty-three of fifty cells. The blanks are the point — a coverage grid with none in it is a lie."
+              />
+            </div>
 
             {/* The rails, the skills and the proof are pages of their own
                 now. Home carries the argument and the way in to each. */}

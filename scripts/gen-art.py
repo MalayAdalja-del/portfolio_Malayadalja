@@ -24,8 +24,12 @@ OUT = HERE.parent / "public" / "art"
 MASTERS = HERE / "art" / "_masters"
 
 SCENES = [
+    ("home-hero", 2400, 1350),
     ("aegis-hero", 2400, 1350),
     ("rails-hero", 2400, 1350),
+    ("proof-hero", 2400, 1350),
+    ("route-hero", 2400, 1350),
+    ("skills-hero", 2400, 1350),
 ]
 
 
