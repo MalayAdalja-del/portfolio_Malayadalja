@@ -16,8 +16,52 @@ import { caseStudies, chapterLinks, faq, profile } from '../content'
 
 export const SITE = 'https://www.malayadalja.in'
 
+/**
+ * One identifier for the person, declared in index.html and referenced
+ * everywhere else.
+ *
+ * The Person block is inlined into all ten prerendered pages. Without a
+ * stable `@id` a parser has no way to know those are the same man, so it
+ * reads ten separate people — the wrong outcome when the job is to outweigh
+ * a scraped directory record about that same man. Every `author` and
+ * `mainEntity` below points here rather than restating him.
+ */
+const PERSON = { '@id': `${SITE}/#person` }
+
+/**
+ * When each page was first published, taken from the commit that created it.
+ *
+ * An undated page competes badly against a stale one that at least carries a
+ * date. These are real dates, not today's, and they need editing by hand if a
+ * page is ever genuinely rewritten. `dateModified` is the build timestamp,
+ * which is honest here because the site only builds on deploy.
+ */
+const PUBLISHED = {
+  '/': '2026-09-21',
+  '/work/speed': '2026-09-21',
+  '/work/aegis': '2026-09-21',
+  '/work/kyb': '2026-09-21',
+  '/aegis-demo': '2026-09-22',
+  '/what-i-check': '2026-09-23',
+  '/how-i-work': '2026-09-23',
+  '/proof': '2026-09-23',
+  '/route': '2026-09-23',
+  '/faq': '2026-09-23',
+}
+
+const today = () => new Date().toISOString().slice(0, 10)
+
+/** Home > this page. Everything except home gets one. */
+const crumbs = (meta, name) => ({
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: profile.name, item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name, item: `${SITE}${meta.path}` },
+  ],
+})
+
 const HOME = {
-  title: `${profile.name} — QA Automation Engineer (SDET) | Playwright, Python`,
+  title: `${profile.name} — SDET & QA Automation Engineer | Playwright`,
   description:
     'Malay Adalja, Software Engineer (QA) with 7+ years testing crypto payments, fintech and e-commerce. Builder of Aegis-QA, an AI-driven test automation platform.',
   path: '/',
@@ -28,7 +72,7 @@ const HOME = {
 const CHAPTER_META = {
   check: {
     path: '/what-i-check',
-    title: 'What I check — payment rails, assertions and coverage | Malay Adalja',
+    title: 'What I check — payment rails and assertions | Malay Adalja',
     description:
       'Seven payment rails with their own state machines and five assertions each: BTC, Lightning, ETH, USDT, XAUT, payouts and refunds, plus the coverage grid.',
     ogType: 'article',
@@ -37,7 +81,7 @@ const CHAPTER_META = {
   },
   'work-how': {
     path: '/how-i-work',
-    title: 'How I work — manual, automation, API, SQL and AI tooling | Malay Adalja',
+    title: 'How I work — manual, automation, API and SQL | Malay Adalja',
     description:
       'Manual and exploratory testing, automation, API and contract testing, database verification, performance and AI tooling, each with the evidence behind it.',
     ogType: 'article',
@@ -46,7 +90,7 @@ const CHAPTER_META = {
   },
   route: {
     path: '/route',
-    title: 'The route — recruiter to QA engineer to building the tooling | Malay Adalja',
+    title: 'The route — recruiter to QA engineer | Malay Adalja',
     description:
       'Seven years in one road: technical recruiting, four years of QA at Auxano, crypto payments at Openxcell, and building Aegis-QA. What each stop taught.',
     ogType: 'article',
@@ -55,7 +99,7 @@ const CHAPTER_META = {
   },
   faq: {
     path: '/faq',
-    title: 'Straight answers — the questions people ask first | Malay Adalja',
+    title: 'Straight answers — what people ask first | Malay Adalja',
     description:
       'Who he is, what kind of QA engineer, what he can test that most cannot, which tools he uses, what Aegis-QA is, and whether he is available for work.',
     ogType: 'article',
@@ -64,7 +108,7 @@ const CHAPTER_META = {
   },
   proof: {
     path: '/proof',
-    title: 'Break this page — six real defects, caught live | Malay Adalja',
+    title: 'Break this page — six real defects, live | Malay Adalja',
     description:
       'Six real accessibility and security defects injected into this page on demand, and the live assertion suite that catches each one in your browser.',
     ogType: 'article',
@@ -139,12 +183,17 @@ export function ldFor(meta) {
       '@graph': [
         {
           '@type': 'FAQPage',
+          url: `${SITE}/faq`,
+          datePublished: PUBLISHED['/faq'],
+          dateModified: today(),
+          about: PERSON,
           mainEntity: faq.map((f) => ({
             '@type': 'Question',
             name: f.q,
             acceptedAnswer: { '@type': 'Answer', text: f.a },
           })),
         },
+        crumbs(meta, 'Straight answers'),
       ],
     }
   }
@@ -153,7 +202,32 @@ export function ldFor(meta) {
     // belong on the home page and nowhere else. They were falling through
     // to every chapter page, which then claimed url '/' while being served
     // at '/route' — two pages asserting they are the same document.
-    if (meta.path !== '/') return null
+    //
+    // Returning null instead left five pages carrying no page-level schema
+    // at all — no type, no date, no breadcrumb, nothing saying what the
+    // document was or who it was by. A WebPage node is the minimum that
+    // makes a page a thing rather than an orphan block of text.
+    if (meta.path !== '/') {
+      return {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebPage',
+            url: `${SITE}${meta.path}`,
+            name: meta.title,
+            description: meta.description,
+            inLanguage: 'en',
+            datePublished: PUBLISHED[meta.path],
+            dateModified: today(),
+            author: PERSON,
+            about: PERSON,
+            isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#website` },
+            primaryImageOfPage: meta.ogImage,
+          },
+          crumbs(meta, meta.title.split(' | ')[0].split(' — ')[0]),
+        ],
+      }
+    }
 
     // The home page. Person lives in index.html because it never changes;
     // these two are derived from content.js so they cannot drift from the
@@ -165,17 +239,20 @@ export function ldFor(meta) {
       '@graph': [
         {
           '@type': 'WebSite',
+          '@id': `${SITE}/#website`,
           name: profile.name,
           alternateName: `${profile.name} — ${profile.headline}`,
           url: `${SITE}/`,
           inLanguage: 'en',
-          author: { '@type': 'Person', name: profile.name },
+          author: PERSON,
         },
         {
           '@type': 'ProfilePage',
           url: `${SITE}/`,
-          dateModified: new Date().toISOString().slice(0, 10),
-          mainEntity: { '@type': 'Person', name: profile.name },
+          datePublished: PUBLISHED['/'],
+          dateModified: today(),
+          isPartOf: { '@id': `${SITE}/#website` },
+          mainEntity: PERSON,
         },
       ],
     }
@@ -189,10 +266,15 @@ export function ldFor(meta) {
         headline: s.title,
         description: s.summary,
         url: `${SITE}${meta.path}`,
-        author: { '@type': 'Person', name: profile.name, url: `${SITE}/` },
+        author: PERSON,
+        publisher: PERSON,
+        datePublished: PUBLISHED[meta.path],
+        dateModified: today(),
+        image: meta.ogImage,
         about: s.stack,
         articleSection: s.tag,
         inLanguage: 'en',
+        isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#website` },
       },
       // Aegis is the one case study that is also a thing, so it gets
       // described as software as well as an article. This is the shape an
@@ -207,7 +289,7 @@ export function ldFor(meta) {
               applicationSubCategory: 'Test automation platform',
               operatingSystem: 'Web, Linux, Docker',
               url: `${SITE}/work/aegis`,
-              author: { '@type': 'Person', name: profile.name, url: `${SITE}/` },
+              author: PERSON,
               isAccessibleForFree: false,
               featureList: [
                 'Record a browser session and compile it to Gherkin and a runnable Playwright spec',

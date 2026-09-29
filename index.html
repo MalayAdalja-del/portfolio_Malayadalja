@@ -63,11 +63,18 @@
       Structured data. This is what Google, and increasingly ChatGPT, Perplexity
       and Claude, actually read to answer "find me a QA automation engineer".
       It ships in the static HTML, so it works even where JS never runs.
+
+      The `@id` is what makes this one person rather than ten. This block is
+      inlined into every prerendered page, and without a stable identifier a
+      parser reads ten unrelated people who happen to share a name — which is
+      the opposite of what it is here to do, given the job is to outweigh a
+      scraped directory record about the same man.
     -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://www.malayadalja.in/#person",
         "name": "Malay Adalja",
         "givenName": "Malay",
         "familyName": "Adalja",
