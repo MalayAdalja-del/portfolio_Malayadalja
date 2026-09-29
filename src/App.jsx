@@ -81,7 +81,7 @@ export default function App({ initialRoute, prerender = false }) {
       {/* The walkthrough is a product, and it brings its own chrome. The
           site header is fixed and blended, so on that page it ghosted
           straight through the demo's own sticky banner. */}
-      {!onDemo && <Nav onResume={() => setResume(true)} />}
+      {!onDemo && <Nav initialRoute={initialRoute} onResume={() => setResume(true)} />}
       {route.name === 'home' && <ChapterRail />}
 
       {onDemo ? (

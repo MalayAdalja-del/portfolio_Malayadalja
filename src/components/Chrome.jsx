@@ -123,8 +123,20 @@ export function ScrollProgress() {
   )
 }
 
-export function Nav({ onResume }) {
-  const route = useRoute()
+/**
+ * `initialRoute` is the prerenderer's, handed down from App.
+ *
+ * Without it this called `useRoute()` bare, which falls back to `home` when
+ * there is no `window` — so every chapter and case-study page was prerendered
+ * with a nav that believed it was on the home page, and shipped `#top`,
+ * `#work` and `#contact` as bare fragments. React 18 does not rewrite
+ * attributes that disagree with the server HTML during hydration, so those
+ * stayed wrong for the life of the page. Clicking still worked, because
+ * `goTo` reads the live route, but a middle-click, an open-in-new-tab and
+ * every crawler got a fragment that pointed at nothing on that page.
+ */
+export function Nav({ initialRoute, onResume }) {
+  const route = useRoute(initialRoute)
   const onHome = route.name === 'home'
 
   /**
@@ -182,28 +194,44 @@ export function Nav({ onResume }) {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-x-0 top-0 z-[85]"
     >
-      {/* The bar has no colour of its own — mix-blend-difference is what
-          keeps it legible over both the white and the black sections. That
-          guarantees contrast but not separation: once the page scrolls, the
-          bar sits directly on top of body copy and reads as two lines of
-          text in the same place. This blurs whatever is behind it, which
-          costs nothing on a dark section, keeps the blend maths intact
-          (blur changes detail, not average colour), and only appears once
-          you have actually scrolled, so the hero is untouched. */}
+      {/* Once the page scrolls, the bar sits directly on top of body copy and
+          reads as two lines of text in the same place. This is the surface
+          that separates them: translucent paper, so the dark bar text below
+          stays legible over a black section as well as a white one. It only
+          appears once you have actually scrolled, so the hero is untouched. */}
       <div
         aria-hidden
         className={`absolute inset-0 transition-opacity duration-300 ${
-          open ? 'bg-ink opacity-100' : scrolled ? 'backdrop-blur-md opacity-100' : 'opacity-0'
+          open
+            ? 'bg-ink opacity-100'
+            : scrolled
+              ? 'bg-paper/85 backdrop-blur-md opacity-100'
+              : 'opacity-0'
         }`}
       />
 
-      {/* With the menu open the bar is the top of an opaque black panel, so
-          it drops the blend and just uses white — blending against the page
-          still showing above the panel washed the Résumé button and the
-          close icon out to a ghost. */}
+      {/* This bar used to be `text-white mix-blend-difference`, on the theory
+          that difference blending would read correctly over the white acts
+          and the black ones alike. It never blended at all. `mix-blend-mode`
+          composites against the backdrop *within its own stacking context*,
+          and the parent <header> is `position: fixed`, which makes one —
+          so the bar blended against its own empty background and stayed
+          plain white. Over the hero, which is white on every route, that
+          rendered the logo, all six links, the Résumé button and the phone
+          hamburger invisible: measured luminance range 0.0 across the strip
+          on all nine routes, desktop and mobile. The site looked like a
+          single landing page because the only way off it could not be seen.
+
+          The cursor, the scroll bar and the chapter rail use the same blend
+          and are fine — each puts it on the fixed element itself rather than
+          on a child, so theirs composites against the page.
+
+          Explicit colours instead, which cannot silently no-op: ink on the
+          hero and on the translucent surface above, paper when the menu has
+          turned the bar into the top of an opaque black panel. */}
       <div
         className={`shell relative flex h-[72px] items-center justify-between ${
-          open ? 'text-paper' : 'text-white mix-blend-difference'
+          open ? 'text-paper' : 'text-ink'
         }`}
       >
         <a
