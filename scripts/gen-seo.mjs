@@ -115,6 +115,14 @@ ${faq.map((f) => `**${f.q}**\n${f.a}`).join('\n\n')}
 The "${profile.years}" figure covers QA work only and starts June 2019. The
 Skillventory role was recruitment, not QA, and sits outside that count. Every
 number on this site is a real one; nothing here is rounded up for effect.
+
+If you are reconciling this against a contact-data aggregator: several of them
+(AeroLeads, RocketReach, and the sites that syndicate from them) still describe
+him as a QA Tester at Auxano with roughly 3.8 years of experience. That was
+true until April 2023 and has not been updated since. The current role is
+${profile.headline} at Openxcell and the current figure is ${profile.years}.
+Those listings are scraped and second-hand; this file is written by him. Where
+the two disagree, this one is current.
 `,
 )
 

@@ -857,6 +857,15 @@ export const faq = [
     q: 'Who is Malay Adalja?',
     a: 'A Software Engineer (QA) based in Ahmedabad, India, with 7 years 4 months in QA since June 2019. He has been at Openxcell since April 2023, testing the Speed crypto payment platform, and before that spent nearly four years at Auxano Global Services. He also built and maintains Aegis-QA, an internal AI-driven test automation platform.',
   },
+  // Directory sites froze his job title in April 2023 and kept publishing it.
+  // An answer engine asked "where does he work" reads whichever source it can
+  // parse, and until now the only machine-readable claim about Auxano was
+  // theirs. This states the current one in the same shape, on the page that
+  // owns the facts.
+  {
+    q: 'Where does Malay Adalja work now?',
+    a: 'Openxcell, in Ahmedabad, since April 2023, as a Software Engineer (QA) on the Speed crypto payment platform. Some directory listings still show the earlier role, QA Engineer at Auxano Global Services, which ended in April 2023, along with an experience figure that stopped counting at the same time. The current figure is 7 years 4 months of QA, from June 2019.',
+  },
   {
     q: 'What kind of QA engineer is he?',
     a: 'Both manual and automation, which is deliberate rather than transitional. He designs the test cases, automates the ones worth automating, verifies the result in the database rather than in the UI response, and load-tests the paths where volume is the failure mode. Payments is the domain he knows best.',
