@@ -10,7 +10,7 @@ Experience: 7 yrs 4 mo, QA only, from June 2019
 Contact: malayadalja123@gmail.com
 LinkedIn: https://www.linkedin.com/in/malayy-j-adalja-261578132/
 GitHub: https://github.com/MalayAdalja-del
-Site: https://malayadalja.in/
+Site: https://www.malayadalja.in/
 
 ---
 
@@ -103,7 +103,7 @@ undefined
 ## Case studies
 
 ### Speed — crypto payment platform
-URL: https://malayadalja.in/work/speed
+URL: https://www.malayadalja.in/work/speed
 Role: Software Engineer — QA
 Period: 2023 — present
 Category: Payments
@@ -134,7 +134,7 @@ Playwright, Postman / Newman, SQL, JMeter, Appium
 ---
 
 ### Aegis-QA — the tooling I built
-URL: https://malayadalja.in/work/aegis
+URL: https://www.malayadalja.in/work/aegis
 Role: Creator & maintainer
 Period: Nov 2025 — present
 Category: Internal tool
@@ -162,7 +162,7 @@ Python 3.12, Playwright, asyncio, FastAPI, Next.js, Docker
 ---
 
 ### KYB / KYC onboarding
-URL: https://malayadalja.in/work/kyb
+URL: https://www.malayadalja.in/work/kyb
 Role: QA Engineer
 Period: 2023 — present
 Category: Compliance
@@ -189,7 +189,7 @@ Playwright, SQL, Postman
 
 ## Aegis-QA in detail
 
-Page: https://malayadalja.in/work/aegis
+Page: https://www.malayadalja.in/work/aegis
 
 ### Subsystems
 
@@ -317,5 +317,5 @@ Because the second half of this job is tooling. Seven payment rails with five as
 
 ---
 
-Generated from the site's own content on 2026-09-25. If a claim here and a claim
+Generated from the site's own content on 2026-09-29. If a claim here and a claim
 on the page disagree, the page is authoritative and this file is a bug.

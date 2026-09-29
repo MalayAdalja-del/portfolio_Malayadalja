@@ -14,7 +14,7 @@ import { caseStudies, chapterLinks, faq, profile } from '../content'
  * right after a client-side navigation.
  */
 
-export const SITE = 'https://malayadalja.in'
+export const SITE = 'https://www.malayadalja.in'
 
 const HOME = {
   title: `${profile.name} — QA Automation Engineer (SDET) | Playwright, Python`,

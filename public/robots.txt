@@ -72,4 +72,4 @@ Allow: /
 User-agent: Google-CloudVertexBot
 Allow: /
 
-Sitemap: https://malayadalja.in/sitemap.xml
+Sitemap: https://www.malayadalja.in/sitemap.xml

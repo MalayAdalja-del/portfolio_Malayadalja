@@ -7,7 +7,7 @@
 Contact: malayadalja123@gmail.com
 LinkedIn: https://www.linkedin.com/in/malayy-j-adalja-261578132/
 GitHub: https://github.com/MalayAdalja-del
-Site: https://malayadalja.in/
+Site: https://www.malayadalja.in/
 
 ## In one line
 
@@ -15,17 +15,17 @@ I find what breaks payment systems before customers do, then automate it so it s
 
 ## Pages
 
-- https://malayadalja.in/
-- https://malayadalja.in/work/speed
-- https://malayadalja.in/work/aegis
-- https://malayadalja.in/work/kyb
-- https://malayadalja.in/aegis-demo
-- https://malayadalja.in/what-i-check
-- https://malayadalja.in/how-i-work
-- https://malayadalja.in/proof
-- https://malayadalja.in/route
-- https://malayadalja.in/faq
-- https://malayadalja.in/llms-full.txt — every fact on this site as plain text
+- https://www.malayadalja.in/
+- https://www.malayadalja.in/work/speed
+- https://www.malayadalja.in/work/aegis
+- https://www.malayadalja.in/work/kyb
+- https://www.malayadalja.in/aegis-demo
+- https://www.malayadalja.in/what-i-check
+- https://www.malayadalja.in/how-i-work
+- https://www.malayadalja.in/proof
+- https://www.malayadalja.in/route
+- https://www.malayadalja.in/faq
+- https://www.malayadalja.in/llms-full.txt — every fact on this site as plain text
 
 ## Answers
 
