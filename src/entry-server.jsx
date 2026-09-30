@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server'
 import { MotionConfig } from 'framer-motion'
-import App from './App'
+import App, { preloadRoute } from './App'
 import { ldFor, metaFor, SITE } from './lib/head'
 import { parseRoute } from './lib/router'
 
@@ -18,9 +18,17 @@ import { parseRoute } from './lib/router'
  * React then hydrates over it and the animation comes back for real
  * visitors. A crawler that runs no JavaScript keeps the static version,
  * which is the whole point.
+ *
+ * It is async because the subpages live in their own chunks now. Awaiting
+ * `preloadRoute` first means the page component is in hand before rendering
+ * starts, so `renderToString` still works and the markup has no hole in it —
+ * and the browser takes the same route, waiting on the same call before it
+ * hydrates. The two passes have to agree, so they use the same mechanism.
  */
-export function render(path) {
+export async function render(path) {
   const route = parseRoute(path)
+  await preloadRoute(path)
+
   const html = renderToString(
     <MotionConfig reducedMotion="always">
       <App initialRoute={route} prerender />

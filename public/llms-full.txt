@@ -320,5 +320,5 @@ Because the second half of this job is tooling. Seven payment rails with five as
 
 ---
 
-Generated from the site's own content on 2026-09-29. If a claim here and a claim
+Generated from the site's own content on 2026-09-30. If a claim here and a claim
 on the page disagree, the page is authoritative and this file is a bug.

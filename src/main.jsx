@@ -1,7 +1,7 @@
 import './lib/probe' // must load before anything renders
 import React from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
-import App from './App'
+import App, { preloadRoute } from './App'
 import './index.css'
 
 const container = document.getElementById('root')
@@ -28,5 +28,22 @@ const app = (
   </React.StrictMode>
 )
 
-if (prerendered) hydrateRoot(container, app)
-else createRoot(container).render(app)
+/**
+ * Subpages are lazy chunks, and hydration has to start with the right one
+ * already loaded.
+ *
+ * If the boundary suspends *during* hydration, the page's first render
+ * happens after lib/motion.jsx has flipped its module-level mount flag, so
+ * it renders the animated branch against static HTML — a mismatch, and the
+ * same abandoned hydration and 2.8s LCP described above. Waiting costs one
+ * cached request on a page that is already painted, and only on subpages;
+ * home resolves immediately. A chunk that fails to load still hydrates,
+ * with Suspense left to retry it.
+ */
+if (prerendered) {
+  preloadRoute(window.location.pathname)
+    .catch(() => {})
+    .then(() => hydrateRoot(container, app))
+} else {
+  createRoot(container).render(app)
+}

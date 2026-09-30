@@ -11,15 +11,75 @@ import CaseStudies from './components/CaseStudies'
 import Chapters from './components/Chapters'
 import Art from './components/Art'
 import { Contact, Footer } from './components/Sections'
-import CaseStudyPage from './pages/CaseStudyPage'
-import AegisDemoPage from './pages/AegisDemoPage'
-import { FaqPage, HowIWorkPage, ProofPage, RoutePage, WhatICheckPage } from './pages/ChapterPages'
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { useRoute } from './lib/router'
+import { parseRoute, useRoute } from './lib/router'
 import { useHead } from './lib/head'
 import { useStatic } from './lib/motion'
 import { initSmoothScroll, scrollToTop } from './lib/smoothScroll'
 import { marqueeA, marqueeB, transitions } from './content'
+
+/**
+ * The subpages load as their own chunks.
+ *
+ * Every visit starts on one route, but a static import of all seven pages
+ * put all seven in the one bundle every visit downloads, parses and
+ * executes. That parse is main-thread work on a phone, which is where the
+ * field score was losing ground — the lab score was already fine.
+ *
+ * It resolves the component itself rather than using `React.lazy`, and that
+ * is not a style preference — it is the only version that hydrates. `lazy`
+ * suspends on its first render even when the module is already in the
+ * registry, so the boundary commits one tick *after* App's mount effect has
+ * flipped the module-level `hasMounted` in lib/motion.jsx. The page then
+ * renders its animated branch against static HTML: a mismatch, and the
+ * abandoned hydration and full repaint that cost 2.8s of LCP once already.
+ * Measured, with the chunk preloaded and `lazy` still in place: 7 of 10
+ * routes threw React #418. Resolving first and rendering synchronously
+ * keeps the page in App's own first render pass, where `hasMounted` is
+ * still false and the markup matches.
+ */
+const LOADERS = {
+  demo: () => import('./pages/AegisDemoPage').then((m) => m.default),
+  work: () => import('./pages/CaseStudyPage').then((m) => m.default),
+  check: () => import('./pages/ChapterPages').then((m) => m.WhatICheckPage),
+  'work-how': () => import('./pages/ChapterPages').then((m) => m.HowIWorkPage),
+  proof: () => import('./pages/ChapterPages').then((m) => m.ProofPage),
+  route: () => import('./pages/ChapterPages').then((m) => m.RoutePage),
+  faq: () => import('./pages/ChapterPages').then((m) => m.FaqPage),
+}
+
+/** Route name → its page component, once its chunk has arrived. */
+const pages = new Map()
+
+/**
+ * Fetch the component a route needs. Home needs none and resolves at once.
+ * Accepts a pathname (the browser and the prerenderer both have one).
+ */
+function loadPage(name) {
+  if (!LOADERS[name] || pages.has(name)) return Promise.resolve()
+  return LOADERS[name]().then((Page) => {
+    pages.set(name, Page)
+  })
+}
+
+export function preloadRoute(path) {
+  return loadPage(parseRoute(path).name)
+}
+
+/** Warm the remaining route chunks once the page is idle, never before. */
+function prefetchPages() {
+  const run = () => {
+    for (const [name, load] of Object.entries(LOADERS)) {
+      if (!pages.has(name)) load().then((Page) => pages.set(name, Page))
+    }
+  }
+  if (typeof requestIdleCallback === 'function') {
+    const id = requestIdleCallback(run, { timeout: 4000 })
+    return () => cancelIdleCallback(id)
+  }
+  const id = setTimeout(run, 2000)
+  return () => clearTimeout(id)
+}
 
 /**
  * Home is an argument in six chapters, not a list of sections.
@@ -50,18 +110,24 @@ export default function App({ initialRoute, prerender = false }) {
   const staticPass = useStatic()
   useHead(route)
   const [resume, setResume] = useState(false)
-  const onWork = route.name === 'work'
+  const [, pageArrived] = useState(0)
   const onDemo = route.name === 'demo'
-  const CHAPTER = {
-    check: WhatICheckPage,
-    'work-how': HowIWorkPage,
-    proof: ProofPage,
-    route: RoutePage,
-    faq: FaqPage,
-  }
-  const Chapter = CHAPTER[route.name]
+  const onSubpage = Boolean(LOADERS[route.name])
+  const Page = pages.get(route.name)
 
   useEffect(() => initSmoothScroll(), [])
+  useEffect(prefetchPages, [])
+
+  // Only reachable by clicking through to a route the idle prefetch has not
+  // reached yet; the route the visitor landed on is already in `pages`.
+  useEffect(() => {
+    if (!onSubpage || pages.has(route.name)) return undefined
+    let live = true
+    loadPage(route.name).then(() => live && pageArrived((n) => n + 1))
+    return () => {
+      live = false
+    }
+  }, [route.name, onSubpage])
 
   // A route change is a page change; close anything modal over the top of it.
   useEffect(() => {
@@ -84,12 +150,8 @@ export default function App({ initialRoute, prerender = false }) {
       {!onDemo && <Nav initialRoute={initialRoute} onResume={() => setResume(true)} />}
       {route.name === 'home' && <ChapterRail />}
 
-      {onDemo ? (
-        <AegisDemoPage />
-      ) : Chapter ? (
-        <Chapter />
-      ) : onWork ? (
-        <CaseStudyPage id={route.id} />
+      {onSubpage ? (
+        Page ? <Page id={route.id} /> : null
       ) : (
         <>
           <main>

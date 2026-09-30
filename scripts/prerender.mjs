@@ -39,7 +39,7 @@ const swap = (html, pattern, replacement) => {
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
 
 for (const path of ROUTES) {
-  const { html, meta, ld, url } = render(path)
+  const { html, meta, ld, url } = await render(path)
 
   let page = template
   page = swap(page, /<title>[\s\S]*?<\/title>/, `<title>${esc(meta.title)}</title>`)
