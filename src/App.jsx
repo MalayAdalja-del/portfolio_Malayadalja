@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { startTransition, useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Cursor, Nav, Preloader, ScrollProgress } from './components/Chrome'
 import ChapterRail from './components/ChapterRail'
@@ -115,6 +115,18 @@ export default function App({ initialRoute, prerender = false }) {
   const onSubpage = Boolean(LOADERS[route.name])
   const Page = pages.get(route.name)
 
+  /**
+   * Opening the résumé is a transition, for the reason the route change is.
+   *
+   * The overlay is the whole CV, built from content.js and animated as one
+   * full-screen layer. Mounting and painting it in the same frame as the click
+   * made it the slowest interaction on the site once the router was fixed:
+   * 328ms, of which 270ms was the browser painting -- not JS. Deferring the
+   * mount lets the click paint first and costs the modal a frame nobody sees
+   * behind its own 0.4s fade.
+   */
+  const openResume = () => startTransition(() => setResume(true))
+
   useEffect(() => initSmoothScroll(), [])
   useEffect(prefetchPages, [])
 
@@ -147,7 +159,7 @@ export default function App({ initialRoute, prerender = false }) {
       {/* The walkthrough is a product, and it brings its own chrome. The
           site header is fixed and blended, so on that page it ghosted
           straight through the demo's own sticky banner. */}
-      {!onDemo && <Nav initialRoute={initialRoute} onResume={() => setResume(true)} />}
+      {!onDemo && <Nav initialRoute={initialRoute} onResume={openResume} />}
       {route.name === 'home' && <ChapterRail />}
 
       {onSubpage ? (
@@ -155,7 +167,7 @@ export default function App({ initialRoute, prerender = false }) {
       ) : (
         <>
           <main>
-            <Hero onResume={() => setResume(true)} />
+            <Hero onResume={openResume} />
 
             <Marquee items={marqueeA} dark />
             <FailureWall />
