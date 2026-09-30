@@ -136,7 +136,11 @@ export function MaskedWords({ text, className = '', delay = 0, stagger = 0.055 }
 export function Marker({ index, children, className = '' }) {
   return (
     <div className={`mb-10 flex items-baseline gap-4 ${className}`}>
-      <span className="eyebrow opacity-45">{index}</span>
+      {/* 45% put the number at 3.15:1 on white, under the 4.5:1 that 10px
+          text needs -- axe flagged it on #work and #chapters. 60% is the
+          first step that clears it on all three backgrounds this sits on
+          (5.18 white, 5.03 bone, 7.27 on ink) and still reads as quiet. */}
+      <span className="eyebrow opacity-60">{index}</span>
       <span className="h-px flex-1 bg-current opacity-15" />
       <span className="eyebrow">{children}</span>
     </div>
