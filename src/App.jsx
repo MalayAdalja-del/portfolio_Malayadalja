@@ -7,6 +7,7 @@ import Transition from './components/Transition'
 import Resume from './components/Resume'
 import Hero from './components/Hero'
 import FailureWall from './components/FailureWall'
+import LiveProof from './components/LiveProof'
 import CaseStudies from './components/CaseStudies'
 import Chapters from './components/Chapters'
 import Art from './components/Art'
@@ -171,6 +172,9 @@ export default function App({ initialRoute, prerender = false }) {
 
             <Marquee items={marqueeA} dark />
             <FailureWall />
+            {/* "What breaks" earns the right to "and here is it being caught",
+                so the evidence goes here rather than three scrolls down. */}
+            <LiveProof />
 
             <div className="shell">
               <Art

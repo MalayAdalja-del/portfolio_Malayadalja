@@ -390,6 +390,22 @@ export const failureWall = {
   ],
 }
 
+/* ── the live proof ───────────────────────────────────────────────────── */
+// The strongest thing on this site was three scrolls and a click away. The
+// real suite and the defect injection are Ch.07 on /proof, which a visitor
+// who bounces off the home page never reaches — so they judged the whole
+// thing on atmosphere and left. Home keeps the hook: the actual suite, one
+// button, running here. The full version stays on /proof.
+export const liveProof = {
+  kicker: 'Proof, not claims',
+  title: 'This page tests itself.',
+  line: 'Everything above this line is a claim. This is not. The suite below is real, it runs in your browser against this document, and it has no idea this section exists.',
+  ctaLine:
+    'Six real defects, injected into this live page. Watch the suite go red, then fix them one at a time and watch it come back.',
+  ctaHref: '/proof',
+  ctaLabel: 'Now break it on purpose',
+}
+
 /* ── case studies ─────────────────────────────────────────────────────── */
 // Outcomes are deliberately qualitative. Add hard numbers when you have them
 // that you can stand behind — see the README checklist.
