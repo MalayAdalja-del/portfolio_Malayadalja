@@ -16,6 +16,7 @@ import { startTransition, useEffect, useState } from 'react'
 /** Every route the site serves, in the order the sitemap lists them. */
 export const ROUTES = [
   '/',
+  '/hire',
   '/what-i-check',
   '/how-i-work',
   '/proof',
@@ -40,6 +41,7 @@ export function parseRoute(pathname) {
   const parts = (pathname || '/').split('/').filter(Boolean)
   if (parts[0] === 'work' && parts[1]) return { name: 'work', id: parts[1] }
   if (parts[0] === 'aegis-demo') return { name: 'demo' }
+  if (parts[0] === 'hire') return { name: 'hire' }
   if (CHAPTERS[parts[0]]) return { name: CHAPTERS[parts[0]] }
   return { name: 'home' }
 }

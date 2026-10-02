@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   aegisPipeline,
+  hire,
   chapterLinks,
   aegisPrinciples,
   aegisRunnerModes,
@@ -49,6 +50,10 @@ const write = (name, body) => {
 
 const urls = [
   { loc: `${SITE}/`, priority: '1.0', changefreq: 'weekly' },
+  // The page a buyer is meant to land on. Priority is relative within one
+  // site, not a global ranking lever — this just says which of my pages
+  // matters most after home, which is true.
+  { loc: `${SITE}/hire`, priority: '0.9', changefreq: 'weekly' },
   ...caseStudies.map((c) => ({
     loc: `${SITE}/work/${c.id}`,
     priority: '0.8',
@@ -100,6 +105,18 @@ ${contact}
 ## In one line
 
 ${profile.positioning}
+
+## Available for
+
+${hire.intro}
+
+${hire.audiences.map((a) => `- ${a.label}: ${a.line}`).join('\n')}
+
+Covers: ${hire.keywords.join(', ')}.
+
+${hire.offer.title} ${hire.offer.line}
+
+To engage: ${profile.email} — or ${SITE}/hire
 
 ## Pages
 

@@ -13,9 +13,24 @@ Site: https://www.malayadalja.in/
 
 I find what breaks payment systems before customers do, then automate it so it stays found.
 
+## Available for
+
+Seven years on money paths that cannot be allowed to fail — crypto, fintech, payouts. Pick the line below that sounds like your problem; the reply is already drafted.
+
+- I run the company: You are taking real money. You need to know it arrives.
+- I invest: You hold twenty companies touching money and no view of the risk.
+- I run engineering: You need coverage on the money path without hiring four people.
+
+Covers: Revenue leakage, Chargeback exposure, Settlement reconciliation, Idempotency, Double-charge, Payout failure, KYB / KYC, PCI scope, Playwright, Python, API + database, Crypto rails.
+
+Before you decide: let me find you one real problem. Send a public checkout or payment URL. I will look at what any customer could see — the flow, the headers, the client-side validation — and send back what I find in plain language. No charge, no pitch attached, no access required.
+
+To engage: malayadalja123@gmail.com — or https://www.malayadalja.in/hire
+
 ## Pages
 
 - https://www.malayadalja.in/
+- https://www.malayadalja.in/hire
 - https://www.malayadalja.in/work/speed
 - https://www.malayadalja.in/work/aegis
 - https://www.malayadalja.in/work/kyb

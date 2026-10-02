@@ -40,6 +40,7 @@ import { marqueeA, marqueeB, transitions } from './content'
  * still false and the markup matches.
  */
 const LOADERS = {
+  hire: () => import('./pages/HirePage').then((m) => m.default),
   demo: () => import('./pages/AegisDemoPage').then((m) => m.default),
   work: () => import('./pages/CaseStudyPage').then((m) => m.default),
   check: () => import('./pages/ChapterPages').then((m) => m.WhatICheckPage),

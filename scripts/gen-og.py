@@ -35,6 +35,8 @@ TEMPLATE = HERE / "og-card.html"
 CARDS = [
     ("index", "Software engineer — QA · Ahmedabad, India",
      "I find what breaks payments", "before customers do.", "type"),
+    ("hire", "Payments QA · remote or Ahmedabad",
+     "Payments break quietly.", "I find it first.", "type"),
     ("what-i-check", "Ch.02 · What I check",
      "Seven rails.", "Five assertions each.", "type"),
     ("how-i-work", "Ch.04 · How I keep up",

@@ -865,8 +865,109 @@ export const nav = [
   { label: 'Work', href: '#work' },
   { label: 'The route', href: '/route' },
   { label: 'Proof', href: '/proof' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Hire me', href: '/hire' },
 ]
+
+/* ── the ten-second card ──────────────────────────────────────────────────
+ *
+ * The rest of this site is an argument. This page is not: it is the one
+ * screen a person with a budget can read before deciding to reply.
+ *
+ * Three facts shaped it. A CEO gives about eight seconds, a partner about
+ * eleven, a VP about twenty-five — none of them scroll. They scan for the
+ * words they already have in their head, which are money words, not QA
+ * words: revenue leakage, chargeback exposure, settlement mismatch. And the
+ * reply has to cost nothing to start, so every button here opens a mail
+ * draft that is already written.
+ *
+ * The audience switch is deliberate rather than three separate pages: one
+ * page means all three vocabularies sit in the same document, which is what
+ * a search engine and an answer engine actually read.
+ */
+export const hire = {
+  eyebrow: 'Engage',
+  title: 'Payments break quietly. I find it before your customers do.',
+  intro:
+    'Seven years on money paths that cannot be allowed to fail — crypto, fintech, payouts. Pick the line below that sounds like your problem; the reply is already drafted.',
+
+  // Scanned, not read. These are the words a buyer arrives with.
+  keywords: [
+    'Revenue leakage',
+    'Chargeback exposure',
+    'Settlement reconciliation',
+    'Idempotency',
+    'Double-charge',
+    'Payout failure',
+    'KYB / KYC',
+    'PCI scope',
+    'Playwright',
+    'Python',
+    'API + database',
+    'Crypto rails',
+  ],
+
+  // Every number here is already claimed elsewhere on this site.
+  figures: [
+    { n: '7y 4m', c: 'Payments QA, nothing else' },
+    { n: '2,300+', c: 'Test cases authored' },
+    { n: '7', c: 'Payment rails, end to end' },
+    { n: '10', c: 'Coverage surfaces mapped' },
+  ],
+
+  audiences: [
+    {
+      id: 'ceo',
+      label: 'I run the company',
+      secs: '8 seconds',
+      line: 'You are taking real money. You need to know it arrives.',
+      points: [
+        'Payments that fail silently and never reach your reporting',
+        'Retries that charge a customer twice and come back as a chargeback',
+        'A ledger that disagrees with what the processor actually settled',
+      ],
+      subject: 'Payments QA — something I want checked',
+      body: 'Malay —\n\nWe are [company], we process payments via [provider].\n\nThe thing that worries me most is:\n\n\nWhat would you look at first?',
+    },
+    {
+      id: 'vc',
+      label: 'I invest',
+      secs: '11 seconds',
+      line: 'You hold twenty companies touching money and no view of the risk.',
+      points: [
+        'Technical diligence on the payment path, before or after the round',
+        'One read across several portfolio companies, same method each time',
+        'Written for a partner meeting, not for an engineering standup',
+      ],
+      subject: 'Portfolio payment risk — worth a conversation?',
+      body: 'Malay —\n\nI am at [fund]. We hold [n] companies that touch payments.\n\nWhat I would want to understand is:\n\n\nCan you walk me through how you would look at one of them?',
+    },
+    {
+      id: 'vp',
+      label: 'I run engineering',
+      secs: '25 seconds',
+      line: 'You need coverage on the money path without hiring four people.',
+      points: [
+        'Idempotency, retry and webhook-replay behaviour under real conditions',
+        'Assertions in the database and the ledger, not just the UI response',
+        'Automation your team keeps, plus the tooling to run it every release',
+      ],
+      subject: 'Payment path coverage — availability?',
+      body: 'Malay —\n\nI lead engineering at [company]. Stack is [stack].\n\nThe gap I am trying to close:\n\n\nWhat does working together look like?',
+    },
+  ],
+
+  // The opening move: give the finding before asking for anything. Scoped to
+  // what any customer could see unprompted — a public checkout page, response
+  // headers, the visible payment flow. Nothing authenticated, no load,
+  // nothing adversarial.
+  offer: {
+    title: 'Before you decide: let me find you one real problem.',
+    line: 'Send a public checkout or payment URL. I will look at what any customer could see — the flow, the headers, the client-side validation — and send back what I find in plain language. No charge, no pitch attached, no access required.',
+    subject: 'Free look — public payment flow',
+    body: 'Malay —\n\nPublic URL: \n\nWhat I would most like to know:\n\n\n(Confirming this is a page anyone can reach without logging in.)',
+    cta: 'Send me a URL',
+  },
+}
 
 /* ── answers, for people and for answer engines ───────────────────────────
  *

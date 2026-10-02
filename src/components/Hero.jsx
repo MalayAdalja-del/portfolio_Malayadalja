@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile, quickFacts, storyPromise, heroKicker } from '../content'
 import { useStatic } from '../lib/motion'
+import { navigate } from '../lib/router'
 
 const LINES = ['I find what', 'breaks payments']
 
@@ -104,16 +105,29 @@ export default function Hero({ onResume }) {
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
+          {/* A real href, so it is a link to a crawler and to a middle
+              click; navigate() keeps it a client-side route for everyone
+              else. Same convention as every internal link here. */}
+          <a
+            href="/hire"
+            onClick={(e) => {
+              e.preventDefault()
+              navigate('/hire')
+            }}
+            className="rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-transform duration-300 hover:scale-[1.04]"
+          >
+            Work with me
+          </a>
           <a
             href="#work"
-            className="rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-transform duration-300 hover:scale-[1.04]"
+            className="rounded-full border border-ink/25 px-7 py-3.5 text-sm font-medium text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-paper"
           >
             See the work
           </a>
           <button
             type="button"
             onClick={onResume}
-            className="rounded-full border border-ink/25 px-7 py-3.5 text-sm font-medium text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-paper"
+            className="rounded-full px-2 py-3.5 text-sm font-medium text-ink/75 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             View résumé
           </button>

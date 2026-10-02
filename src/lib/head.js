@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { caseStudies, chapterLinks, faq, profile } from '../content'
+import { caseStudies, chapterLinks, faq, hire, profile } from '../content'
 
 /**
  * Per-route <head>.
@@ -47,6 +47,7 @@ const PUBLISHED = {
   '/proof': '2026-09-23',
   '/route': '2026-09-23',
   '/faq': '2026-09-23',
+  '/hire': '2026-10-02',
 }
 
 const today = () => new Date().toISOString().slice(0, 10)
@@ -70,6 +71,17 @@ const HOME = {
 
 /** The title, description and canonical path for a parsed route. */
 const CHAPTER_META = {
+  // The conversion page. Its description is written for a search result
+  // rather than for the page: it is the only sentence most buyers read.
+  hire: {
+    path: '/hire',
+    title: 'Hire a payments QA engineer | Malay Adalja — SDET',
+    description:
+      'Payments QA and test automation for fintech and crypto: revenue leakage, double-charges, settlement reconciliation, payout and KYB failures. 7+ years, Playwright and Python. Free look at any public payment flow.',
+    ogType: 'website',
+    keywords:
+      'hire payments QA engineer, payments QA consultant India, fintech QA automation, crypto payment testing, revenue leakage testing, chargeback testing, settlement reconciliation testing, idempotency testing, double charge bug, payout failure testing, KYB KYC testing, PCI scope, Playwright automation consultant, SDET for hire, QA automation engineer Ahmedabad, remote SDET India',
+  },
   check: {
     path: '/what-i-check',
     title: 'What I check — payment rails and assertions | Malay Adalja',
@@ -197,6 +209,66 @@ export function ldFor(meta) {
       ],
     }
   }
+  // /hire is the only page that states an offer, so it is the only one that
+  // carries Service and Offer. This is the shape an answer engine lifts when
+  // someone asks who does this work and where — a WebPage node says a
+  // document exists, a Service node says a service is available.
+  if (meta.path === '/hire') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          url: `${SITE}/hire`,
+          name: meta.title,
+          description: meta.description,
+          inLanguage: 'en',
+          datePublished: PUBLISHED['/hire'],
+          dateModified: today(),
+          author: PERSON,
+          about: PERSON,
+          isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#website` },
+          primaryImageOfPage: meta.ogImage,
+        },
+        {
+          '@type': 'Service',
+          '@id': `${SITE}/hire#service`,
+          name: 'Payments QA and test automation',
+          serviceType: 'Software quality assurance for payment systems',
+          provider: PERSON,
+          areaServed: [
+            { '@type': 'Country', name: 'India' },
+            { '@type': 'Place', name: 'Remote, worldwide' },
+          ],
+          audience: hire.audiences.map((a) => ({
+            '@type': 'Audience',
+            audienceType: a.label,
+          })),
+          description: hire.intro,
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'What I check',
+            itemListElement: hire.keywords.map((k) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name: k },
+            })),
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: hire.offer.title,
+          description: hire.offer.line,
+          price: '0',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          offeredBy: PERSON,
+          url: `${SITE}/hire`,
+        },
+        crumbs(meta, 'Hire'),
+      ],
+    }
+  }
+
   if (!meta.study) {
     // WebSite and ProfilePage describe the site and the person, so they
     // belong on the home page and nowhere else. They were falling through
