@@ -7,7 +7,12 @@ export const heroKicker = 'Malay Adalja, QA Automation Engineer (SDET)'
 
 export const profile = {
   name: 'Malay Adalja',
-  headline: 'Software Engineer — QA',
+  // The title on the CV, and the string he should be findable by. "Software
+  // Engineer — QA" is an employer's internal title and matches nothing anyone
+  // types: sourcing for this job is keyword search on LinkedIn and Naukri for
+  // SDET, Playwright, automation. Lead with those. Keep this in step with the
+  // LinkedIn headline — that is the funnel, this page is the close.
+  headline: 'QA Automation Engineer (SDET) — Playwright · Python · Payments',
   years: '7 yrs 4 mo',
   location: 'Ahmedabad, India',
   availability: 'Open to work · remote or hybrid',
@@ -19,16 +24,22 @@ export const profile = {
   intro:
     'Seven years on crypto payments. BTC, ETH, USDT, XAUT, Lightning, ERC-20 contracts, payouts. Manual and automated. API and database. Web and mobile. When the tooling ran out, I built my own.',
 
-  // QA is the job. AI is the thing he went and learned. Both are true and
-  // the second one is why Aegis exists at all, so it gets said out loud
-  // rather than left to be inferred from a tools list.
+  // Aegis has to read as QA depth, not as a man with one foot out of the
+  // discipline. "QA is my profession, AI is my curiosity" was honest and it
+  // cost him: to someone hiring a QA engineer it says the next job is the one
+  // he actually wants. The work is the same work either way, so say that.
   curiosity:
-    'QA is my profession. AI is my curiosity. Aegis-QA is what happened when the two met: I did not wait for a vendor to sell me a tool, I learned enough AI to build my own.',
+    'Aegis-QA is QA work, not a detour from it. The tooling ran out before the testing did, so I built what the job needed: record a real session, run it across UI, API, flow and security, and find out which layer broke. Being able to replace your tools is the same muscle as being able to break the system they test.',
 
   email: 'malayadalja123@gmail.com',
   linkedin: 'https://www.linkedin.com/in/malayy-j-adalja-261578132/',
   github: 'https://github.com/MalayAdalja-del',
-  resume: '', // e.g. '/Malay-Adalja-QA.pdf' dropped into /public
+  // Empty meant the Download row never rendered in Contact and the Download
+  // button never rendered in the résumé toolbar — a hiring page with no file
+  // to take away. Generated FROM this site's own résumé overlay, so the PDF
+  // and the page cannot drift: see scripts/ note in README. Regenerate after
+  // editing anything the résumé renders.
+  resume: '/Malay-Adalja-QA-Automation-SDET.pdf',
 }
 
 /** Answers the recruiter's first four questions without any scrolling. */
