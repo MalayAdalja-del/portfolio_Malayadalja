@@ -185,7 +185,17 @@
     background: #fff;
   }
 
-  body > *:not(.resume-overlay) {
+  /* The résumé is rendered inside #root, not beside it — the real chain is
+     .resume-overlay < #root < body. So `body > *:not(.resume-overlay)` never
+     matched the overlay; it matched #root, hid it, and took the résumé down
+     with it. Print produced a genuinely blank page: #root display:none, the
+     overlay measured 0x0, body scrollHeight 0. Hide #root's siblings, then
+     its children except the overlay, so the one ancestor it needs survives. */
+  body > *:not(#root) {
+    display: none !important;
+  }
+
+  #root > *:not(.resume-overlay) {
     display: none !important;
   }
 
